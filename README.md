@@ -19,6 +19,7 @@ The repository is organized into distinct functional domains mapped directly to 
     * **Sparse Matrix-Vector Multiplication (SpMV):** Implementations evaluating sparse storage formats, focusing on Compressed Sparse Row (CSR) vector multiplication layouts to analyze memory coalescence and cache residency limitations across sparse stencils.
 * **`numerical-solvers/`**
     * **Batched Direct Solvers:** Monolithic, block-level factorization systems featuring dense LU Decomposition with parallelized partial pivoting, shared memory row-swapping, and Schur complement rank-1 updates.
+    * **Blocked Cholesky Factorization:** High-performance dense $A = LL^T$ decomposition. Features a cooperative, shared-memory tiled trailing submatrix update kernel optimized for implicit transposition layouts that bypasses global memory bandwidth constraints to achieve **~79.25% SM Compute Throughput**. Detailed Nsight hardware metrics analysis is archived in [`cholesky_profiling_report.md`](./numerical-solvers/cholesky_profiling_report.md).
     * **Linear Systems:** Basic utilities including backward substitution and lower triangle evaluations.
 * **`krylov-methods/`**
     * **2D Conjugate Gradient (CG) Solver:** An iterative structured field solver optimized for 2D Poisson equations, demonstrating how vector operation fusion minimizes global memory round-trips.
