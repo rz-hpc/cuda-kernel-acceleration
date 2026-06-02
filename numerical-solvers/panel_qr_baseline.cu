@@ -1,0 +1,102 @@
+
+#define BLOCK_DIM 32
+
+
+// d_A: M x n
+// d_tau: Pointer to an array of size $N$ where scalar reflection coefficients are saved
+// lda: Leading Dimension of A. The stride (in elements) between consecutive rows
+__global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int lda) {
+    // For starting point, assume a tall-skinny chunk where M fits in a fixed max size (e.g., 512)
+    __shared__ float tile_A[512][BLOCK_DIM + 1];
+    __shared__ float tile_v[512];
+    __shared__ float s_tau;
+    __shared__ float s_alpha; // the first element of target vector
+    __shared__ float s_v_first;
+
+    int tx = threadIdx.x;
+
+    // load panel from global memory to shared memory
+    // grid-stride loop
+    for (int i = tx; i < M; i += blockDim.x) {
+        for (int j = 0; j < N; j++) {
+            tile_A[i][j] = d_A[i * lda + j];
+        }
+    }
+    __syncthreads();
+
+    // column by column
+    for (int k = 0; k < N; k++) {
+        // thread 0 to compute norm and tau of column k
+        if (tx == 0) {
+            float sum_squares = 0.0f;
+            for (int i = k; i < M; i++) {
+                sum_squares += tile_A[i][k] * tile_A[i][k];                
+            }
+            float norm = sqrtf(sum_squares);
+
+            // target verctor: first element s_alpha
+            // opposite sign of the first diagonal element of current (sub)A to avoid catastrophic cancellation
+            // same abs value of norm
+            float ak = tile_A[k][k];
+            s_alpha = (ak > 0.0f) ? -norm : norm;
+
+            s_v_first = ak - s_alpha;
+            // Reconstruct v^T * v = (v_first^2) + sum of squares of remaining elements
+            float residual_sq = sum_squares - ak * ak;
+            s_tau = 2.0f / (s_v_first * s_v_first + residual_sq);
+        }
+        __syncthreads();
+
+        // Populate the reflection vector V
+        for (int i = tx; i < M; i += blockDim.x) {
+            if (i == k) {
+                tile_v[i] = 1.0f; // normalized v1
+            }
+            else if (i > k) {
+                tile_v[i] = tile_A[i][k] / s_v_first;
+                tile_A[i][k] = tile_v[i];
+            }
+            else {
+                tile_v[i] = 0.0f; // upper triangle (above diagonal)
+            }
+        }
+
+        // thread 0 saves R's diagonal value
+        if (tx == 0) {
+            tile_A[k][k] = s_alpha;
+        }
+        __syncthreads();
+
+        // update trailing columns (columns to the right of k)
+        // H_1 A = A - tau v_1 (v_1^T A)
+        // each thread handles a column j
+        // j: coalesced work distribution or a grid-stride loop
+        for (int j = k + 1 + tx; j < N; j += blockDim.x) {
+            // apply dot product v^T * A_j
+            float dot = 0.0f;
+            for (int i = k; i < M; i++) {
+                dot += tile_v[i] * tile_A[i][j];
+            }
+
+            // apply rank-1 update: A_j = A_j - tau * v * dot
+            for (int i = k; i < M; i++) {
+                tile_A[i][j] -= s_tau * tile_v[i] * dot;
+            }
+        }
+        __syncthreads();
+
+        // save tau scalar of this column to the global memory
+        if (tx == 0) {
+            d_tau[k] = s_tau;
+        }
+
+    }
+
+    // write back the completed upper triangular R and householder vectors to global memory
+    for (int i = tx; i < M; i += blockDim.x) {
+        for (int j = 0; j < N; j++) {
+            d_A[i * lda + j] = tile_A[i][j];
+        }
+    }
+
+}
