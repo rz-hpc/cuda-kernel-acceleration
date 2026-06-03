@@ -31,13 +31,15 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 
     // index
     int tx = threadIdx.x;
+    int total_element = M * N;
 
     // loading panel from global memory to shared memory
-    // grid-stride
-    for (int i = tx; i < M; i += blockDim.x) {
-        for (int j = 0; j < N; j++) {
-            tile_A[i][j] = d_A[i * lda + j];
-        }
+    // grid-stride over flat panel size
+    for (int index = tx; index < total_element; index++) {
+        // mapping flat 1D index back to 2D coordinates
+        int i = index / N;
+        int j = index % N;
+        tile_A[i][j] = d_A[i * lda + j];      
     }
     __syncthreads();
 
@@ -55,7 +57,10 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
             s_alpha = (ak > 0.0f) ? -norm : norm;
             s_v_first = ak - s_alpha;
 
-            // v1^T v1 = s_v_first ^ 2 + residual_sq
+            // Calulate tau: tau = 2.0/||v_scaled||^2
+            // v_scaled = v / v_first, ||v_scaled||^2 = v^2 / v_first^2
+            // since v^2 = v^T v = v_first ^ 2 + residual_sq
+            // tau = 2.0 * v_first ^ 2 / (v_first ^ 2 + residual_sq)
             float residual_sq = sum_squares - ak * ak;
             s_tau = 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_sq);
         }
@@ -107,10 +112,12 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
     }
 
     // write back to global memory
-    for (int i = tx; i < M; i += blockDim.x) {
-        for (int j = 0; j < N; j++) {
-            d_A[i * lda + j] = tile_A[i][j];
-        }
+    // grid-stride over flat panel size
+    for (int index = tx; index < total_element; index++) {
+        // mapping flat 1D index back to 2D coordinates
+        int i = index / N;
+        int j = index % N;
+        d_A[i * lda + j] = tile_A[i][j];
     }
 }
 

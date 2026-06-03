@@ -2,9 +2,10 @@
 #define BLOCK_DIM 32
 
 
-// d_A: M x n
+// d_A: M x N
 // d_tau: Pointer to an array of size $N$ where scalar reflection coefficients are saved
 // lda: Leading Dimension of A. The stride (in elements) between consecutive rows
+// this panel qr kernel works for M <= 512 N <= 32
 __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int lda) {
     // For starting point, assume a tall-skinny chunk where M fits in a fixed max size (e.g., 512)
     __shared__ float tile_A[512][BLOCK_DIM + 1];
@@ -14,13 +15,15 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
     __shared__ float s_v_first;
 
     int tx = threadIdx.x;
+    int total_element = M * N;
 
     // load panel from global memory to shared memory
-    // grid-stride loop
-    for (int i = tx; i < M; i += blockDim.x) {
-        for (int j = 0; j < N; j++) {
-            tile_A[i][j] = d_A[i * lda + j];
-        }
+    // grid-stride over flat panel size
+    for (int index = tx; index < total_element; index++) {
+        // mapping flat 1D index back to 2D coordinates
+        int i = index / N;
+        int j = index % N;
+        tile_A[i][j] = d_A[i * lda + j];
     }
     __syncthreads();
 
@@ -43,7 +46,13 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
             s_v_first = ak - s_alpha;
             // Reconstruct v^T * v = (v_first^2) + sum of squares of remaining elements
             float residual_sq = sum_squares - ak * ak;
-            s_tau = 2.0f / (s_v_first * s_v_first + residual_sq);
+
+            // Calulate tau: tau = 2.0/||v_scaled||^2
+            // v_scaled = v / v_first, ||v_scaled||^2 = v^2 / v_first^2
+            // since v^2 = v^T v = v_first ^ 2 + residual_sq
+            // tau = 2.0 * v_first ^ 2 / (v_first ^ 2 + residual_sq)
+            float residual_sq = sum_squares - ak * ak;
+            s_tau = 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_sq);
         }
         __syncthreads();
 
@@ -93,10 +102,12 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
     }
 
     // write back the completed upper triangular R and householder vectors to global memory
-    for (int i = tx; i < M; i += blockDim.x) {
-        for (int j = 0; j < N; j++) {
-            d_A[i * lda + j] = tile_A[i][j];
-        }
+    // grid-stride over flat panel size
+    for (int index = tx; index < total_element; index++) {
+        // mapping flat 1D index back to 2D coordinates
+        int i = index / N;
+        int j = index % N;
+        d_A[i * lda + j] = tile_A[i][j];
     }
 
 }
