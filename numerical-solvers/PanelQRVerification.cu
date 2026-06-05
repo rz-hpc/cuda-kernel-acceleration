@@ -35,7 +35,7 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 
     // loading panel from global memory to shared memory
     // grid-stride over flat panel size
-    for (int index = tx; index < total_element; index++) {
+    for (int index = tx; index < total_element; index += blockDim.x) {
         // mapping flat 1D index back to 2D coordinates
         int i = index / N;
         int j = index % N;
@@ -113,7 +113,7 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 
     // write back to global memory
     // grid-stride over flat panel size
-    for (int index = tx; index < total_element; index++) {
+    for (int index = tx; index < total_element; index += blockDim.x) {
         // mapping flat 1D index back to 2D coordinates
         int i = index / N;
         int j = index % N;
