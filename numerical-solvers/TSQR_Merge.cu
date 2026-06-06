@@ -12,7 +12,7 @@
 // stride: distance in floats between the stacked R in global memory
 // lda: leading dimension of global matrix A
 // level: the current level of the tree reduction (used to offset tau writes)
-__global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int stride, int lda, int level) {
+__global__ void tsqr_merge_kernel(float* d_A, float* d_tau, float* d_V_merge, int M, int N, int stride, int lda, int level, int initial_blocks) {
 
     // shared memory for 2N x N stacked system (max N = 32 -> 64 rows)
     __shared__ float tile_A[64][BLOCK_DIM + 1];
@@ -33,16 +33,16 @@ __global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int st
     float* base_bottom = base_top + stride;
 
     // load the two separated N x N in to shared tile 2N x N
-    int total_elements = N * N
-    for (int index = tx; index < total_elements; index++) {
+    int total_elements = N * N;
+    for (int index = tx; index < total_elements; index += blockDim.x) {
         int r = index / N;
         int c = index % N;
 
-        // top
-        tile_A[r][c] = base_top[r * lda + c];
+        // upper triangle of top
+        tile_A[r][c] = (r <= c) ? base_top[r * lda + c] : 0.0f;
 
-        // bottom
-        tile_A[r + N][c] = base_bottom[r * lda + c];
+        // upper triangle of bottom
+        tile_A[r + N][c] = (r <= c) ? base_bottom[r * lda + c] : 0.0f;
     }
     __syncthreads();
 
@@ -50,23 +50,26 @@ __global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int st
     for (int k = 0; k < N; k++) {
         // compute norm, s_alpha, s_v_first, tau (thread 0)
         if (tx == 0) {
-            float sum_squares = 0.0f;
+            float residual_squares = 0.0f;
 
             // sum_squares needs row k of top and all rows of bottom
-            sum_squares += tile_A[k][k] * tile_A[k][k]; // top diagonal
-            for (int i = N; i < M_merge; i++) {
-                sum_squares += tile_A[i][k] * tile_A[i][k]; // bottom elements
+            //sum_squares += tile_A[k][k] * tile_A[k][k]; // top diagonal
+            for (int i = k + 1; i < N; i++) {
+                residual_squares += tile_A[i][k] * tile_A[i][k];
             }
+            for (int i = N; i < M_merge; i++) {
+                residual_squares += tile_A[i][k] * tile_A[i][k]; // bottom elements
+            }
+            float ak = tile_A[k][k];
+            float sum_squares = residual_squares + ak * ak;
 
             float norm = sqrtf(sum_squares);
 
-            float ak = tile_A[k][k];
             s_alpha = (ak > 0.0f) ? -norm : norm;
             s_v_first = ak - s_alpha;
 
             // scaled tau
-            float residual_sq = sum_squares - ak * ak;
-            s_tau = 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_sq);
+            s_tau = (s_v_first == 0.0f) ? 0.0f : 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_squares);
         }
         __syncthreads();
 
@@ -87,7 +90,7 @@ __global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int st
 
         // update trailing columns
         // A = A - tau * v * (v^T * A)
-        for (int j = k + 1 + tx; j < N; j += BlockDim.x) {
+        for (int j = k + 1 + tx; j < N; j += blockDim.x) {
             // dot product needs to include top block row k
             float dot = tile_v[k] * tile_A[k][j];
             for (int i = N; i < M_merge; i++) {
@@ -114,7 +117,7 @@ __global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int st
             tile_A[k][k] = s_alpha;
 
             // using level to prevent overwriting previous coefficients
-            int global_tau_idx = (level * M) + (blockDim.x * N) + k;
+            int global_tau_idx = (level * (initial_blocks * N)) + (blockIdx.x * N) + k;
             d_tau[global_tau_idx] = s_tau;
         }
         __syncthreads();
@@ -122,13 +125,16 @@ __global__ void tsqr_merge_kernel(float* d_A, float* d_tau, int M, int N, int st
 
     // write back to the global memory
 
-    for (int index = tx; index < total_elements; index++) {
+    int merge_block_offset = (level * initial_blocks + blockIdx.x) * (N * N);
+
+    for (int index = tx; index < total_elements; index += blockDim.x) {
         int r = index / N;
         int c = index % N;
 
-        base_top[r * lda + c] = tile_A[r][c];
+        if (r <= c) { // only writes the upper triangle
+            base_top[r * lda + c] = tile_A[r][c];
+        }
 
-        // zero out the bottom
-        base_bottom[r * lda + c] = 0.0f;
+        d_V_merge[merge_block_offset + r * N + c] =tile_A[r + N][c];
     }
 }
