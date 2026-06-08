@@ -33,7 +33,7 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
         if (tx == 0) {
             float sum_squares = 0.0f;
             for (int i = k; i < M; i++) {
-                sum_squares += tile_A[i][k] * tile_A[i][k];                
+                sum_squares += tile_A[i][k] * tile_A[i][k];
             }
             float norm = sqrtf(sum_squares);
 
@@ -112,7 +112,7 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 
 }
 
-// Verified panel_qr_baseline kernel 
+// Verified panel_qr_baseline kernel
 __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int lda) {
 
 	// shared memory
@@ -155,7 +155,7 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 			// v_scaled ^ 2 = v^2 / s_v_first^2
 			// v^2 = s_v_first ^ 2 + residual_squares
 			// tau_scaled = 2.0f * s_v_first^2 / (s_v_first ^ 2 + residual_squares)
-			s_tau = 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_squares); 
+			s_tau = 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_squares);
 		}
 		__syncthreads();
 
@@ -208,4 +208,124 @@ __global__ void panel_qr_baseline(float* d_A, float* d_tau, int M, int N, int ld
 		int c = index % N;
     block_A[r * lda + c] = tile_A[r][c];
 	}
+}
+
+// Since the Nsight report pointed out the UncoalescedSharedAccess,
+// the optimization is to when calculate dot product replace shared memory tile_v with within warp __shfl_sync,
+// to 1. resolve bank conflicts 2. improve execution throughput
+// Given the fact that it's a Tall Skinny matrix (N = 4 for example),
+// it fits in a warp totally fine.
+
+#define TILE_SIZE 128
+
+// here M is the block rows (not the full rows of origina A)
+__global__ void qr_base_optimized_kernel(float* d_A, float* d_tau, int M, int N, int lda) {
+    // shared memory
+    __shared__ float tile_A[TILE_SIZE][BLOCK_DIM + 1];
+    __shared__ float tile_v[TILE_SIZE];
+    __shared__ float s_tau;
+    __shared__ float s_alpha;
+    __shared__ float s_v_first;
+
+    // index
+    int tx = threadIdx.x;
+    float* block_A = d_A + (blockIdx.x * M * lda);
+
+    for (int row_block = 0; row_block < M; row_block += TILE_SIZE) {
+
+        // load from global memory to shared memory
+        for (int i = tx; i < TILE_SIZE; i += blockDim.x) {
+            for (int j = 0; j < N; j++) {
+                tile_A[i][j] = block_A[(row_block + i) * lda + j];
+            }
+        }
+        __syncthreads();
+
+        // for each column k in N
+        for (int k = 0; k < N; k++) {
+            // calculate residual_sq, sum_squares, norm, s_alpha, s_v_first, and tau
+            if (tx == 0) {
+                float residual_sq = 0.0f;
+                for (int i = k + 1; i < M; i++) {
+                    residual_sq += tile_A[i][k] * tile_A[i][k];
+                }
+                float ak = tile_A[k][k];
+                float sum_squares = residual_sq + ak * ak;
+                float norm = sqrtf(sum_squares);
+                s_alpha = (ak > 0.0f) ? -norm : norm;
+                s_v_first = ak - s_alpha;
+
+                // tau = 2.0f/(v_scaled^T * v_scaled) = 2 / || v_saled||^2
+                // v_scaled = v / s_v_first
+                // tau = 2.0f * s_v_first ^ 2 / ||v||^2
+                s_tau = (s_v_first == 0.0f) ? 0.0f : 2.0f * s_v_first * s_v_first / (s_v_first * s_v_first + residual_sq);
+            }
+            __syncthreads();
+
+            // populate reflection/householder vector v
+            for (int i = tx; i < M; i += blockDim.x) {
+                if (i == k) {
+                    tile_v[i] = 1.0f; // normalized
+                }
+                else if (i > k) {
+                    tile_v[i] = tile_A[i][k] / s_v_first;
+                    tile_A[i][k] = tile_v[i];
+                }
+                else {
+                    tile_v[i] = 0.0f; // clear out upper triangle
+                }
+            }
+            __syncthreads();
+
+            // save the R (diagonal)
+            if (tx == 0) {
+                tile_A[k][k] = s_alpha;
+            }
+            __syncthreads();
+
+            // trailing columns update (to the right of k)
+            // A = A - tau * v * (v^T * A)
+            // Before optimization loop: for (int j = k + 1 + tx; j < N; j += blockDim.x)
+            // One thread works on one column: thread 0 works on column k + 1, thread 1 works on column k + 2
+            // it won't be helpful to do the warp reduction since there is only one thread
+            // For the optimization of warp shuffling, need to change the loop to below
+            // so that all 32 threads in a warp work together on one column
+            // inner loop i needs to associate with tx, and grid-stride
+            for (int j = k + 1; j < N; j++) {
+                // dot product using registers and warp shuffle
+                float dot = 0.0f;
+                // each thread handles a subset of this column
+                for (int i = k + tx; i < M; i += blockDim.x) {
+                    dot += tile_v[i] * tile_A[i][j];
+                }
+
+                // Warp-level reduction: aggregate cross the 32 threads
+                for (int offset = 16; offset >= 1; offset >>= 1) {
+                    dot += __shfl_down_sync(0xffffffff, dot, offset);
+                }
+
+                // Broadcast the result: thread 0 holds the result
+                dot = __shfl_sync(0xffffffff, dot, 0);
+
+                // rank-1 update
+                for (int i = k + tx; i < M; i += blockDim.x) {
+                    tile_A[i][j] -= s_tau * tile_v[i] * dot;
+                }
+            }
+            __syncthreads();
+
+            // save tau to the global memory
+            if (tx == 0) {
+                d_tau[blockIdx.x * N + k] = s_tau;
+            }
+        }
+
+        // write back to the global memory
+        for (int i = tx; i < TILE_SIZE; i += blockDim.x) {
+            for (int j = 0; j < N; j++) {
+                block_A[(row_block + i) * lda + j] = tile_A[i][j];
+            }
+        }
+        __syncthreads();
+    }
 }
