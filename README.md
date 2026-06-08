@@ -20,7 +20,7 @@ The repository is organized into distinct functional domains mapped directly to 
 * **`numerical-solvers/`**
     * **Batched Direct Solvers:** Monolithic, block-level factorization systems featuring dense LU Decomposition with parallelized partial pivoting, shared memory row-swapping, and Schur complement rank-1 updates.
     * **Blocked Cholesky Factorization:** High-performance dense $A = LL^T$ decomposition. Features a cooperative, shared-memory tiled trailing submatrix update kernel optimized for implicit transposition layouts that bypasses global memory bandwidth constraints to achieve **~79.25% SM Compute Throughput**. Detailed Nsight hardware metrics analysis is archived in [`cholesky_profiling_report.md`](./numerical-solvers/cholesky_profiling_report.md).
-    * **Tall-Skinny QR (TSQR) Factorization:** High-performance, numerically stable QR decomposition for tall-skinny matrices ($M \gg N$). Implements a hierarchical tree-reduction architecture that performs local Householder panel factorizations followed by recursive $R$-matrix merging. The implementation features a decoupled workspace for Householder vectors to eliminate memory clobbering and utilizes a custom masking strategy for leaf-level vector loads. Current profiling focuses on mitigating shared memory bank serialization in merge kernels, with ongoing refactoring targeting warp-level register primitives (__shfl_down_sync) to maximize effective GFLOPS. Detailed hardware performance analysis is archived in tsqr_profiling_report.md.
+  * **Tall-Skinny QR (TSQR) Factorization:** High-performance, numerically stable QR decomposition for tall-skinny matrices ($M \gg N$). Implements a hierarchical tree-reduction architecture: leaf blocks run independent Householder panel factorizations, and a recursive merge kernel stacks pairs of $R$ factors into a $2N \times N$ system for further reduction. A decoupled `d_V_merge` workspace prevents Householder vector clobbering across tree levels. The warp-shuffle optimized panel kernel (`qr_base_optimized_kernel`) reassigns all 32 warp threads to cooperate on each trailing column via `__shfl_down_sync` dot-product reduction, achieving a **2.21× speedup** (67.14 µs → 30.37 µs) and near-doubling warp lane utilization (8.90 → 16.76 active threads/warp). Detailed Nsight hardware metrics analysis is archived in [`tsqr_profiling_report.md`](https://github.com/rz-hpc/cuda-kernel-acceleration/blob/main/numerical-solvers/tsqr_profiling_report.md).
     * **Linear Systems:** Basic utilities including backward substitution and lower triangle evaluations.
 * **`krylov-methods/`**
     * **2D Conjugate Gradient (CG) Solver:** An iterative structured field solver optimized for 2D Poisson equations, demonstrating how vector operation fusion minimizes global memory round-trips.
@@ -63,6 +63,23 @@ The repository is organized into distinct functional domains mapped directly to 
     * Developed an optimized alternative layout bypassing the indirect indexing (`values[i] * p[col_indices[i]]`) of the CSR format. Instead, the grid was restructured into localized $32 \times 32$ spatial blocks mapped directly to thread blocks utilizing **Shared Memory Tiling**.
     * **Performance Gains:** Achieved a **~4× throughput speedup** over the scalar CSR baseline. 
     * **Micro-Architectural Driver:** By staging the spatial stencil tiles explicitly inside the fast L1/SRAM memory layer, data elements are loaded once from DRAM and reused concurrently by all 256 threads in the block. This drastically reduces the pressure on the GPU's memory controllers, simplifies coordinate tracking math for the hardware instruction schedulers, and optimizes the efficiency of the hardware prefetcher.
+
+### 4. Tall-Skinny QR (TSQR) — Warp-Shuffle Panel Factorization
+
+- **Hardware Diagnostic Target:** Eliminating idle warp lanes during Householder trailing column updates by replacing column-per-thread parallelism with column-per-warp `__shfl_down_sync` reduction.
+- **Profiling Configuration:** $M = 512$, $N = 4$, 4 leaf blocks × 128 rows, 3-level tree, NVIDIA Tesla T4 (sm\_75).
+- **Nsight Compute Diagnostics (Panel QR Kernel):**
+  * **Baseline Duration:** 67.14 µs (`panel_qr_baseline_kernel`)
+  * **Optimized Duration:** 30.37 µs (`qr_base_optimized_kernel`) — **2.21× speedup**
+  * **SM Active Cycles:** 3,799.70 → 1,651.90 — 2.30× reduction
+  * **Avg. Active Threads Per Warp:** 8.90 → 16.76 — +88% warp lane utilization
+  * **Warp Cycles Per Issued Instruction:** 6.01 → 5.68
+  * **Arithmetic Intensity:** ~0.99 FLOP/byte (memory-bound; below T4 ridge point of ~10 FLOP/byte)
+- **Micro-Architectural Bottleneck & Analysis:**
+  * **Baseline bottleneck — warp underutilization:** The baseline trailing update used `j = k + 1 + tx; j < N; j += blockDim.x`, assigning one thread per column. With $N = 4$, at most 3 threads were active during the compute phase; 29 of 32 warp lanes were idle on every instruction issue slot. This is confirmed by the 8.90 average active threads per warp — less than one full quarter of the warp.
+  * **Optimization — column-per-warp with warp shuffle:** The optimized kernel pivots to `i = k + tx; i < M; i += blockDim.x` for the inner loop, partitioning the 128-row dot product across all 32 threads (4 elements per thread). A `__shfl_down_sync` butterfly reduction aggregates the partial sums into thread 0 without touching shared memory. The active thread count rises to 16.76 per warp, confirming warp-level utilization nearly doubled.
+  * **Remaining bottleneck — serial norm reduction:** Thread 0 still computes $\sum_{i=k}^{M} x_i^2$ serially at the start of each column step (~40–45% of cycles stalled on fixed-latency dependency). This is the next optimization target: a parallel shared-memory tree reduction over all 32 threads.
+  * **Merge kernel:** The `tsqr_merge_optimized_kernel` shows increased active threads (8.81 → 12.48/warp) but flat wall-clock time. With $M_{\text{merge}} = 2N = 8$ rows and BLOCK\_DIM = 32, the problem is too small to benefit from warp cooperation — 24 of 32 threads contribute zero to every dot product. This is an architectural floor for $N = 4$; the kernel design is correct and will scale favorably at $N \geq 16$.
 
 ---
 
