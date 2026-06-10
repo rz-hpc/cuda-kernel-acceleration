@@ -1,0 +1,30 @@
+==PROF== Connected to process 4864 (/content/matMulVecMem)
+==PROF== Profiling "multiplyKernelNative" - 0: 0%....50%....100% - 3 passes
+Kernel Native elapsed time: 616.649 ms
+==PROF== Profiling "multiplyKernelTiledVectorizedA" - 1: 0%....50%....100% - 3 passes
+Kernel Tiled with vectorized memory access elapsed time: 119.981 ms
+isSuccess 1
+==PROF== Disconnected from process 4864
+[4864] matMulVecMem@127.0.0.1
+  multiplyKernelNative(float *, float *, float *, int, int, int) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        12.54
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst  500,000,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  multiplyKernelTiledVectorizedA(float *, float *, float *, int, int, int) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        11.93
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst  520,224,768
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+

@@ -1,0 +1,2284 @@
+==PROF== Connected to process 10116 (/content/cholesky_tiled)
+==PROF== Profiling "diagnoal_factorization_kernel" - 0: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 1: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 2: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 3: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 4: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 5: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 6: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 7: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 8: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 9: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 10: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 11: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 12: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 13: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 14: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 15: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 16: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 17: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 18: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 19: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 20: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 21: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 22: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 23: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 24: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 25: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 26: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 27: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 28: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 29: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 30: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 31: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 32: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 33: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 34: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 35: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 36: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 37: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 38: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 39: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 40: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 41: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 42: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 43: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 44: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 45: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 46: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 47: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 48: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 49: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 50: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 51: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 52: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 53: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 54: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 55: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 56: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 57: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 58: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 59: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 60: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 61: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 62: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 63: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 64: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 65: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 66: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 67: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 68: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 69: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 70: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 71: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 72: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 73: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 74: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 75: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 76: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 77: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 78: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 79: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 80: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 81: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 82: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 83: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 84: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 85: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 86: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 87: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 88: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 89: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 90: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 91: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 92: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 93: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 94: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 95: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 96: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 97: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 98: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 99: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 100: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 101: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 102: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 103: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 104: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 105: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 106: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 107: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 108: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 109: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 110: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 111: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 112: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 113: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 114: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 115: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 116: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 117: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 118: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 119: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 120: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 121: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 122: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 123: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 124: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 125: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 126: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 127: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 128: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 129: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 130: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 131: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 132: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 133: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 134: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 135: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 136: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 137: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 138: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 139: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 140: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 141: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 142: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 143: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 144: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 145: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 146: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 147: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 148: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 149: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 150: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 151: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 152: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 153: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 154: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 155: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 156: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 157: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 158: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 159: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 160: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 161: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 162: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 163: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 164: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 165: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 166: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 167: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 168: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 169: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 170: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 171: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 172: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 173: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 174: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 175: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 176: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 177: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 178: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 179: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 180: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 181: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 182: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 183: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 184: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 185: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 186: 0%....50%....100% - 3 passes
+==PROF== Profiling "column_update_kernel" - 187: 0%....50%....100% - 3 passes
+==PROF== Profiling "trailing_submatrix_kernel" - 188: 0%....50%....100% - 3 passes
+==PROF== Profiling "diagnoal_factorization_kernel" - 189: 0%....50%....100% - 3 passes
+Blocked Cholesky kernels isSuccess: 1
+==PROF== Disconnected from process 10116
+[10116] cholesky_tiled@127.0.0.1
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.93
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (63, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       432.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,322,496
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (63, 63, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        20.51
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    2,033,136
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   65,060,352
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.25
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (62, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       426.02
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,301,504
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (62, 62, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        19.91
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,969,120
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   63,011,840
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (61, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       424.06
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,280,512
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (61, 61, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        19.20
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,906,128
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   60,996,096
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.93
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (60, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       414.66
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,259,520
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (60, 60, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        18.55
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,844,160
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   59,013,120
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (59, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       416.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,238,528
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (59, 59, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        17.93
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,783,216
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   57,062,912
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.96
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (58, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       409.95
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,217,536
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (58, 58, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        17.31
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,723,296
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   55,145,472
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (57, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       396.10
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,196,544
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (57, 57, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        16.68
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,664,400
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   53,260,800
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (56, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       395.49
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,175,552
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (56, 56, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        15.95
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,606,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   51,408,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.57
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (55, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       382.30
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,154,560
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (55, 55, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        15.53
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,549,680
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   49,589,760
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (54, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       373.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,133,568
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (54, 54, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        15.01
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,493,856
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   47,803,392
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.42
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (53, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       369.28
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,112,576
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (53, 53, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        14.44
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,439,056
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   46,049,792
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.86
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (52, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       357.92
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,091,584
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (52, 52, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        13.89
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,385,280
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   44,328,960
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (51, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       349.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,070,592
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (51, 51, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        13.32
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,332,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   42,640,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.12
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (50, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       343.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,049,600
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (50, 50, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        12.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,280,800
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   40,985,600
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (49, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       332.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,028,608
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (49, 49, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        12.28
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,230,096
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   39,363,072
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (48, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       329.60
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,007,616
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (48, 48, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        11.70
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,180,416
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   37,773,312
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (47, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       317.66
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      986,624
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (47, 47, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        11.24
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,131,760
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   36,216,320
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (46, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       312.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      965,632
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (46, 46, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        10.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,084,128
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   34,692,096
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (45, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       306.40
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      944,640
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (45, 45, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        10.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,037,520
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   33,200,640
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (44, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       296.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      923,648
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (44, 44, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         9.80
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      991,936
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   31,741,952
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.45
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (43, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       290.37
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      902,656
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (43, 43, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         9.31
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      947,376
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   30,316,032
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (42, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       287.20
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      881,664
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (42, 42, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         8.81
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      903,840
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   28,922,880
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.96
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (41, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       277.22
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      860,672
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (41, 41, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         8.33
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      861,328
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   27,562,496
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (40, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       268.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      839,680
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (40, 40, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         7.87
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      819,840
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   26,234,880
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.54
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (39, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       262.46
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      818,688
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (39, 39, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         7.53
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      779,376
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   24,940,032
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (38, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      797,696
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (38, 38, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         7.05
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      739,936
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   23,677,952
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.80
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (37, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       252.32
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      776,704
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (37, 37, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         6.66
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      701,520
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   22,448,640
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.58
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (36, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       244.42
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      755,712
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (36, 36, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         6.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      664,128
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   21,252,096
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (35, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       238.27
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      734,720
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (35, 35, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         5.85
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      627,760
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   20,088,320
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.58
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (34, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       232.51
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      713,728
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (34, 34, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         5.46
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      592,416
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   18,957,312
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.80
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (33, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       224.42
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      692,736
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (33, 33, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         5.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      558,096
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   17,859,072
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (32, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       218.50
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      671,744
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (32, 32, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         4.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      524,800
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,793,600
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (31, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       214.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      650,752
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (31, 31, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         4.40
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      492,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,760,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (30, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       205.79
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      629,760
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (30, 30, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         4.08
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      461,280
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   14,760,960
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.70
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (29, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       200.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      608,768
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (29, 29, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         3.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      431,056
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   13,793,792
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (28, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       191.65
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      587,776
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (28, 28, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         3.46
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      401,856
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   12,859,392
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (27, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       185.38
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      566,784
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (27, 27, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         3.20
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      373,680
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   11,957,760
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (26, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       176.86
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      545,792
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (26, 26, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         2.94
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      346,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   11,088,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.18
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (25, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       170.91
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      524,800
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (25, 25, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         2.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      320,400
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   10,252,800
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (24, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       163.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      503,808
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (24, 24, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         2.59
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      295,296
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    9,449,472
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.58
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (23, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       156.86
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      482,816
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (23, 23, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         2.37
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      271,216
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    8,678,912
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.70
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (22, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       152.80
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      461,824
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (22, 22, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         2.13
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      248,160
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    7,941,120
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.93
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (21, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       147.07
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      440,832
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (21, 21, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         1.90
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      226,128
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    7,236,096
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (20, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       139.52
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      419,840
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (20, 20, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         1.68
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      205,120
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    6,563,840
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.80
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (19, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       133.89
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      398,848
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (19, 19, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         1.47
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      185,136
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    5,924,352
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.44
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (18, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       128.03
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      377,856
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (18, 18, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         1.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      166,176
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    5,317,632
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.12
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (17, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       120.86
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      356,864
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (17, 17, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte         1.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      148,240
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    4,743,680
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (16, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       116.29
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      335,872
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (16, 16, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       931.84
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      131,328
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    4,202,496
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (15, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       108.10
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      314,880
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (15, 15, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       817.02
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      115,440
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    3,694,080
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (14, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       101.89
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      293,888
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (14, 14, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       714.62
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst      100,576
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    3,218,432
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.54
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (13, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        97.79
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      272,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (13, 13, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       625.28
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       86,736
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    2,775,552
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.12
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (12, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        89.82
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      251,904
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (12, 12, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       543.39
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       73,920
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    2,365,440
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.22
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (11, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        84.86
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      230,912
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (11, 11, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       457.57
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       62,128
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,988,096
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.58
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (10, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        77.63
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      209,920
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (10, 10, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       382.05
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       51,360
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,643,520
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.67
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (9, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        71.42
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      188,928
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (9, 9, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       321.92
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       41,616
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,331,712
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.96
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (8, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        65.12
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      167,936
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (8, 8, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       251.81
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       32,896
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    1,052,672
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.48
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (7, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        58.66
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      146,944
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (7, 7, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       204.06
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       25,200
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      806,400
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.99
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (6, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        52.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      125,952
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (6, 6, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       159.30
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       18,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      592,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (5, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        46.40
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      104,960
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (5, 5, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte       120.06
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst       12,880
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      412,160
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.32
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (4, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        40.64
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       83,968
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (4, 4, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        86.66
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst        8,256
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      264,192
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.90
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (3, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        33.98
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       62,976
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (3, 3, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        57.25
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst        4,656
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      148,992
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        17.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (2, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        27.84
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       41,984
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (2, 2, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        34.88
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst        2,080
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       66,560
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.67
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
+  column_update_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        21.95
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       20,992
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  trailing_submatrix_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.99
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst          528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst       16,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  diagnoal_factorization_kernel(float *, int, int) (1, 1, 1)x(32, 32, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        16.51
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst        8,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst           64
+    ------------------------------------------------- ----------- ------------
+
