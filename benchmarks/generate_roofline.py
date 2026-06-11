@@ -61,7 +61,7 @@ def plot_roofline(hardware_specs, kernel_data, output_path="roofline.png"):
     plt.xlim(10**-2, 10**3)
     plt.ylim(10**0, max_gflops * 2)
     
-    plt.legend(loc='lower right', frameon=True, facecolor='white', edgecolor='none', fontsize=10)
+    plt.legend(loc='upper left', frameon=True, facecolor='white', edgecolor='none', fontsize=10)
     plt.tight_layout()
     
     # Save and close
@@ -81,6 +81,7 @@ if __name__ == "__main__":
     # Example Kernel Benchmarking Results
     # Arithmetic Intensity (AI) = FLOPs / Total Memory Traffic (Bytes transferred to/from Global Memory)
     benchmarked_kernels = [
+        # --- BLAS / Vectorized MatMul Section ---
         {
             'name': 'Native MatMul',
             'intensity': 79.81,
@@ -90,6 +91,25 @@ if __name__ == "__main__":
             'name': 'Tiled Vectorized MatMul',
             'intensity': 86.99,
             'gflops': 8.63
+        },
+        # --- Numerical Solvers / Tiled Cholesky Section ---
+        {
+            'name': 'Cholesky Diagonal',
+            'category': 'Tiled Cholesky',
+            'intensity': 0.9588,
+            'gflops': 1.5  # <-- Replace with: 0.001028 / total_diagonal_time_sec
+        },
+        {
+            'name': 'Cholesky Column Update',
+            'category': 'Tiled Cholesky',
+            'intensity': 6.0363,
+            'gflops': 42.0  # <-- Replace with: 0.084640 / total_column_time_sec
+        },
+        {
+            'name': 'Cholesky Trailing Submatrix',
+            'category': 'Tiled Cholesky',
+            'intensity': 6.6908,
+            'gflops': 135.2  # <-- Replace with: 2.842345 / total_trailing_time_sec
         }
     ]
 
