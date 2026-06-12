@@ -110,6 +110,19 @@ if __name__ == "__main__":
             'category': 'Tiled Cholesky',
             'intensity': 6.6908,
             'gflops': 135.2  # <-- Replace with: 2.842345 / total_trailing_time_sec
+        },
+        # --- Sparse Linear Algebra / SpMV Section ---
+        {
+            'name': 'CSR-Scalar SpMV',
+            'category': 'Sparse MV',
+            'intensity': 0.1015,       # From 1,990,290 FLOPs / 19,600,000 Bytes
+            'gflops': 14.53            # Based on 1.990290e-3 GFLOPs / 137.02e-6 sec
+        },
+        {
+            'name': 'CSR-Vector SpMV',
+            'category': 'Sparse MV',
+            'intensity': 0.2521,       # From 3,280,290 FLOPs / 13,010,000 Bytes
+            'gflops': 41.67            # Based on 3.280290e-3 GFLOPs / 78.72e-6 sec
         }
     ]
 

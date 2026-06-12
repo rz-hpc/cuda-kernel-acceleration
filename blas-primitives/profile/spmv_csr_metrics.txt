@@ -1,0 +1,29 @@
+==PROF== Connected to process 9142 (/content/spMV_MatrixFormats_Benchmark)
+==PROF== Profiling "spmv_csr_scalar_kernel" - 0: 0%....50%....100% - 3 passes
+==PROF== Profiling "spmv_csr_vector_kernel" - 1: 0%....50%....100% - 3 passes
+isSuccess: TRUE
+isSuccess: 1
+==PROF== Disconnected from process 9142
+[9142] spMV_MatrixFormats_Benchmark@127.0.0.1
+  spmv_csr_scalar_kernel(int, const int *, const int *, const float *, const float *, float *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        19.60
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      995,145
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  spmv_csr_vector_kernel(int, const int *, const int *, const float *, const float *, float *) (2500, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        13.01
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,290,000
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst      995,145
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
