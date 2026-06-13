@@ -1,0 +1,51 @@
+==PROF== Connected to process 8000 (/content/cuSPARSE_spMV)
+==PROF== Profiling "csr_partition_kernel" - 0: 0%....50%....100% - 3 passes
+==PROF== Profiling "vector_scalar_multiply_kernel" - 1: 0%....50%....100% - 3 passes
+==PROF== Profiling "csrmv_v3_kernel" - 2: 0%....50%....100% - 3 passes
+==PROF== Disconnected from process 8000
+[8000] cuSPARSE_spMV@127.0.0.1
+  void unnamed>::csr_partition_kernel<int, int>(const T1 *, T2, T1, T1, T2, T2 *, T2) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        68.99
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector        1,270
+    lts__t_sectors_srcunit_tex_op_write.sum                sector          122
+    sm__cycles_elapsed.avg                                  cycle        6,149
+    sm__cycles_elapsed.max                                  cycle        6,150
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (10, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.03
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            0
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,250
+    sm__cycles_elapsed.avg                                  cycle     1,966.80
+    sm__cycles_elapsed.max                                  cycle        1,968
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void csrmv_v3_kernel<std::integral_constant<bool, 0>, int, int, float, float, float, float, void>(KernelCoeffs<T7>, const T3 *, const T2 *, const T3 *, const T4 *, T2, int, int, const T5 *, T6 *, T3 *, T7 *) (972, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Mbyte        11.59
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      930,400
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        3,709
+    sm__cycles_elapsed.avg                                  cycle    49,599.40
+    sm__cycles_elapsed.max                                  cycle       49,606
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,360,371
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,990,290
+    ------------------------------------------------- ----------- ------------
+
