@@ -8,7 +8,11 @@ through profiling-guided iteration on an NVIDIA Tesla T4 (Turing, sm_75).
 
 ## Background & Motivation
 
-Across 8 years engineering iterative numerical solvers (CG, LU, domain decomposition) and 4 years optimizing high-throughput concurrent systems — including lock-free producer-consumer pipelines for multi-billion row datasets and NUMA-aware memory layout tuning — I developed a deep intuition for hardware-aware algorithm design.
+Across 8 years engineering iterative numerical solvers (CG, LU, domain decomposition) at
+Siemens EDA and 4 years optimizing high-throughput concurrent systems at Microsoft —
+including lock-free producer-consumer pipelines for multi-billion row datasets and
+NUMA-aware memory layout tuning — I developed a deep intuition for hardware-aware
+algorithm design.
 
 This self-directed CUDA project extends that foundation to GPU-native implementations,
 profiled end-to-end with Nsight Compute. Each module targets a specific GPU
@@ -27,8 +31,9 @@ workflows), HPC kernel optimization, and GPU-native numerical methods.
 `shared memory tiling` · `bank conflict analysis & padding` · `warp-level primitives`
 (`__shfl_down_sync`) · `Nsight Compute profiling (ncu)` · `occupancy optimization` ·
 `memory coalescing` · `L1/L2 cache hierarchy` · `batched LU factorization` ·
+`blocked Cholesky (LL^T)` · `Tall-Skinny QR (TSQR, Householder)` ·
 `Krylov iterative solvers (CG)` · `FlashAttention block tiling` · `BLAS-level GEMM` ·
-`CSR SpMV` · `Turing architecture (sm_75)` · `Google Colab T4 runtime`
+`CSR SpMV` · `Schur complement rank-1 update` · `Turing architecture (sm_75)` · `Google Colab T4 runtime`
 
 ---
 
@@ -55,10 +60,12 @@ cuda-kernel-acceleration/
 ├── blas-primitives/          # GEMM (naive → tiled → register), Matrix Transpose
 ├── parallel-primitives/      # Prefix Sum: Blelloch, Brent-Kung, warp shuffle
 ├── sparse-linear-algebra/    # CSR SpMV, structured stencil variants
-├── numerical-solvers/        # Batched LU with partial pivoting, backward substitution
+├── numerical-solvers/        # Batched LU (partial pivoting), Cholesky (blocked),
+│                             # Tall-Skinny QR (TSQR), backward substitution
 ├── krylov-methods/           # 2D Conjugate Gradient for Poisson equations
 ├── dl-acceleration/          # Online Softmax, FlashAttention block tiling
-└── asynchronous-streams/     # CUDA stream overlap experiments
+├── asynchronous-streams/     # CUDA stream overlap experiments
+└── benchmarks/               # Nsight Compute ncu reports and profiling summaries
 ```
 
 ---
@@ -186,14 +193,18 @@ ncu --set full ./lu_solver
 
 ## Roadmap
 
-Work in progress — constrained by Colab T4 runtime, but scoped to what's learnable
-within those limits:
+Work in progress — all experiments scoped to Google Colab T4 runtime constraints,
+with architecture-only studies noted where hardware access isn't available.
 
+- [ ] **cuDSS refactorization demo** *(next up)* — repeated solves on matrices sharing
+      a sparsity pattern (analyze-once / factorize-once / solve-many workflow). Targets
+      the core use case for sparse direct solvers in iterative design loops (e.g. circuit
+      simulation, FEM parameter sweeps) where the nonzero structure is fixed but values change.
 - [ ] cuSPARSE API comparison benchmarks for SpMV formats (CSR vs BSR vs ELL)
-- [ ] FP16/BF16 GEMM variants — explore whether tensor core access is achievable on T4
+- [ ] FP16/BF16 GEMM variants — explore tensor core access pathways on T4 (sm_75)
 - [ ] Multi-stream overlap across solver iterations (asynchronous-streams module)
 - [ ] Hopper architecture (sm_90) review: TMA, warpgroup MMA — architectural study
-      even if not runnable on Colab
+      even if not runnable on Colab T4
 - [ ] Structured sparsity experiments for transformer inference acceleration
 
 ---
