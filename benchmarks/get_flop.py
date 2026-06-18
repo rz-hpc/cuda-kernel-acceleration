@@ -77,3 +77,6 @@ def extract_gflops_from_csv(file_path):
 extract_gflops_from_csv("benchmarks/cuSPARSE_spmv_csr_report.csv")
 extract_gflops_from_csv("benchmarks/spmv_csr_report.csv")
 extract_gflops_from_csv("benchmarks/conjugate_gradient_2d_report.csv")
+extract_gflops_from_csv("benchmarks/matMulVecMem_report.csv")
+extract_gflops_from_csv("benchmarks/cholesky_tiled_report.csv")
+extract_gflops_from_csv("benchmarks/cuDSS_Refactorization_report.csv")

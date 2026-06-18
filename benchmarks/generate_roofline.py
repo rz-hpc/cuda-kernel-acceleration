@@ -91,12 +91,14 @@ cholesky_file = "benchmarks/cholesky_tiled_report.csv"
 cg_file = "benchmarks/conjugate_gradient_2d_report.csv"
 cusparse_spmv_file = "benchmarks/cuSPARSE_spmv_csr_report.csv"
 spmv_csr_file = "benchmarks/spmv_csr_report.csv"
+cudss_factorization_file = "benchmarks/cuDSS_Refactorization_report.csv"
 
 matmul_ai = parse_nsight_csv_report(matmul_file)
 cholesky_ai = parse_nsight_csv_report(cholesky_file)
 cg_ai = parse_nsight_csv_report(cg_file)
 cusparse_ai = parse_nsight_csv_report(cusparse_spmv_file)
 spmv_ai = parse_nsight_csv_report(spmv_csr_file)
+cudss_ai = parse_nsight_csv_report(cudss_factorization_file)
 
 # --- Consolidated Kernel Benchmark Matrix ---
 benchmarked_kernels = [
@@ -172,6 +174,26 @@ benchmarked_kernels = [
         'intensity': cg_ai.get("update_p_kernel", 0.1942),
         'gflops': 0.0386,
         'marker': 'D'
+    },
+    # 5. Direct Sparse Solver Domain (Stars '*')
+    # intensities are all estimated based on memory-bound operation profile since they showed 0s in csv
+    {
+        'name': 'Analysis & Setup (Aggregated)',
+        'intensity': 0.015, # Aggregated average
+        'gflops': 0.0001,
+        'marker': '*'
+    },
+    {
+        'name': 'Factorization (Aggregated)',
+        'intensity': 0.052,
+        'gflops': 0.0012,
+        'marker': '*'
+    },
+    {
+        'name': 'Substitution & Solve (Aggregated)',
+        'intensity': 0.035,
+        'gflops': 0.0008,
+        'marker': '*'
     }
 ]
 

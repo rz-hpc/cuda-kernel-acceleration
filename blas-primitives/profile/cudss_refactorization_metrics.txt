@@ -1,0 +1,1495 @@
+==PROF== Connected to process 9458 (/content/cuDSS_refactorization_demo)
+==PROF== Profiling "copy_csr_columns_ker" - 0: 0%....50%....100% - 3 passes
+==PROF== Profiling "radix_sort_ker" - 1: 0%....50%....100% - 3 passes
+==PROF== Profiling "trans_nnz_per_row_ker" - 2: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 3: 0%....50%....100% - 3 passes
+==PROF== Profiling "trans_columns_ker" - 4: 0%....50%....100% - 3 passes
+==PROF== Profiling "radix_sort_ker" - 5: 0%....50%....100% - 3 passes
+==PROF== Profiling "xadj_ker" - 6: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 7: 0%....50%....100% - 3 passes
+==PROF== Profiling "adjncy_ker" - 8: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 9: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 10: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 11: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 12: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 13: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 14: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 15: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 16: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 17: 0%....50%....100% - 3 passes
+==PROF== Profiling "dependency_map_ker" - 18: 0%....50%....100% - 3 passes
+==PROF== Profiling "nnz_per_col_ker" - 19: 0%....50%....100% - 3 passes
+==PROF== Profiling "nnz_per_col_ker" - 20: 0%....50%....100% - 3 passes
+==PROF== Profiling "supernode_map_offsets_ker" - 21: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_ker" - 22: 0%....50%....100% - 3 passes
+==PROF== Profiling "supernode_map_ker" - 23: 0%....50%....100% - 3 passes
+==PROF== Profiling "supernode_dependant_ker" - 24: 0%....50%....100% - 3 passes
+==PROF== Profiling "nnz_count_ker" - 25: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 26: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 27: 0%....50%....100% - 3 passes
+==PROF== Profiling "set_default_ker" - 28: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 29: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 30: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 31: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 32: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 33: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 34: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 35: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 36: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 37: 0%....50%....100% - 3 passes
+==PROF== Profiling "csc_rows_ker" - 38: 0%....50%....100% - 3 passes
+==PROF== Profiling "radix_sort_ker" - 39: 0%....50%....100% - 3 passes
+==PROF== Profiling "define_superpanel_ker" - 40: 0%....50%....100% - 3 passes
+==PROF== Profiling "updates_offsets_ker" - 41: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 42: 0%....50%....100% - 3 passes
+==PROF== Profiling "blocks_ker" - 43: 0%....50%....100% - 3 passes
+==PROF== Profiling "updates_ker" - 44: 0%....50%....100% - 3 passes
+==PROF== Profiling "radix_sort_ker" - 45: 0%....50%....100% - 3 passes
+==PROF== Profiling "compute_hybrid_minimum_chunk_..." - 46: 0%....50%....100% - 3 passes
+==PROF== Profiling "map_offsets_ker" - 47: 0%....50%....100% - 3 passes
+==PROF== Profiling "offsets_par_ker" - 48: 0%....50%....100% - 3 passes
+==PROF== Profiling "map_ker" - 49: 0%....50%....100% - 3 passes
+==PROF== Profiling "modify_update_ker" - 50: 0%....50%....100% - 3 passes
+==PROF== Profiling "count_dep_fwd_bwd_ker" - 51: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_bwd_order_step_1_ker" - 52: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_bwd_order_step_2_ker" - 53: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_bwd_order_step_1_ker" - 54: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_bwd_order_step_2_ker" - 55: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_bwd_order_step_1_ker" - 56: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 57: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 58: 0%....50%....100% - 3 passes
+==PROF== Profiling "independent_ker" - 59: 0%....50%....100% - 3 passes
+==PROF== Profiling "plain_map_ker" - 60: 0%....50%....100% - 3 passes
+==PROF== Profiling "factorize_v3_ker" - 61: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 62: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_ker" - 63: 0%....50%....100% - 3 passes
+==PROF== Profiling "bwd_ker" - 64: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 65: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 66: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 67: 0%....50%....100% - 3 passes
+==PROF== Profiling "independent_ker" - 68: 0%....50%....100% - 3 passes
+==PROF== Profiling "plain_map_ker" - 69: 0%....50%....100% - 3 passes
+==PROF== Profiling "factorize_v3_ker" - 70: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 71: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_ker" - 72: 0%....50%....100% - 3 passes
+==PROF== Profiling "bwd_ker" - 73: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 74: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 75: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 76: 0%....50%....100% - 3 passes
+==PROF== Profiling "independent_ker" - 77: 0%....50%....100% - 3 passes
+==PROF== Profiling "plain_map_ker" - 78: 0%....50%....100% - 3 passes
+==PROF== Profiling "factorize_v3_ker" - 79: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 80: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_ker" - 81: 0%....50%....100% - 3 passes
+==PROF== Profiling "bwd_ker" - 82: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 83: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 84: 0%....50%....100% - 3 passes
+==PROF== Profiling "copy_matrix_ker" - 85: 0%....50%....100% - 3 passes
+==PROF== Profiling "independent_ker" - 86: 0%....50%....100% - 3 passes
+==PROF== Profiling "plain_map_ker" - 87: 0%....50%....100% - 3 passes
+==PROF== Profiling "factorize_v3_ker" - 88: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 89: 0%....50%....100% - 3 passes
+==PROF== Profiling "fwd_ker" - 90: 0%....50%....100% - 3 passes
+==PROF== Profiling "bwd_ker" - 91: 0%....50%....100% - 3 passes
+==PROF== Profiling "perm_ker" - 92: 0%....50%....100% - 3 passes
+System 0 (alpha=1): OK, max_err=5.55112e-17
+System 1 (alpha=1.5): OK, max_err=5.55112e-17
+System 2 (alpha=2): OK, max_err=2.77556e-17
+System 3 (alpha=2.5): OK, max_err=2.77556e-17
+==PROF== Disconnected from process 9458
+[9458] cuDSS_refactorization_demo@127.0.0.1
+  void cudss::copy_csr_columns_ker<int, int, int, 128>(long, const T2 *, const T3 *, T1 *, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         7.46
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,723.40
+    sm__cycles_elapsed.max                                  cycle        2,724
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::radix_sort_ker<int, int, double, 1, 16, 4, 0>(T2, const T1 *, T2 *, T2 *, T3 *, T3 *, T2, T2) (5, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        13.63
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           11
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           52
+    sm__cycles_elapsed.avg                                  cycle     6,495.40
+    sm__cycles_elapsed.max                                  cycle        6,497
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::trans_nnz_per_row_ker<int, int, long, int, 128>(T4, const T1 *, const T2 *, T3 *, T4, T4, int) (5, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.34
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           10
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,589.60
+    sm__cycles_elapsed.max                                  cycle        2,590
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<long, int, int, 128, 1>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        25.98
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      220,469
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           49
+    sm__cycles_elapsed.avg                                  cycle 2,242,984.20
+    sm__cycles_elapsed.max                                  cycle    2,242,987
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::trans_columns_ker<int, int, long, int, 128>(T4, const T1 *, const T2 *, T3 *, T4 *, T4, T4, int) (5, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.47
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           10
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            8
+    sm__cycles_elapsed.avg                                  cycle     2,893.20
+    sm__cycles_elapsed.max                                  cycle        2,894
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::radix_sort_ker<long, int, double, 1, 16, 4, 0>(T2, const T1 *, T2 *, T2 *, T3 *, T3 *, T2, T2) (5, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        14.37
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           13
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           52
+    sm__cycles_elapsed.avg                                  cycle     6,155.20
+    sm__cycles_elapsed.max                                  cycle        6,156
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::xadj_ker<int, int, long, int, 128>(T4, const T1 *, const T2 *, const T3 *, const T4 *, T3 *, T4, T4, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        14.72
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            7
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     3,990.20
+    sm__cycles_elapsed.max                                  cycle        3,991
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<long, long, long, 128, 1>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        20.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      220,174
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           46
+    sm__cycles_elapsed.avg                                  cycle 2,242,815.40
+    sm__cycles_elapsed.max                                  cycle    2,242,818
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::adjncy_ker<int, int, long, int, 128>(T4, const T1 *, const T2 *, T3 *, T4 *, T3 *, T4 *, T4, T4, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         9.38
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     3,840.40
+    sm__cycles_elapsed.max                                  cycle        3,841
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (512, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        11.87
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          470
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     5,711.80
+    sm__cycles_elapsed.max                                  cycle        5,713
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (256, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         7.65
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          216
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     3,930.40
+    sm__cycles_elapsed.max                                  cycle        3,932
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (128, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.30
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          105
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,827.80
+    sm__cycles_elapsed.max                                  cycle        2,830
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (64, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.38
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           64
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,261.80
+    sm__cycles_elapsed.max                                  cycle        2,264
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (32, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.06
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           32
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,150.20
+    sm__cycles_elapsed.max                                  cycle        2,151
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (16, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           16
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle        2,107
+    sm__cycles_elapsed.max                                  cycle        2,108
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (8, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.67
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            8
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle        2,090
+    sm__cycles_elapsed.max                                  cycle        2,091
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (4, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.51
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            4
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,090.80
+    sm__cycles_elapsed.max                                  cycle        2,091
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (2, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.83
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            2
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,087.40
+    sm__cycles_elapsed.max                                  cycle        2,088
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::dependency_map_ker<int, long, 512, 0>(T1, const T2 *, const T1 *, const T1 *, const T1 *, T1 *, T1 *, const T1 *) (1, 1, 1)x(512, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.25
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           11
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           20
+    sm__cycles_elapsed.avg                                  cycle     6,430.40
+    sm__cycles_elapsed.max                                  cycle        6,431
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::nnz_per_col_ker<long, int, 128, 1>(T2, const T1 *, const T2 *, const T2 *, const T2 *, T2 *, T2 *, T2 *, T2 *, T2, T2, T2, int, int, int) (512, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        10.37
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          409
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,995.80
+    sm__cycles_elapsed.max                                  cycle        2,999
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::nnz_per_col_ker<long, int, 128, 0>(T2, const T1 *, const T2 *, const T2 *, const T2 *, T2 *, T2 *, T2 *, T2 *, T2, T2, T2, int, int, int) (40, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.50
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           24
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     4,064.60
+    sm__cycles_elapsed.max                                  cycle        4,065
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::supernode_map_offsets_ker<int, 1>(T1, const T1 *, const T1 *, T1 *, T1, T1 *, T1, T1 *, T1 *, T1) (1023, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        25.44
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          878
+    lts__t_sectors_srcunit_tex_op_write.sum                sector          890
+    sm__cycles_elapsed.avg                                  cycle     4,248.80
+    sm__cycles_elapsed.max                                  cycle        4,251
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::offsets_ker<int, 1>(T1, T1 *) (1, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        14.08
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          161
+    lts__t_sectors_srcunit_tex_op_write.sum                sector          260
+    sm__cycles_elapsed.avg                                  cycle    31,643.40
+    sm__cycles_elapsed.max                                  cycle       31,646
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::supernode_map_ker<int, 1>(T1, const T1 *, const T1 *, T1 *, T1, T1 *, T1, T1 *, T1 *, T1) (1023, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        24.10
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector        1,742
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,227
+    sm__cycles_elapsed.avg                                  cycle     4,777.60
+    sm__cycles_elapsed.max                                  cycle        4,781
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::supernode_dependant_ker<int, 128>(T1, T1 *, T1 *, T1 *, T1 *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.03
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            4
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     2,808.20
+    sm__cycles_elapsed.max                                  cycle        2,809
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::nnz_count_ker<long, int, 128>(T2, const T2 *, const T2 *, T1 *, T1 *, T1 *, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.53
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            8
+    sm__cycles_elapsed.avg                                  cycle        2,563
+    sm__cycles_elapsed.max                                  cycle        2,564
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<long, long, int, 128, 2>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        22.53
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      231,121
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           92
+    sm__cycles_elapsed.avg                                  cycle 2,350,608.80
+    sm__cycles_elapsed.max                                  cycle    2,350,612
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<long, int, int, 128, 1>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        21.34
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      220,175
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           45
+    sm__cycles_elapsed.avg                                  cycle 2,242,678.80
+    sm__cycles_elapsed.max                                  cycle    2,242,682
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::set_default_ker<int, 128>(T1, T1 *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.42
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            0
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     1,823.60
+    sm__cycles_elapsed.max                                  cycle        1,825
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        25.86
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          512
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     6,616.20
+    sm__cycles_elapsed.max                                  cycle        6,617
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        22.08
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          256
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     4,662.80
+    sm__cycles_elapsed.max                                  cycle        4,663
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        20.29
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector          128
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     3,344.20
+    sm__cycles_elapsed.max                                  cycle        3,345
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        19.20
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           64
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,848.20
+    sm__cycles_elapsed.max                                  cycle        2,849
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        18.94
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           32
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,310.80
+    sm__cycles_elapsed.max                                  cycle        2,312
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        18.62
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           16
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,459.40
+    sm__cycles_elapsed.max                                  cycle        2,460
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        18.56
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            8
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,247.60
+    sm__cycles_elapsed.max                                  cycle        2,248
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        18.56
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            4
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,426.60
+    sm__cycles_elapsed.max                                  cycle        2,427
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        18.50
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            2
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,241.40
+    sm__cycles_elapsed.max                                  cycle        2,242
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::csc_rows_ker<long, int, 256>(T2, T2, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, T2 *, T2 *, T2 *, const T2 *, const T2 *, const T2 *, T2, T2, const T2 *, int, T2, const T2 *) (40, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        19.62
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           16
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           15
+    sm__cycles_elapsed.avg                                  cycle       11,311
+    sm__cycles_elapsed.max                                  cycle       11,313
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::radix_sort_ker<long, int, double, 1, 16, 4, 0>(T2, const T1 *, T2 *, T2 *, T3 *, T3 *, T2, T2) (4, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        14.14
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           32
+    sm__cycles_elapsed.avg                                  cycle        5,957
+    sm__cycles_elapsed.max                                  cycle        5,958
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::define_superpanel_ker<long, int, 256>(T2, T2, T2, const T1 *, const T2 *, const T2 *, T2, T2 *, T1 *, T2 *, T1 *, T2, T2, T2, double, int, int, int, T2, T1, T2) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        14.02
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            6
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle     8,754.20
+    sm__cycles_elapsed.max                                  cycle        8,755
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst          512
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::updates_offsets_ker<long, int, 128>(T2, const T2 *, const T1 *, const T2 *, const T2 *, T1 *, T1 *, T2, T2) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         7.33
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            5
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     3,184.60
+    sm__cycles_elapsed.max                                  cycle        3,186
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<long, long, long, 128, 2>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        22.56
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      231,152
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           90
+    sm__cycles_elapsed.avg                                  cycle    2,350,677
+    sm__cycles_elapsed.max                                  cycle    2,350,677
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::blocks_ker<long, int, 128>(T2, const T2 *, const T1 *, const T2 *, const T2 *, const T1 *, T2 *, T2 *, T2, T2) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.24
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            7
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     3,031.60
+    sm__cycles_elapsed.max                                  cycle        3,032
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::updates_ker<long, int, 128>(T2, const T2 *, const T2 *, T1 *, const T2 *, const T2 *, T1 *, T2 *, T2 *, T2, T2) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.53
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle        2,979
+    sm__cycles_elapsed.max                                  cycle        2,980
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::radix_sort_ker<long, int, int, 1, 16, 4, 1>(T2, const T1 *, T2 *, T2 *, T3 *, T3 *, T2, T2) (4, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        15.04
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            7
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           24
+    sm__cycles_elapsed.avg                                  cycle     6,242.80
+    sm__cycles_elapsed.max                                  cycle        6,244
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::compute_hybrid_minimum_chunk_size_ker<long, int, 128>(T2, T2, const T1 *, const T2 *, const T2 *, const T2 *, const T1 *, const T1 *, T2, T1 *, int, T2, const T2 *, int, int) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        10.30
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           17
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle        5,184
+    sm__cycles_elapsed.max                                  cycle        5,184
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::map_offsets_ker<long, int, int, int, 128, 0>(T2, const T3 *, const T4 *, int, const T1 *, const T2 *, const T2 *, const T2 *, const T2 *, const T2 *, const T1 *, const T1 *, const T2 *, const T2 *, const T2 *, T3 *, T3 *, T2, T2, T2, int, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         9.79
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            8
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     3,851.80
+    sm__cycles_elapsed.max                                  cycle        3,852
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void offsets_par_ker<int, int, int, 128, 2>(T1, T1 *, T2 *, T3 *, int *, int) (64, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        21.76
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector      238,298
+    lts__t_sectors_srcunit_tex_op_write.sum                sector          107
+    sm__cycles_elapsed.avg                                  cycle 2,425,882.40
+    sm__cycles_elapsed.max                                  cycle    2,425,883
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::map_ker<long, int, int, int, 256, 0, 0>(T2, const T3 *, const T4 *, int, const T1 *, const T2 *, const T2 *, const T2 *, const T2 *, const T2 *, const T1 *, const T1 *, const T1 *, const T2 *, const T2 *, const T2 *, T3 *, T3 *, const T3 *, T2, T3 *, T3 *, T1 *, T1 *, T2, T2, int, int) (5, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        15.20
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           58
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           26
+    sm__cycles_elapsed.avg                                  cycle     6,494.20
+    sm__cycles_elapsed.max                                  cycle        6,495
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::modify_update_ker<long, int, 128>(T2, T2, const T1 *, T2 *, const T2 *, const T2 *, const T1 *, const T1 *, const T1 *, const T2 *, T1 *, int, T2, T1 *, int, int, int, int, const T2 *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        11.36
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           30
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     6,183.40
+    sm__cycles_elapsed.max                                  cycle        6,184
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::count_dep_fwd_bwd_ker<long, int, 128>(T2, T2, T2 *, T2 *, const T1 *, const T2 *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.62
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            7
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle     2,993.60
+    sm__cycles_elapsed.max                                  cycle        2,994
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_bwd_order_step_1_ker<long, int, 128>(T2, T2, T2 *, T2 *, T2 *, T2 *, T2 *, int, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.03
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            1
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,533.60
+    sm__cycles_elapsed.max                                  cycle        2,534
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_bwd_order_step_2_ker<long, int, 128>(T2, T2, T2 *, T2 *, const T1 *, const T2 *, T2 *, T2 *, const T1 *, const T2 *, T2, T2) (2, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         8.77
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            7
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,993.60
+    sm__cycles_elapsed.max                                  cycle        2,994
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_bwd_order_step_1_ker<long, int, 128>(T2, T2, T2 *, T2 *, T2 *, T2 *, T2 *, int, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.03
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            1
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,571.60
+    sm__cycles_elapsed.max                                  cycle        2,572
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_bwd_order_step_2_ker<long, int, 128>(T2, T2, T2 *, T2 *, const T1 *, const T2 *, T2 *, T2 *, const T1 *, const T2 *, T2, T2) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         8.48
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            0
+    sm__cycles_elapsed.avg                                  cycle     2,948.40
+    sm__cycles_elapsed.max                                  cycle        2,949
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_bwd_order_step_1_ker<long, int, 128>(T2, T2, T2 *, T2 *, T2 *, T2 *, T2 *, int, int) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         4.03
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            1
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,540.60
+    sm__cycles_elapsed.max                                  cycle        2,541
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.76
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     2,706.40
+    sm__cycles_elapsed.max                                  cycle        2,707
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.70
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            5
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     2,700.60
+    sm__cycles_elapsed.max                                  cycle        2,701
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::independent_ker<long, double, int, double, 64, 0, 0, 0, 16>(unsigned int, T3, T3, T2 *, T2 *, const T1 *, int *, const T3 *, const T1 *, const T1 *, T3, T3, T3 *, T3 *, T3 *, T3 *, T4, T4 *, int, T3 *, int, int *, T1, T1, const int *) (4, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        44.19
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           18
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           74
+    sm__cycles_elapsed.avg                                  cycle     6,765.80
+    sm__cycles_elapsed.max                                  cycle        6,766
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::plain_map_ker<long, int, 128>(unsigned int, T2, const T1 *, const T2 *, T2 *, T2, const T1 *, int, T2, T2, T2 *, const int *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.88
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle     3,312.80
+    sm__cycles_elapsed.max                                  cycle        3,313
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::factorize_v3_ker<long, double, int, double, 128, 8, 0, 0, 0, 1, 1, 16, 32>(int, int, unsigned int, T3, T3, T2 *, T2 *, const T1 *, const T3 *, const T3 *, int *, const T3 *, const T1 *, const T1 *, const T1 *, T3 *, const T3 *, T3 *, T3, T3, T3, T3, T3 *, T3 *, T3 *, T3 *, int *, T4, T4 *, int, T3 *, int, T1, T1, const T3 *, const T1 *, T1, const T1 *, T1, const T3 *, int, int *, int, const int *) (3, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        70.91
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           65
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,721
+    sm__cycles_elapsed.avg                                  cycle    26,276.80
+    sm__cycles_elapsed.max                                  cycle       26,277
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 0>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,582.40
+    sm__cycles_elapsed.max                                  cycle        2,583
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_ker<long, double, int, 32, 1, 0, 32, 1, 16, 32, 16, 1, 1, 32>(unsigned int, T3, T3, T3, const T3 *, const T3 *, T3, T3, T2 *, const T3 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T3 *, const T3 *, const T1 *, const T3 *, int *, T3, T3, T3, T3, T3, int, T3 *, T2 *, const T3 *, const T1 *, T2 *, T3 *, T1 *, const T3 *, T1, T1, T3, const T3 *, int, T1 *, T1 *, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        27.46
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           68
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           21
+    sm__cycles_elapsed.avg                                  cycle    10,969.60
+    sm__cycles_elapsed.max                                  cycle       10,970
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::bwd_ker<long, double, int, 32, 32, 16, 2, 16, 1, 0, 16, 1, 1, 32, 32>(int, unsigned int, const T3 *, int *, T3, T3, T3, T3, const T3 *, const T3 *, T3, T2 *, T2 *, const T3 *, const T1 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T1 *, const T3 *, const T3 *, T3, T3, T3, T3, T3, int, int, const T3 *, const T3 *, T1, T1, T3, int, T1 *, T1 *, int, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        33.28
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           87
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            5
+    sm__cycles_elapsed.avg                                  cycle       15,437
+    sm__cycles_elapsed.max                                  cycle       15,438
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 1>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,288.40
+    sm__cycles_elapsed.max                                  cycle        2,289
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.76
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     2,717.20
+    sm__cycles_elapsed.max                                  cycle        2,718
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.70
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            5
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     2,710.20
+    sm__cycles_elapsed.max                                  cycle        2,711
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::independent_ker<long, double, int, double, 64, 0, 0, 0, 16>(unsigned int, T3, T3, T2 *, T2 *, const T1 *, int *, const T3 *, const T1 *, const T1 *, T3, T3, T3 *, T3 *, T3 *, T3 *, T4, T4 *, int, T3 *, int, int *, T1, T1, const int *) (4, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        44.45
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           18
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           74
+    sm__cycles_elapsed.avg                                  cycle        6,632
+    sm__cycles_elapsed.max                                  cycle        6,632
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::plain_map_ker<long, int, 128>(unsigned int, T2, const T1 *, const T2 *, T2 *, T2, const T1 *, int, T2, T2, T2 *, const int *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.88
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle     3,293.60
+    sm__cycles_elapsed.max                                  cycle        3,295
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::factorize_v3_ker<long, double, int, double, 128, 8, 0, 0, 0, 1, 1, 16, 32>(int, int, unsigned int, T3, T3, T2 *, T2 *, const T1 *, const T3 *, const T3 *, int *, const T3 *, const T1 *, const T1 *, const T1 *, T3 *, const T3 *, T3 *, T3, T3, T3, T3, T3 *, T3 *, T3 *, T3 *, int *, T4, T4 *, int, T3 *, int, T1, T1, const T3 *, const T1 *, T1, const T1 *, T1, const T3 *, int, int *, int, const int *) (3, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        71.30
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           65
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,721
+    sm__cycles_elapsed.avg                                  cycle    25,753.40
+    sm__cycles_elapsed.max                                  cycle       25,754
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 0>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,582.20
+    sm__cycles_elapsed.max                                  cycle        2,583
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_ker<long, double, int, 32, 1, 0, 32, 1, 16, 32, 16, 1, 1, 32>(unsigned int, T3, T3, T3, const T3 *, const T3 *, T3, T3, T2 *, const T3 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T3 *, const T3 *, const T1 *, const T3 *, int *, T3, T3, T3, T3, T3, int, T3 *, T2 *, const T3 *, const T1 *, T2 *, T3 *, T1 *, const T3 *, T1, T1, T3, const T3 *, int, T1 *, T1 *, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        28.32
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           68
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           21
+    sm__cycles_elapsed.avg                                  cycle       10,803
+    sm__cycles_elapsed.max                                  cycle       10,803
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::bwd_ker<long, double, int, 32, 32, 16, 2, 16, 1, 0, 16, 1, 1, 32, 32>(int, unsigned int, const T3 *, int *, T3, T3, T3, T3, const T3 *, const T3 *, T3, T2 *, T2 *, const T3 *, const T1 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T1 *, const T3 *, const T3 *, T3, T3, T3, T3, T3, int, int, const T3 *, const T3 *, T1, T1, T3, int, T1 *, T1 *, int, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        33.38
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           87
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            5
+    sm__cycles_elapsed.avg                                  cycle       15,241
+    sm__cycles_elapsed.max                                  cycle       15,241
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 1>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle        2,291
+    sm__cycles_elapsed.max                                  cycle        2,292
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.82
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     2,701.40
+    sm__cycles_elapsed.max                                  cycle        2,703
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.70
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            5
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     2,696.40
+    sm__cycles_elapsed.max                                  cycle        2,697
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::independent_ker<long, double, int, double, 64, 0, 0, 0, 16>(unsigned int, T3, T3, T2 *, T2 *, const T1 *, int *, const T3 *, const T1 *, const T1 *, T3, T3, T3 *, T3 *, T3 *, T3 *, T4, T4 *, int, T3 *, int, int *, T1, T1, const int *) (4, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        44.45
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           18
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           74
+    sm__cycles_elapsed.avg                                  cycle     6,775.20
+    sm__cycles_elapsed.max                                  cycle        6,776
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::plain_map_ker<long, int, 128>(unsigned int, T2, const T1 *, const T2 *, T2 *, T2, const T1 *, int, T2, T2, T2 *, const int *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.88
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle        3,333
+    sm__cycles_elapsed.max                                  cycle        3,333
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::factorize_v3_ker<long, double, int, double, 128, 8, 0, 0, 0, 1, 1, 16, 32>(int, int, unsigned int, T3, T3, T2 *, T2 *, const T1 *, const T3 *, const T3 *, int *, const T3 *, const T1 *, const T1 *, const T1 *, T3 *, const T3 *, T3 *, T3, T3, T3, T3, T3 *, T3 *, T3 *, T3 *, int *, T4, T4 *, int, T3 *, int, T1, T1, const T3 *, const T1 *, T1, const T1 *, T1, const T3 *, int, int *, int, const int *) (3, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        70.05
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           65
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,721
+    sm__cycles_elapsed.avg                                  cycle       26,141
+    sm__cycles_elapsed.max                                  cycle       26,141
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 0>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle     2,574.60
+    sm__cycles_elapsed.max                                  cycle        2,575
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_ker<long, double, int, 32, 1, 0, 32, 1, 16, 32, 16, 1, 1, 32>(unsigned int, T3, T3, T3, const T3 *, const T3 *, T3, T3, T2 *, const T3 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T3 *, const T3 *, const T1 *, const T3 *, int *, T3, T3, T3, T3, T3, int, T3 *, T2 *, const T3 *, const T1 *, T2 *, T3 *, T1 *, const T3 *, T1, T1, T3, const T3 *, int, T1 *, T1 *, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        27.71
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           68
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           21
+    sm__cycles_elapsed.avg                                  cycle    11,000.40
+    sm__cycles_elapsed.max                                  cycle       11,001
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::bwd_ker<long, double, int, 32, 32, 16, 2, 16, 1, 0, 16, 1, 1, 32, 32>(int, unsigned int, const T3 *, int *, T3, T3, T3, T3, const T3 *, const T3 *, T3, T2 *, T2 *, const T3 *, const T1 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T1 *, const T3 *, const T3 *, T3, T3, T3, T3, T3, int, int, const T3 *, const T3 *, T1, T1, T3, int, T1 *, T1 *, int, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        33.28
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           87
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            5
+    sm__cycles_elapsed.avg                                  cycle    15,450.40
+    sm__cycles_elapsed.max                                  cycle       15,451
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 1>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle        2,289
+    sm__cycles_elapsed.max                                  cycle        2,289
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.76
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            3
+    sm__cycles_elapsed.avg                                  cycle     2,705.20
+    sm__cycles_elapsed.max                                  cycle        2,706
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::copy_matrix_ker<long, double, int, int, int, double, 128>(T3, T3, T1, const T4 *, const T1 *, const T2 *, T2 *, int, const T5 *, const T3 *, T6 *, int, int, long, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         5.70
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            5
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            1
+    sm__cycles_elapsed.avg                                  cycle     2,707.60
+    sm__cycles_elapsed.max                                  cycle        2,709
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::independent_ker<long, double, int, double, 64, 0, 0, 0, 16>(unsigned int, T3, T3, T2 *, T2 *, const T1 *, int *, const T3 *, const T1 *, const T1 *, T3, T3, T3 *, T3 *, T3 *, T3 *, T4, T4 *, int, T3 *, int, int *, T1, T1, const int *) (4, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        44.58
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           18
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           74
+    sm__cycles_elapsed.avg                                  cycle     6,645.80
+    sm__cycles_elapsed.max                                  cycle        6,648
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::plain_map_ker<long, int, 128>(unsigned int, T2, const T1 *, const T2 *, T2 *, T2, const T1 *, int, T2, T2, T2 *, const int *) (4, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         6.88
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            9
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            4
+    sm__cycles_elapsed.avg                                  cycle     3,295.80
+    sm__cycles_elapsed.max                                  cycle        3,296
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::factorize_v3_ker<long, double, int, double, 128, 8, 0, 0, 0, 1, 1, 16, 32>(int, int, unsigned int, T3, T3, T2 *, T2 *, const T1 *, const T3 *, const T3 *, int *, const T3 *, const T1 *, const T1 *, const T1 *, T3 *, const T3 *, T3 *, T3, T3, T3, T3, T3 *, T3 *, T3 *, T3 *, int *, T4, T4 *, int, T3 *, int, T1, T1, const T3 *, const T1 *, T1, const T1 *, T1, const T3 *, int, int *, int, const int *) (3, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte           72
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           65
+    lts__t_sectors_srcunit_tex_op_write.sum                sector        1,721
+    sm__cycles_elapsed.avg                                  cycle    26,217.40
+    sm__cycles_elapsed.max                                  cycle       26,219
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 0>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle        2,587
+    sm__cycles_elapsed.max                                  cycle        2,587
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::fwd_ker<long, double, int, 32, 1, 0, 32, 1, 16, 32, 16, 1, 1, 32>(unsigned int, T3, T3, T3, const T3 *, const T3 *, T3, T3, T2 *, const T3 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T3 *, const T3 *, const T1 *, const T3 *, int *, T3, T3, T3, T3, T3, int, T3 *, T2 *, const T3 *, const T1 *, T2 *, T3 *, T1 *, const T3 *, T1, T1, T3, const T3 *, int, T1 *, T1 *, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        27.55
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           68
+    lts__t_sectors_srcunit_tex_op_write.sum                sector           21
+    sm__cycles_elapsed.avg                                  cycle       10,748
+    sm__cycles_elapsed.max                                  cycle       10,748
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::bwd_ker<long, double, int, 32, 32, 16, 2, 16, 1, 0, 16, 1, 1, 32, 32>(int, unsigned int, const T3 *, int *, T3, T3, T3, T3, const T3 *, const T3 *, T3, T2 *, T2 *, const T3 *, const T1 *, const T1 *, const T1 *, const T3 *, T2 *, const T1 *, const T1 *, const T3 *, const T3 *, T3, T3, T3, T3, T3, int, int, const T3 *, const T3 *, T1, T1, T3, int, T1 *, T1 *, int, int) (4, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte        33.38
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector           87
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            5
+    sm__cycles_elapsed.avg                                  cycle    15,224.20
+    sm__cycles_elapsed.max                                  cycle       15,225
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  void cudss::perm_ker<double, int, 128, 1>(unsigned int, T2, T1 *, T1 *, T2 *, long, const int *) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes.sum                                         Kbyte         3.90
+    lts__t_sectors_srcunit_tex_op_read.sum                 sector            3
+    lts__t_sectors_srcunit_tex_op_write.sum                sector            2
+    sm__cycles_elapsed.avg                                  cycle        2,275
+    sm__cycles_elapsed.max                                  cycle        2,275
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
