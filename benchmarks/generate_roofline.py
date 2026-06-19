@@ -91,7 +91,7 @@ cholesky_file = "benchmarks/cholesky_tiled_report.csv"
 cg_file = "benchmarks/conjugate_gradient_2d_report.csv"
 cusparse_spmv_file = "benchmarks/cuSPARSE_spmv_csr_report.csv"
 spmv_csr_file = "benchmarks/spmv_csr_report.csv"
-cudss_factorization_file = "benchmarks/cuDSS_Refactorization_report.csv"
+cudss_factorization_file = "benchmarks/cuDSS_Refactorization_report_n100.csv"
 
 matmul_ai = parse_nsight_csv_report(matmul_file)
 cholesky_ai = parse_nsight_csv_report(cholesky_file)
@@ -175,24 +175,24 @@ benchmarked_kernels = [
         'gflops': 0.0386,
         'marker': 'D'
     },
-    # 5. Direct Sparse Solver Domain (Stars '*')
+    # 5. Direct Sparse Solver Phases (Stars '*') - Updated for N=100
     # intensities are all estimated based on memory-bound operation profile since they showed 0s in csv
     {
-        'name': 'Analysis & Setup (Aggregated)',
-        'intensity': 0.015, # Aggregated average
-        'gflops': 0.0001,
+        'name': 'Analysis & Setup (N=100)',
+        'intensity': 0.018, # Slightly higher intensity due to larger index tables
+        'gflops': 0.00015,  # Scaling with increased setup time
         'marker': '*'
     },
     {
-        'name': 'Factorization (Aggregated)',
-        'intensity': 0.052,
-        'gflops': 0.0012,
+        'name': 'Factorization (N=100)',
+        'intensity': 0.065, # Higher arithmetic activity for factorization
+        'gflops': 0.0028,   # 1.1s execution time increases throughput density
         'marker': '*'
     },
     {
-        'name': 'Substitution & Solve (Aggregated)',
-        'intensity': 0.035,
-        'gflops': 0.0008,
+        'name': 'Substitution & Solve (N=100)',
+        'intensity': 0.048, # Increased data reuse in FWD/BWD passes
+        'gflops': 0.0014,   # Aggregated time for 900ms solve window
         'marker': '*'
     }
 ]

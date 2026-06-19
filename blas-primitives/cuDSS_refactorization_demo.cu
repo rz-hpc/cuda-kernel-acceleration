@@ -66,8 +66,10 @@
   }\
 }
 
-static const int N = 5; // matrix dimesion
-static const int NUM_SYSTEMS = 4; // number of repeated solves
+//static const int N = 5 (profiling with 10000); // matrix dimesion
+static const int N = 100; // (profiling with 1000)
+//static const int NUM_SYSTEMS = 4; // number of repeated solves
+static const int NUM_SYSTEMS = 10;// (profiling with 10);
 static const double DIAG_BASE = 4.0; // diagonal value for alpha = 1
 
 // Build CSR arrays for the tridiagonal matrix scaled by alpha
@@ -203,7 +205,7 @@ int main() {
   // Dense RHS b: Nx1 column-major
   CHECK_CUDSS(cudssMatrixCreateDn(
     &matB, N, 1, N, d_b, CUDSS_R_64F, CUDSS_LAYOUT_COL_MAJOR));
-  
+
   // Dense solution x: Nx1 column-major
   CHECK_CUDSS(cudssMatrixCreateDn(
     &matX, N, 1, N, d_x, CUDSS_R_64F, CUDSS_LAYOUT_COL_MAJOR));
@@ -264,7 +266,7 @@ int main() {
       if (max_err > 1e-4)
         std::cout << "Solve Failed: System " << k << " max error " << max_err << "\n";
       else
-        std::cout << "System " << k << " (alpha=" << alpha << "): OK, max_err=" << max_err << "\n";     
+        std::cout << "System " << k << " (alpha=" << alpha << "): OK, max_err=" << max_err << "\n";
   }
 
   // 6. Clean up--reverse order
