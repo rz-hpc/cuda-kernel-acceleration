@@ -127,13 +127,16 @@ __global__ void column_update_kernel(float* d_A, int n, int k_block) {
     int tx = threadIdx.x;
     int ty = threadIdx.y;
 
-    // kernel launched with 1D grid <<<blocks_below, threadsPerBlock>>>
-    // so here is blockIdx.x
-    int target_block_row = k_block + 1 + blockIdx.x;
-
     // global idx for diagnoal L11
     int diag_row = k_block * BLOCK_DIM + ty;
     int diag_col = k_block * BLOCK_DIM + tx;
+
+    // kernel launched with 1D grid <<<blocks_below, threadsPerBlock>>>
+    // so here is blockIdx.x
+    // + 1 because we need to skip the diagnoal block itself 
+    // (diagonal k_block just got factorized by kernel 1, fully solved)
+    // kernel 2 (current) only updates blocks strictly below the diagonal (vertical panel)
+    int target_block_row = k_block + 1 + blockIdx.x;
 
     // A21 global idx
     int target_row = target_block_row * BLOCK_DIM + ty;
