@@ -233,7 +233,7 @@ __host__ void Multiply(float* h_A, float* h_B, float* h_C, int m, int k, int n) 
     //mutiplyKernelTiledVectorizedA<<<BlocksPerGrid, ThreadsPerBlock>>>(d_A, d_B, d_C, m, k, n);
 
     // Still seeing bank conflicts
-    //dim3 ThreadsPerBlock(THREAD_TILE_SIZE, THREAD_TILE_SIZE, 1);
+    //dim3 ThreadsPerBlock(TILE_WIDTH / THREAD_TILE_SIZE, TILE_WIDTH / THREAD_TILE_SIZE, 1);
     //dim3 BlocksPerGrid( (n + TILE_WIDTH - 1) / TILE_WIDTH, (m + TILE_WIDTH - 1) / TILE_WIDTH, 1);
     //mutiplyKernelTiledRegisterPadding<<<BlocksPerGrid, ThreadsPerBlock>>>(d_A, d_B, d_C, m, k, n);
 
