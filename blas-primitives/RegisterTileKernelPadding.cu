@@ -40,9 +40,11 @@ __global__ void mutiplyKernelTiledRegisterPadding(float* d_A, float* d_B, float*
 
         // Load A and B to the shared
         // Within a block, a thread owns a 4 X 4 patch
+	// the thread stride for loading should be blockDim.y for row, blockDim.x for col
+	// the kernel threadsPerBlock was launched as blockDim.y = blockDim.x = TILE_WIDTH/ THREAD_TILE_SIZE
         #pragma unroll
-        for (int i = 0; i < TILE_WIDTH; i += THREAD_TILE_SIZE) {
-            for (int j = 0; j < TILE_WIDTH; j += THREAD_TILE_SIZE) {
+        for (int i = 0; i < TILE_WIDTH; i += TILE_WIDTH / THREAD_TILE_SIZE) {
+            for (int j = 0; j < TILE_WIDTH; j += TILE_WIDTH / THREAD_TILE_SIZE) {
                 int shared_row = ty + i;
                 int shared_col = tx + j;
 
@@ -138,7 +140,9 @@ __global__ void mutiplyKernelTiledRegisterPaddingWith8By4Thread(float* d_A, floa
     for (int w = 0; w < (k + TILE_WIDTH - 1) / TILE_WIDTH; w++) {
 
         // Load A and B to the shared
-        // Within a block, a thread owns a 4 X 4 patch
+        // Within a block, a thread owns a 4 X 2 patch
+	// thread row stride = TILE_WIDTH / THREAD_TILE_H = 16 / 4 = 4
+	// thread col stride = TILE_WIDTH / THREAD_TILE_W = 16 / 2 = 8
         #pragma unroll
         for (int i = 0; i < TILE_WIDTH; i += 4) {
             for (int j = 0; j < TILE_WIDTH; j += 8) {
