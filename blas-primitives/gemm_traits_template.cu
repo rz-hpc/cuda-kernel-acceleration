@@ -145,11 +145,11 @@ __global__ void gemm_kernel(const T* d_A, const T* d_B, T* d_C,
             // load from shared memory to register tiles
             #pragma unroll
             for (int i = 0; i < THREAD_TILE_SIZE; i++) {
-                regA[i] = tile_A[ty * THREAD_TILE_SIZE + i][k_inst];
+                regA[i] = static_cast<compute_t>(tile_A[ty * THREAD_TILE_SIZE + i][k_inst]);
             }
             #pragma unroll
             for (int j = 0; j < THREAD_TILE_SIZE; j++) {
-                regB[j] = tile_B[k_inst][tx * THREAD_TILE_SIZE + j];
+                regB[j] = static_cast<compute_t>(tile_B[k_inst][tx * THREAD_TILE_SIZE + j]);
             }
 
             // outer product
