@@ -220,7 +220,7 @@ void generate_random_spd_matrix(float* A, int n) {
             }
             // off diagnoal could be negative
             else {
-                L[i * n + j] = (float)(rand() % 5 - 2); // random float in [-2, 6]
+                L[i * n + j] = (float)(rand() % 5 - 2); // random float in [-2, 2]
             }
         }
     }
