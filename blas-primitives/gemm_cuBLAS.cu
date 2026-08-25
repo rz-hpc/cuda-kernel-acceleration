@@ -161,7 +161,8 @@ __global__ void gemm_kernel(const T* d_A, const T* d_B, T* d_C,
               if (global_row_C < M && global_col_C < N) {
                   int global_idx = global_row_C * N + global_col_C;
                   compute_t prev_C = static_cast<compute_t>(d_C[global_idx]);
-                  d_C[global_idx] = alpha_c * accum[i][j] + beta_c * prev_C;
+                  compute_t result = alpha_c * accum[i][j] + beta_c * prev_C;
+		  d_C[global_idx] = static_cast<T>(result);
               }
           }
       }
