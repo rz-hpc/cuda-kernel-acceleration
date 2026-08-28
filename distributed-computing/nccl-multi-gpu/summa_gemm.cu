@@ -115,9 +115,12 @@ int main(int argc, char** argv) {
     CHECK_CUDA(cudaStreamCreate(&compute_stream));
     CHECK_CUDA(cudaStreamCreate(&comm_stream));
 
-    cudaEvent_t compute_done, comm_done;
-    CHECK_CUDA(cudaEventCreate(&compute_done));
-    CHECK_CUDA(cudaEventCreate(&comm_done));
+    // Decalre per-buffer event arrays (instead of single events)
+    cudaEvent_t compute_done[2], comm_done[2];
+    for (int i = 0; i < 2; i++) {
+        CHECK_CUDA(cudaEventCreate(&compute_done[i]));
+        CHECK_CUDA(cudaEventCreate(&comm_done[i]));
+    }
 
     cublasHandle_t cublas_handle;
     CHECK_CUBLAS(cublasCreate(&cublas_handle));
@@ -155,14 +158,14 @@ int main(int argc, char** argv) {
                               nccl_col_comm, 
                               comm_stream));
     CHECK_NCCL(ncclGroupEnd());
-    CHECK_CUDA(cudaEventRecord(comm_done, comm_stream));
+    CHECK_CUDA(cudaEventRecord(comm_done[0], comm_stream));
 
     // B. The Main Loop
     for (int k = 0; k < K_blocks; k++) {
         int next_buf = (current_buf + 1) % 2;
 
         // 1. Compute on current buffer (waits for comm_done)
-        CHECK_CUDA(cudaStreamWaitEvent(compute_stream, comm_done, 0));
+        CHECK_CUDA(cudaStreamWaitEvent(compute_stream, comm_done[current_buf], 0));
 
         CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
                     Nb, Nb, Nb,
@@ -171,7 +174,7 @@ int main(int argc, char** argv) {
                     d_A_recv[current_buf], Nb,
                     &beta,
                     d_C_local, Nb));
-        CHECK_CUDA(cudaEventRecord(compute_done, compute_stream));
+        CHECK_CUDA(cudaEventRecord(compute_done[current_buf], compute_stream));
 
         // 2. Commnicate next buffer (waits for compute_done on the next buffer)
         if (k + 1 < K_blocks) {
@@ -179,7 +182,8 @@ int main(int argc, char** argv) {
             int next_root_A = next_k % 2;
             int next_root_B = next_k % 2;
 
-            CHECK_CUDA(cudaStreamWaitEvent(comm_stream, compute_done, 0));
+            // communicate into next_buf, has to wait the next_buf compute from 2 iterations ago to have finished reading it
+            CHECK_CUDA(cudaStreamWaitEvent(comm_stream, compute_done[next_buf], 0));
 
             // Copy next tile from local storage to send buffer if we own it
             if (rank_col == next_root_A)
@@ -192,7 +196,7 @@ int main(int argc, char** argv) {
             CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[next_buf], (void*)d_B_recv[next_buf], Nb * Nb, ncclFloat, next_root_B, nccl_col_comm, comm_stream));
             CHECK_NCCL(ncclGroupEnd());
 
-            CHECK_CUDA(cudaEventRecord(comm_done, comm_stream));
+            CHECK_CUDA(cudaEventRecord(comm_done[next_buf], comm_stream));
         }
 
         current_buf = next_buf;
@@ -210,8 +214,10 @@ int main(int argc, char** argv) {
     CHECK_CUBLAS(cublasDestroy(cublas_handle));
     CHECK_CUDA(cudaStreamDestroy(compute_stream));
     CHECK_CUDA(cudaStreamDestroy(comm_stream));
-    CHECK_CUDA(cudaEventDestroy(compute_done));
-    CHECK_CUDA(cudaEventDestroy(comm_done));
+    for (int i = 0; i < 2; i++) {
+        CHECK_CUDA(cudaEventDestroy(compute_done[i]));
+        CHECK_CUDA(cudaEventDestroy(comm_done[i]));
+    }
 
     // B. Free GPU memory
     CHECK_CUDA(cudaFree(d_C_local));
