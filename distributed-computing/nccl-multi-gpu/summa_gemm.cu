@@ -1,12 +1,15 @@
 
+// !apt-get update
+// !apt-get install -y libopenmpi-dev openmpi-bin
+//
 // Compile and run with
 // !nvcc summa_gemm.cu -o summa_gemm -lcublas -lnccl -ccbin mpicxx
 // !./summa_gemm
 //
-// 
 // The run needs to be multi-gpu environment
 // Because of Google Colab hardware limitation (only one T4 GPU), the output
 // 
+// Output: 
 // nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
 // [773eafce20e3:04260] *** An error occurred in MPI_Cart_create
 // [773eafce20e3:04260] *** reported by process [317652993,0]
@@ -14,6 +17,22 @@
 // [773eafce20e3:04260] *** MPI_ERR_ARG: invalid argument of some other kind
 // [773eafce20e3:04260] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
 // [773eafce20e3:04260] ***    and potentially your MPI job)
+//
+// With NCCL_DEBUG = WARN and -np 1 (1 core on Colab)
+// !nvcc summa_gemm.cu -o summa_gemm -lcublas -lnccl -ccbin mpicxx -arch=native
+// !NCCL_DEBUG=WARN mpirun --allow-run-as-root -np 1 ./summa_gemm
+//
+// Output:
+// NCCL version 2.25.1+cuda12.8
+// SUMMA Distributed GEMM Completed without blocking the pipeline!
+//
+// With NCCL_DEBUG = WARN and -np 2 on 1 core Colab
+// !nvcc summa_gemm.cu -o summa_gemm -lcublas -lnccl -ccbin mpicxx -arch=native
+// !mpirun --allow-run-as-root -x NCCL_DEBUG=WARN -np 2 ./summa_gemm
+//
+// Output:
+// There are not enough slots available in the system to satisfy the 2
+// slots that were requested by the application: ...
 
 #include <mpi.h>
 #include <nccl.h>
@@ -58,8 +77,12 @@ int main(int argc, char** argv) {
     int local_rank = world_rank; // In real deployments, parse local rank carefully
     CHECK_CUDA(cudaSetDevice(local_rank));
 
-    // 2. Setup 2D MPI Grid (2x2)
-    int dims[2] = {2, 2};
+    // 2. Setup 2D MPI Grid
+    // MPI_Dims_create finds a valid P x Q factorization of world_size to fill dims
+    // For 4 cores, 2 x 2, for 6 cores 3 x 2
+    int dims[2] = {0, 0};
+    MPI_Dims_create(world_size, 2, dims);
+
     int periods[2] = {0, 0};
     MPI_Comm cart_comm;
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, 1, &cart_comm);
@@ -88,9 +111,13 @@ int main(int argc, char** argv) {
     MPI_Bcast(&row_id, sizeof(row_id), MPI_BYTE, 0, row_comm);
     MPI_Bcast(&col_id, sizeof(col_id), MPI_BYTE, 0, col_comm);
 
+    int row_comm_size, col_comm_size; // the actual communicator size
+    MPI_Comm_size(row_comm, &row_comm_size);
+    MPI_Comm_size(col_comm, &col_comm_size);
+
     ncclComm_t nccl_row_comm, nccl_col_comm;
-    CHECK_NCCL(ncclCommInitRank(&nccl_row_comm, 2, row_id, row_comm_rank));
-    CHECK_NCCL(ncclCommInitRank(&nccl_col_comm, 2, col_id, col_comm_rank));
+    CHECK_NCCL(ncclCommInitRank(&nccl_row_comm, row_comm_size, row_id, row_comm_rank));
+    CHECK_NCCL(ncclCommInitRank(&nccl_col_comm, col_comm_size, col_id, col_comm_rank));
 
     // 5. Matrix and Block Size Setup (e.g., K_blocks total)
     const int Nb = 1024; // 1024 x 1024 tiles
@@ -134,8 +161,8 @@ int main(int argc, char** argv) {
     int current_buf = 0;
 
     // A. Prime the pump (Load Buffer 0)
-    int root_A = 0 % 2; // Which process column owns A's block 0
-    int root_B = 0 % 2; // Which process row owns B's block 0
+    int root_A = 0 % row_comm_size; // Which process column owns A's block 0
+    int root_B = 0 % col_comm_size; // Which process row owns B's block 0
 
     if (rank_col == root_A)
       CHECK_CUDA(cudaMemcpyAsync(d_A_recv[0], d_A_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
@@ -179,8 +206,8 @@ int main(int argc, char** argv) {
         // 2. Commnicate next buffer (waits for compute_done on the next buffer)
         if (k + 1 < K_blocks) {
             int next_k = k + 1;
-            int next_root_A = next_k % 2;
-            int next_root_B = next_k % 2;
+            int next_root_A = next_k % row_comm_size;
+            int next_root_B = next_k % col_comm_size;
 
             // communicate into next_buf, has to wait the next_buf compute from 2 iterations ago to have finished reading it
             CHECK_CUDA(cudaStreamWaitEvent(comm_stream, compute_done[next_buf], 0));
