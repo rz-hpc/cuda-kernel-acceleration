@@ -1,0 +1,6 @@
+
+NOTICE: Existing SQLite export found: summa_profile_rank0.sqlite
+        It is assumed file was previously exported from: summa_profile_rank0.nsys-rep
+        Consider using --force-export=true if needed.
+
+Processing [summa_profile_rank0.sqlite] with [gpu_gaps]... 

@@ -1,0 +1,15 @@
+
+NOTICE: Existing SQLite export found: summa_profile_rank0.sqlite
+        It is assumed file was previously exported from: summa_profile_rank0.nsys-rep
+        Consider using --force-export=true if needed.
+
+Processing [summa_profile_rank0.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+
+ ** CUDA GPU Kernel Summary (cuda_gpu_kern_sum):
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)   Med (ns)   Min (ns)  Max (ns)  StdDev (ns)                                       Name                                     
+ --------  ---------------  ---------  ---------  ---------  --------  --------  -----------  ------------------------------------------------------------------------------
+     89.0         12018387          4  3004596.8  2939053.5   2878878   3261402     173581.0  ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+     10.1          1365681          4   341420.3   340412.0    324797    360060      17350.8  ampere_sgemm_128x64_nn                                                        
+      0.9           124287          8    15535.9    15440.0      9824     19104       2919.3  fill_kernel(float *, float, int)                                              
+
