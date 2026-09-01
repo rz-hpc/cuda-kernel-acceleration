@@ -34,6 +34,14 @@
 // There are not enough slots available in the system to satisfy the 2
 // slots that were requested by the application: ...
 
+// cuBLAS Baseline Verification Output:
+// NCCL version 2.25.1+cuda12.8
+// Baseline C[0] = 2.28981e+10, Distributed C[0] = 2.28981e+10
+// [Rank 0] cuBLAS Baseline Verification completed.
+// Max Absolute Error across 1024x1024 matrix: 36864
+// Max Relative Error: 1.40157e-06
+// DISTRIBUTED VERIFICATION: PASS
+
 #include <mpi.h>
 #include <nccl.h>
 #include <cublas_v2.h>
@@ -67,12 +75,100 @@
     } \
 } while(0)
 
+// MPI Index Mapping
+struct LocalCoord {
+    int rank_coord;
+    int local_idx;
+};
+
+struct Local2DCoord {
+    int rank_row, rank_col;
+    int local_row, local_col;
+};
+
+struct Global2DCoord {
+    int g_row, g_col;
+};
+
+__host__ __device__ inline LocalCoord global_to_local(int global_idx, int nb, int p_dim) {
+    int block_idx = global_idx / nb;
+    int owner_coord = block_idx % p_dim;
+    int local_block = block_idx / p_dim;
+    int offset = global_idx % nb;
+
+    return {owner_coord, local_block * nb + offset};
+}
+
+__host__ __device__ inline int local_to_global(int local_idx, int rank_coord, int nb, int p_dim) {
+    int local_block = local_idx / nb;
+    int offset = local_idx % nb;
+    int global_block = local_block * p_dim + rank_coord;
+
+    return global_block * nb + offset;
+}
+
+__host__ __device__ inline Local2DCoord global_to_local_2d(int g_row, int g_col, int nb, int P_r, int P_c) {
+    LocalCoord r = global_to_local(g_row, nb, P_r);
+    LocalCoord c = global_to_local(g_col, nb, P_c);
+
+    return {r.rank_coord, c.rank_coord, r.local_idx, c.local_idx};
+}
+
+__host__ __device__ inline Global2DCoord local_to_global_2d(int l_row, int l_col, int rank_row, int rank_col, int nb, int P_r, int P_c) {
+    int g_row = local_to_global(l_row, rank_row, nb, P_r);
+    int g_col = local_to_global(l_col, rank_col, nb, P_c);
+
+    return {g_row, g_col};
+}
+
 __global__ void fill_kernel(float* ptr, float value, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < n) {
         ptr[idx] = value;
     }
 }
+
+__global__ void init_tile_A_kernel(float* tile_ptr, int Nb, int rank_row, int P_r, int k) {
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx < Nb * Nb) {
+        int l_row = idx % Nb;
+        int l_col = idx / Nb;
+        int g_row = local_to_global(l_row, rank_row, Nb, P_r);
+        int g_col = k * Nb + l_col;
+        tile_ptr[idx] = static_cast<float>(g_row + g_col);
+    }
+}
+
+__global__ void init_tile_B_kernel(float* tile_ptr, int Nb, int rank_col, int P_c, int k) {
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx < Nb * Nb) {
+        int l_row = idx % Nb;
+        int l_col = idx / Nb;
+        int g_row = k * Nb + l_row;
+        int g_col = local_to_global(l_col, rank_col, Nb, P_c);
+        tile_ptr[idx] = static_cast<float>(g_row - g_col);
+    }
+}
+
+// Clean baseline initialization kernel for column-major reference matrices
+__global__ void init_baseline_matrix_kernel(float* ptr, int M, int N, bool is_matrix_A) {
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx < M * N) {
+        int col = idx / M; // Column-major: row index is idx % M, col index is idx / M
+        int row = idx % M;
+        if (is_matrix_A) {
+            ptr[idx] = static_cast<float>(row + col);
+        } else {
+            ptr[idx] = static_cast<float>(row - col);
+        }
+    }
+}
+
+// Struct to prevent precision loss during MPI Gather
+struct FloatPayload {
+    int global_offset;
+    float val;
+};
 
 int main(int argc, char** argv) {
     MPI_Init(&argc, &argv);
@@ -90,6 +186,8 @@ int main(int argc, char** argv) {
     // For 4 cores, 2 x 2, for 6 cores 3 x 2
     int dims[2] = {0, 0};
     MPI_Dims_create(world_size, 2, dims);
+    int P_r = dims[0];
+    int P_c = dims[1];
 
     int periods[2] = {0, 0};
     MPI_Comm cart_comm;
@@ -130,6 +228,14 @@ int main(int argc, char** argv) {
     // 5. Matrix and Block Size Setup (e.g., K_blocks total)
     const int Nb = 1024; // 1024 x 1024 tiles
     const int K_blocks = 4; // Total iterations
+
+    const int Global_M = P_r * Nb;
+    const int Global_N = P_c * Nb;
+    const int Global_K = K_blocks * Nb;
+
+    int local_M = Global_M / P_r;
+    int local_N = Global_N / P_c;
+
     size_t tile_bytes = Nb * Nb * sizeof(float);
 
     // Local device memory for Matrix C and our owned piecies of A and B
@@ -139,12 +245,18 @@ int main(int argc, char** argv) {
     CHECK_CUDA(cudaMalloc(&d_B_local, tile_bytes * K_blocks));
     CHECK_CUDA((cudaMemset(d_C_local, 0, tile_bytes)));
 
+    // Matrix A and B Initial
     int threadsPerBlock = 256; 
     int blocksPerGrid = (Nb * Nb + threadsPerBlock - 1) / threadsPerBlock;
+
+    // Generate A and B in-place using global coordinates
     for (int k = 0; k < K_blocks; k++) {
-        float val = (rank_row + 1) * 100.0f + (rank_col + 1) * 10.0f + k;
-        fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_A_local + k * Nb * Nb, val, Nb * Nb);
-        fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_B_local + k * Nb * Nb, val, Nb * Nb);
+        //float val = (rank_row + 1) * 100.0f + (rank_col + 1) * 10.0f + k;
+        //fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_A_local + k * Nb * Nb, val, Nb * Nb);
+        //fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_B_local + k * Nb * Nb, val, Nb * Nb);
+
+        init_tile_A_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_A_local + k * Nb * Nb, Nb, rank_row, P_r, k);
+        init_tile_B_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_B_local + k * Nb * Nb, Nb, rank_col, P_c, k);
     }
     CHECK_CUDA(cudaDeviceSynchronize());
 
@@ -178,8 +290,9 @@ int main(int argc, char** argv) {
     int current_buf = 0;
 
     // A. Prime the pump (Load Buffer 0)
-    int root_A = 0 % row_comm_size; // Which process column owns A's block 0
-    int root_B = 0 % col_comm_size; // Which process row owns B's block 0
+    // Dynamic Root Resolution using mapping utilities
+    int root_A = global_to_local(0 * Nb, Nb, P_c).rank_coord; // Which process column owns A's block 0
+    int root_B = global_to_local(0 * Nb, Nb, P_r).rank_coord; // Which process row owns B's block 0
 
     if (rank_col == root_A)
       CHECK_CUDA(cudaMemcpyAsync(d_A_recv[0], d_A_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
@@ -214,8 +327,8 @@ int main(int argc, char** argv) {
         CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
                     Nb, Nb, Nb,
                     &alpha,
-                    d_B_recv[current_buf], Nb, // cublas is column-major, A and B a swapped
                     d_A_recv[current_buf], Nb,
+                    d_B_recv[current_buf], Nb,
                     &beta,
                     d_C_local, Nb));
         CHECK_CUDA(cudaEventRecord(compute_done[current_buf], compute_stream));
@@ -248,6 +361,7 @@ int main(int argc, char** argv) {
 
     CHECK_CUDA(cudaDeviceSynchronize());
 
+/*    
     // Verification: does the distributed communication pattern work correctly
     // Note: the SUMMA computation is not verified in this experiment
     std::vector<float> h_C(Nb * Nb);
@@ -279,6 +393,89 @@ int main(int argc, char** argv) {
     if (world_rank == 0) {
         std::cout << (all_pass ? "SUMMA correctness verified across ALL ranks: PASS"
                             : "SUMMA correctness FAILED on at least one rank") << std::endl;
+    }
+*/
+
+    // Gather and cuBLAS Ground Truth Verification on Rank 0
+    std::vector<float> h_C_local(local_M * local_N);
+    CHECK_CUDA(cudaMemcpy(h_C_local.data(), d_C_local, local_M * local_N * sizeof(float), cudaMemcpyDeviceToHost));
+
+    if (world_rank != 0) {
+        for (int lc = 0; lc < local_N; lc++) {
+            for (int lr = 0; lr < local_M; lr++) {
+                float val = h_C_local[lc * local_M + lr];
+                Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
+                // CORRECTED: Column-major global offset
+                FloatPayload p = {g.g_col * Global_M + g.g_row, val};
+                MPI_Send(&p, sizeof(FloatPayload), MPI_BYTE, 0, 1, cart_comm);
+            }
+        }
+    }
+    else {
+        std::vector<float> final_C_dist(Global_M * Global_N, 0.0f);
+
+        // Self-map Rank 0 using column-major global offset
+        for (int lc = 0; lc < local_N; lc++) {
+            for (int lr = 0; lr < local_M; lr++) {
+                float val = h_C_local[lc * local_M + lr];
+                Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
+                final_C_dist[g.g_col * Global_M + g.g_row] = val;
+            }
+        }
+
+        // Receive payloads from Workers
+        int incoming_elements = (Global_M * Global_N) - (local_M * local_N);
+        for (int i = 0; i < incoming_elements; i++) {
+            FloatPayload p;
+            MPI_Recv(&p, sizeof(FloatPayload), MPI_BYTE, MPI_ANY_SOURCE, 1, cart_comm, MPI_STATUS_IGNORE);
+            final_C_dist[p.global_offset] = p.val;
+        }
+
+        // Run baseline GEMM to Verify
+        float *d_A_ref, *d_B_ref, *d_C_ref;
+        CHECK_CUDA(cudaMalloc(&d_A_ref, Global_M * Global_K * sizeof(float)));
+        CHECK_CUDA(cudaMalloc(&d_B_ref, Global_K * Global_N * sizeof(float)));
+        CHECK_CUDA(cudaMalloc(&d_C_ref, Global_M * Global_N * sizeof(float)));
+        CHECK_CUDA(cudaMemset(d_C_ref, 0, Global_M * Global_N * sizeof(float)));
+
+        int blocks_A = (Global_M * Global_K + threadsPerBlock - 1) / threadsPerBlock;
+        int blocks_B = (Global_K * Global_N + threadsPerBlock - 1) / threadsPerBlock;
+        //int blocks_C = (Global_M * Global_N + threadsPerBlock - 1) / threadsPerBlock;
+
+        // CORRECTED: Use clean baseline initialization kernels
+        init_baseline_matrix_kernel<<<blocks_A, threadsPerBlock>>>(d_A_ref, Global_M, Global_K, true);
+        init_baseline_matrix_kernel<<<blocks_B, threadsPerBlock>>>(d_B_ref, Global_K, Global_N, false);
+
+        // CORRECTED: Proper M, N, K dimensions and leading dimensions (Global_M, Global_K, Global_M)
+        CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
+                                Global_M, Global_N, Global_K,
+                                &alpha, 
+                                d_A_ref, Global_M, 
+                                d_B_ref, Global_K, 
+                                &beta, 
+                                d_C_ref, Global_M));
+
+        std::vector<float> h_C_ref(Global_M * Global_N);
+        CHECK_CUDA(cudaMemcpy(h_C_ref.data(), d_C_ref, Global_M * Global_N * sizeof(float), cudaMemcpyDeviceToHost));   
+    
+        std::cout << "Baseline C[0] = " << h_C_ref[0] << ", Distributed C[0] = " << final_C_dist[0] << "\n";
+
+        float max_err = 0.0f;
+        float max_rel_err = 0.0f;
+        for (int i = 0; i < Global_M * Global_N; i++) {
+            float abs_diff = std::fabs(final_C_dist[i] - h_C_ref[i]);
+            max_err = std::max(max_err, abs_diff);
+            float rel_diff = abs_diff / (std::fabs(h_C_ref[i]) + 1e-5f);
+            max_rel_err = std::max(max_rel_err, rel_diff);
+        }
+
+        std::cout << "[Rank 0] cuBLAS Baseline Verification completed.\n";
+        std::cout << "Max Absolute Error across " << Global_M << "x" << Global_N << " matrix: " << max_err << "\n";
+        std::cout << "Max Relative Error: " << max_rel_err << "\n";
+        
+        // Use a reasonable relative tolerance for FP32 large-scale accumulations
+        std::cout << (max_rel_err < 1e-3f ? "DISTRIBUTED VERIFICATION: PASS" : "DISTRIBUTED VERIFICATION: FAIL") << std::endl;
+        cudaFree(d_A_ref); cudaFree(d_B_ref); cudaFree(d_C_ref);
     }
 
     // Cleanup (reverse order teardown)
