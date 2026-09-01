@@ -128,11 +128,12 @@ __global__ void fill_kernel(float* ptr, float value, int n) {
     }
 }
 
+// Row-Major Initialization Kernels
 __global__ void init_tile_A_kernel(float* tile_ptr, int Nb, int rank_row, int P_r, int k) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < Nb * Nb) {
-        int l_row = idx % Nb;
-        int l_col = idx / Nb;
+        int l_row = idx / Nb; // Row-major indexing
+        int l_col = idx % Nb;
         int g_row = local_to_global(l_row, rank_row, Nb, P_r);
         int g_col = k * Nb + l_col;
         tile_ptr[idx] = static_cast<float>(g_row + g_col);
@@ -142,20 +143,20 @@ __global__ void init_tile_A_kernel(float* tile_ptr, int Nb, int rank_row, int P_
 __global__ void init_tile_B_kernel(float* tile_ptr, int Nb, int rank_col, int P_c, int k) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < Nb * Nb) {
-        int l_row = idx % Nb;
-        int l_col = idx / Nb;
+        int l_row = idx / Nb; // Row-major indexing
+        int l_col = idx % Nb;
         int g_row = k * Nb + l_row;
         int g_col = local_to_global(l_col, rank_col, Nb, P_c);
         tile_ptr[idx] = static_cast<float>(g_row - g_col);
     }
 }
 
-// Clean baseline initialization kernel for column-major reference matrices
+// Clean baseline initialization kernel for row-major reference matrices
 __global__ void init_baseline_matrix_kernel(float* ptr, int M, int N, bool is_matrix_A) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < M * N) {
-        int col = idx / M; // Column-major: row index is idx % M, col index is idx / M
-        int row = idx % M;
+        int row = idx / N; // Row-major: row index is idx / N, col index is idx % N
+        int col = idx % N;
         if (is_matrix_A) {
             ptr[idx] = static_cast<float>(row + col);
         } else {
@@ -324,11 +325,13 @@ int main(int argc, char** argv) {
         // 1. Compute on current buffer (waits for comm_done)
         CHECK_CUDA(cudaStreamWaitEvent(compute_stream, comm_done[current_buf], 0));
 
+        // ROW-MAJOR CUBLAS TRICK: Compute C_row = A_row * B_row using cuBLAS column-major interface
+        // Equation: C^T = B^T * A^T -> Pass B first, A second with leading dimension = Nb
         CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
                     Nb, Nb, Nb,
                     &alpha,
-                    d_A_recv[current_buf], Nb,
                     d_B_recv[current_buf], Nb,
+                    d_A_recv[current_buf], Nb,
                     &beta,
                     d_C_local, Nb));
         CHECK_CUDA(cudaEventRecord(compute_done[current_buf], compute_stream));
@@ -403,10 +406,11 @@ int main(int argc, char** argv) {
     if (world_rank != 0) {
         for (int lc = 0; lc < local_N; lc++) {
             for (int lr = 0; lr < local_M; lr++) {
-                float val = h_C_local[lc * local_M + lr];
+                // Row-Major local indexing
+                float val = h_C_local[lr * local_N + lc];
                 Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
-                // CORRECTED: Column-major global offset
-                FloatPayload p = {g.g_col * Global_M + g.g_row, val};
+                // Row-Major global offset
+                FloatPayload p = {g.g_row * Global_N + g.g_col, val};
                 MPI_Send(&p, sizeof(FloatPayload), MPI_BYTE, 0, 1, cart_comm);
             }
         }
@@ -414,12 +418,12 @@ int main(int argc, char** argv) {
     else {
         std::vector<float> final_C_dist(Global_M * Global_N, 0.0f);
 
-        // Self-map Rank 0 using column-major global offset
+        // Self-map Rank 0 using row-major global offset
         for (int lc = 0; lc < local_N; lc++) {
             for (int lr = 0; lr < local_M; lr++) {
-                float val = h_C_local[lc * local_M + lr];
+                float val = h_C_local[lr * local_N + lc];
                 Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
-                final_C_dist[g.g_col * Global_M + g.g_row] = val;
+                final_C_dist[g.g_row * Global_N + g.g_col] = val;
             }
         }
 
@@ -446,14 +450,16 @@ int main(int argc, char** argv) {
         init_baseline_matrix_kernel<<<blocks_A, threadsPerBlock>>>(d_A_ref, Global_M, Global_K, true);
         init_baseline_matrix_kernel<<<blocks_B, threadsPerBlock>>>(d_B_ref, Global_K, Global_N, false);
 
-        // CORRECTED: Proper M, N, K dimensions and leading dimensions (Global_M, Global_K, Global_M)
+        // Baseline cuBLAS Row-Major GEMM call (B_ref first, A_ref second)
+        // Dimensions: N = Global_N, M = Global_M, K = Global_K
+        // Leading Dimensions: ldb = Global_N, lda = Global_K, ldc = Global_N
         CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
-                                Global_M, Global_N, Global_K,
+                                Global_N, Global_M, Global_K,
                                 &alpha, 
-                                d_A_ref, Global_M, 
-                                d_B_ref, Global_K, 
+                                d_B_ref, Global_N, // ldb = Global_N
+                                d_A_ref, Global_K, // lda = Global_K
                                 &beta, 
-                                d_C_ref, Global_M));
+                                d_C_ref, Global_N)); // ldc = Global_N
 
         std::vector<float> h_C_ref(Global_M * Global_N);
         CHECK_CUDA(cudaMemcpy(h_C_ref.data(), d_C_ref, Global_M * Global_N * sizeof(float), cudaMemcpyDeviceToHost));   
