@@ -49,6 +49,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 
 // Error checking macro (essential fro production-grade CUDA/NCCL)
 #define CHECK_CUDA(cmd) do { \
@@ -121,6 +122,66 @@ __host__ __device__ inline Global2DCoord local_to_global_2d(int l_row, int l_col
     return {g_row, g_col};
 }
 
+// structure to track local matrix dimensions and allocation strides
+struct LocalMatrixDim {
+    int local_rows; // Exact valid rows owned by rank
+    int local_cols; // Exact valid cols owned by rank
+    int alloc_rows; // Padded rows (aligned to multiple of Nb)
+    int alloc_cols; // Padded cols (aligned to multiple of Nb)
+    int num_blocks_row; // Number of Nb x Nb block tiles vertically
+    int num_blocks_col; // Number of Nb x Nb block titles horizontally
+};
+
+// Compute local allocation and valid dimensions under 2D block-cyclic layout
+inline LocalMatrixDim get_local_matrix_dim(int G_M, int G_N, int nb, int P_r, int P_c, int rank_row, int rank_col) {
+    int total_blocks_m = (G_M + nb - 1) / nb;
+    int total_blocks_n = (G_N + nb - 1) / nb;
+
+    // Count how many full/partial blocks this rank owns
+    int blocks_r = total_blocks_m / P_r + (rank_row < (total_blocks_m % P_r) ? 1 : 0);
+    int blocks_c = total_blocks_n / P_c + (rank_col < (total_blocks_n % P_c) ? 1 : 0);
+
+    // Calculate exact non-padded valid element bounds
+    int valid_r = 0;
+    for (int b = rank_row; b < total_blocks_m; b += P_r) {
+        int rows_in_block = std::min(nb, G_M - b * nb);
+        valid_r += rows_in_block;
+    }
+
+    int valid_c = 0;
+    for (int b = rank_col; b < total_blocks_n; b += P_c) {
+        int cols_in_block = std::min(nb, G_N - b * nb);
+        valid_c += cols_in_block;
+    }
+
+    return {
+        valid_r,
+        valid_c,
+        blocks_r * nb, // Allocating full padded tiles simplifies memory strides
+        blocks_c * nb,
+        blocks_r,
+        blocks_c
+    };
+}
+
+// Convert local element coordinate back to global coordinate in 2D block-cyclic layout
+__host__ __device__ inline Global2DCoord local_to_global_2d_arbitrary(
+                                              int l_row, int l_col,
+                                              int rank_row, int rank_col,
+                                              int nb, int P_r, int P_c) {
+    int local_block_r = l_row / nb;
+    int offset_r = l_row % nb;
+    int global_block_r = local_block_r * P_r + rank_row;
+    int g_row = global_block_r * nb + offset_r;
+
+    int local_block_c = l_col / nb;
+    int offset_c = l_col % nb;
+    int global_block_c = local_block_c * P_c + rank_col;
+    int g_col = global_block_c * nb + offset_c;
+
+    return {g_row, g_col};
+}
+
 __global__ void fill_kernel(float* ptr, float value, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < n) {
@@ -128,26 +189,39 @@ __global__ void fill_kernel(float* ptr, float value, int n) {
     }
 }
 
-// Row-Major Initialization Kernels
-__global__ void init_tile_A_kernel(float* tile_ptr, int Nb, int rank_row, int P_r, int k) {
+// Block-Cyclic Matrix Initialization Kernels for Arbitrary (M, N, K)
+__global__ void init_matrix_A_kernel(float* ptr, int alloc_cols, int G_M, int G_K, int Nb, int P_r, int P_c, int rank_row, int rank_col) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx < Nb * Nb) {
-        int l_row = idx / Nb; // Row-major indexing
-        int l_col = idx % Nb;
-        int g_row = local_to_global(l_row, rank_row, Nb, P_r);
-        int g_col = k * Nb + l_col;
-        tile_ptr[idx] = static_cast<float>(g_row + g_col);
+    int total_threads = gridDim.x * blockDim.x;
+
+    // Strided grid loop over local memory
+    for (int i = idx; i < alloc_cols * G_M; i += total_threads) {
+        int l_row = i / alloc_cols;
+        int l_col = i % alloc_cols;
+
+        Global2DCoord g = local_to_global_2d_arbitrary(l_row, l_col, rank_row, rank_col, Nb, P_r, P_c);
+        if (g.g_row < G_M && g.g_col < G_K) {
+            ptr[l_row * alloc_cols + l_col] = static_cast<float>(g.g_row + g.g_col);
+        } else {
+            ptr[l_row * alloc_cols + l_col] = 0.0f; // Padding
+        }
     }
 }
 
-__global__ void init_tile_B_kernel(float* tile_ptr, int Nb, int rank_col, int P_c, int k) {
+__global__ void init_matrix_B_kernel(float* ptr, int alloc_cols, int G_K, int G_N, int Nb, int P_r, int P_c, int rank_row, int rank_col) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx < Nb * Nb) {
-        int l_row = idx / Nb; // Row-major indexing
-        int l_col = idx % Nb;
-        int g_row = k * Nb + l_row;
-        int g_col = local_to_global(l_col, rank_col, Nb, P_c);
-        tile_ptr[idx] = static_cast<float>(g_row - g_col);
+    int total_threads = gridDim.x * blockDim.x;
+
+    for (int i = idx; i < alloc_cols * G_K; i += total_threads) {
+        int l_row = i / alloc_cols;
+        int l_col = i % alloc_cols;
+
+        Global2DCoord g = local_to_global_2d_arbitrary(l_row, l_col, rank_row, rank_col, Nb, P_r, P_c);
+        if (g.g_row < G_K && g.g_col < G_N) {
+            ptr[l_row * alloc_cols + l_col] = static_cast<float>(g.g_row - g.g_col);
+        } else {
+            ptr[l_row * alloc_cols + l_col] = 0.0f; // Padding
+        }
     }
 }
 
@@ -227,45 +301,64 @@ int main(int argc, char** argv) {
     CHECK_NCCL(ncclCommInitRank(&nccl_col_comm, col_comm_size, col_id, col_comm_rank));
 
     // 5. Matrix and Block Size Setup (e.g., K_blocks total)
-    const int Nb = 1024; // 1024 x 1024 tiles
-    const int K_blocks = 4; // Total iterations
 
-    const int Global_M = P_r * Nb;
-    const int Global_N = P_c * Nb;
-    const int Global_K = K_blocks * Nb;
+    // Inputs: arbitrary M, N, K and Block Size Nb
+    const int Global_M = 3500;
+    const int Global_N = 2048;
+    const int Global_K = 5120;
+    const int Nb = 1024; // Tile size
 
-    int local_M = Global_M / P_r;
-    int local_N = Global_N / P_c;
+    const int K_blocks = (Global_K + Nb - 1) / Nb;
 
-    size_t tile_bytes = Nb * Nb * sizeof(float);
+    // Calculate dynamic local storage needs per rank
+    LocalMatrixDim dim_C = get_local_matrix_dim(Global_M, Global_N, Nb, P_r, P_c, rank_row, rank_col);
 
-    // Local device memory for Matrix C and our owned piecies of A and B
+    // Matrix A panel storage: Row ranks split M, Column ranks split K panel iterations
+    LocalMatrixDim dim_A = get_local_matrix_dim(Global_M, Global_K, Nb, P_r, P_c, rank_row, rank_col);
+
+    // Matrix B panel storage: Row ranks split K panel iterations, Column ranks split N
+    LocalMatrixDim dim_B = get_local_matrix_dim(Global_K, Global_N, Nb, P_r, P_c, rank_row, rank_col);
+
+    size_t bytes_C = dim_C.alloc_rows * dim_C.alloc_cols * sizeof(float);
+    size_t bytes_A = dim_A.alloc_rows * dim_A.alloc_cols * sizeof(float);
+    size_t bytes_B = dim_B.alloc_rows * dim_B.alloc_cols * sizeof(float);
+
+    // Device Memory Allocations (Zero-initialized to handle padding seamlessly)
     float *d_C_local, *d_A_local, *d_B_local;
-    CHECK_CUDA(cudaMalloc(&d_C_local, tile_bytes));
-    CHECK_CUDA(cudaMalloc(&d_A_local, tile_bytes * K_blocks)); // Assuming owns a strip
-    CHECK_CUDA(cudaMalloc(&d_B_local, tile_bytes * K_blocks));
-    CHECK_CUDA((cudaMemset(d_C_local, 0, tile_bytes)));
+    CHECK_CUDA(cudaMalloc(&d_C_local, bytes_C));
+    CHECK_CUDA(cudaMalloc(&d_A_local, bytes_A));
+    CHECK_CUDA(cudaMalloc(&d_B_local, bytes_B));
+    CHECK_CUDA((cudaMemset(d_C_local, 0, bytes_C)));
+    CHECK_CUDA((cudaMemset(d_A_local, 0, bytes_A)));
+    CHECK_CUDA((cudaMemset(d_B_local, 0, bytes_B)));
 
     // Matrix A and B Initial
-    int threadsPerBlock = 256; 
-    int blocksPerGrid = (Nb * Nb + threadsPerBlock - 1) / threadsPerBlock;
+    int threadsPerBlock = 256;
+    // int blocksPerGrid = (Nb * Nb + threadsPerBlock - 1) / threadsPerBlock;
+    
+    // Total elements allocated in local 2D buffers for Matrix A and B
+    int total_elements_A = dim_A.alloc_rows * dim_A.alloc_cols;
+    int total_elements_B = dim_B.alloc_rows * dim_B.alloc_cols;
+    int blocks_A = (total_elements_A + threadsPerBlock - 1) / threadsPerBlock;
+    int blocks_B = (total_elements_B + threadsPerBlock - 1) / threadsPerBlock;
 
-    // Generate A and B in-place using global coordinates
-    for (int k = 0; k < K_blocks; k++) {
-        //float val = (rank_row + 1) * 100.0f + (rank_col + 1) * 10.0f + k;
-        //fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_A_local + k * Nb * Nb, val, Nb * Nb);
-        //fill_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_B_local + k * Nb * Nb, val, Nb * Nb);
-
-        init_tile_A_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_A_local + k * Nb * Nb, Nb, rank_row, P_r, k);
-        init_tile_B_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_B_local + k * Nb * Nb, Nb, rank_col, P_c, k);
-    }
+    init_matrix_A_kernel<<<blocks_A, threadsPerBlock>>>(d_A_local, dim_A.alloc_cols, Global_M, Global_K, Nb, P_r, P_c, rank_row, rank_col);
+    init_matrix_B_kernel<<<blocks_B, threadsPerBlock>>>(d_B_local, dim_B.alloc_cols, Global_K, Global_N, Nb, P_r, P_c, rank_row, rank_col);
     CHECK_CUDA(cudaDeviceSynchronize());
 
     // 6. Double Buffering Setup (The Overlap architecture)
+    
+    // Panel A size: local rows x panel width (Nb)
+    size_t bytes_A_panel = dim_A.alloc_rows * Nb * sizeof(float);
+    // Panel B size: panel height (Nb) x local cols
+    size_t bytes_B_panel = Nb * dim_B.alloc_cols * sizeof(float);
+    
     float *d_A_recv[2], *d_B_recv[2];
     for (int i = 0; i < 2; i++) {
-        CHECK_CUDA(cudaMalloc(&d_A_recv[i], tile_bytes));
-        CHECK_CUDA(cudaMalloc(&d_B_recv[i], tile_bytes));
+        CHECK_CUDA(cudaMalloc(&d_A_recv[i], bytes_A_panel));
+        CHECK_CUDA(cudaMalloc(&d_B_recv[i], bytes_B_panel));
+        CHECK_CUDA(cudaMemset(d_A_recv[i], 0, bytes_A_panel));
+        CHECK_CUDA(cudaMemset(d_B_recv[i], 0, bytes_B_panel));
     }
 
     cudaStream_t compute_stream, comm_stream;
@@ -291,14 +384,26 @@ int main(int argc, char** argv) {
     int current_buf = 0;
 
     // A. Prime the pump (Load Buffer 0)
-    // Dynamic Root Resolution using mapping utilities
-    int root_A = global_to_local(0 * Nb, Nb, P_c).rank_coord; // Which process column owns A's block 0
-    int root_B = global_to_local(0 * Nb, Nb, P_r).rank_coord; // Which process row owns B's block 0
+    int root_A = 0 % P_c;
+    int root_B = 0 % P_r;
+    int current_kb_0 = std::min(Nb, Global_K - 0 * Nb);
 
-    if (rank_col == root_A)
-      CHECK_CUDA(cudaMemcpyAsync(d_A_recv[0], d_A_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
-    if (rank_row == root_B)
-      CHECK_CUDA(cudaMemcpyAsync(d_B_recv[0], d_B_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+    if (rank_col == root_A) {
+      int local_k_A = 0 / P_c;
+      float* src_A = d_A_local + (local_k_A * Nb);
+      // CHECK_CUDA(cudaMemcpyAsync(d_A_recv[0], d_A_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+      CHECK_CUDA(cudaMemcpy2DAsync(d_A_recv[0], current_kb_0 * sizeof(float), // dpitch = width of panel
+                                 src_A, dim_A.alloc_cols * sizeof(float),   // spitch = stride of local matrix A
+                                 current_kb_0 * sizeof(float),              // width = panel width in bytes
+                                 dim_A.alloc_rows,                          // height = total local rows
+                                 cudaMemcpyDeviceToDevice, comm_stream));
+    }
+    if (rank_row == root_B) {
+        int local_k_B = 0 / P_r;
+        float* src_B = d_B_local + (local_k_B * Nb * dim_B.alloc_cols);
+        // CHECK_CUDA(cudaMemcpyAsync(d_B_recv[0], d_B_local + (0 * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+        CHECK_CUDA(cudaMemcpyAsync(d_B_recv[0], src_B, current_kb_0 * dim_B.alloc_cols * sizeof(float), cudaMemcpyDeviceToDevice, comm_stream));
+    }
 
     CHECK_NCCL(ncclGroupStart());
     CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[0], // pointer to data being sent (read, only this rank)
@@ -321,35 +426,50 @@ int main(int argc, char** argv) {
     // B. The Main Loop
     for (int k = 0; k < K_blocks; k++) {
         int next_buf = (current_buf + 1) % 2;
+        int current_kb = std::min(Nb, Global_K - k * Nb);
 
         // 1. Compute on current buffer (waits for comm_done)
         CHECK_CUDA(cudaStreamWaitEvent(compute_stream, comm_done[current_buf], 0));
 
-        // ROW-MAJOR CUBLAS TRICK: Compute C_row = A_row * B_row using cuBLAS column-major interface
-        // Equation: C^T = B^T * A^T -> Pass B first, A second with leading dimension = Nb
+        // Row-major GEMM via cuBLAS Column-Major API (C = A * B -> C^T = B^T * A^T)
+        // M_cublas = dim_C.alloc_cols
+        // N_cublas = dim_C.alloc_rows
+        // K_cublas = current_kb
         CHECK_CUBLAS(cublasSgemm(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N,
-                    Nb, Nb, Nb,
-                    &alpha,
-                    d_B_recv[current_buf], Nb,
-                    d_A_recv[current_buf], Nb,
-                    &beta,
-                    d_C_local, Nb));
+                         dim_C.alloc_cols, dim_C.alloc_rows, current_kb,
+                         &alpha,
+                         d_B_recv[current_buf], dim_B.alloc_cols, // lda = dim_B.alloc_cols (must be >= dim_C.alloc_cols)
+                         d_A_recv[current_buf], current_kb,       // ldb = current_kb        (must be >= current_kb)
+                         &beta,
+                         d_C_local, dim_C.alloc_cols));           // ldc = dim_C.alloc_cols (must be >= dim_C.alloc_cols)
         CHECK_CUDA(cudaEventRecord(compute_done[current_buf], compute_stream));
 
         // 2. Commnicate next buffer (waits for compute_done on the next buffer)
         if (k + 1 < K_blocks) {
             int next_k = k + 1;
-            int next_root_A = next_k % row_comm_size;
-            int next_root_B = next_k % col_comm_size;
+            int next_kb = std::min(Nb, Global_K - next_k * Nb);
+            int next_root_A = next_k % P_c;
+            int next_root_B = next_k % P_r;
 
             // communicate into next_buf, has to wait the next_buf compute from 2 iterations ago to have finished reading it
             CHECK_CUDA(cudaStreamWaitEvent(comm_stream, compute_done[next_buf], 0));
 
             // Copy next tile from local storage to send buffer if we own it
-            if (rank_col == next_root_A)
-                CHECK_CUDA(cudaMemcpyAsync(d_A_recv[next_buf], d_A_local + (next_k * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
-            if (rank_row == next_root_B)
-                CHECK_CUDA(cudaMemcpyAsync(d_B_recv[next_buf], d_B_local + (next_k * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+            if (rank_col == next_root_A) {
+                // CHECK_CUDA(cudaMemcpyAsync(d_A_recv[next_buf], d_A_local + (next_k * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+                int local_k_A = next_k / P_c;
+                float* src_A = d_A_local + (local_k_A * Nb);
+                CHECK_CUDA(cudaMemcpy2DAsync(d_A_recv[next_buf], Nb * sizeof(float),
+                                             src_A, dim_A.alloc_cols * sizeof(float),
+                                             next_kb * sizeof(float), dim_A.alloc_rows,
+                                             cudaMemcpyDeviceToDevice, comm_stream));
+            }
+            if (rank_row == next_root_B) {
+                // CHECK_CUDA(cudaMemcpyAsync(d_B_recv[next_buf], d_B_local + (next_k * Nb * Nb), tile_bytes, cudaMemcpyDeviceToDevice, comm_stream));
+                int local_k_B = next_k / P_r;
+                float* src_B = d_B_local + (local_k_B * Nb * dim_B.alloc_cols);
+                CHECK_CUDA(cudaMemcpyAsync(d_B_recv[next_buf], src_B, next_kb * dim_B.alloc_cols * sizeof(float), cudaMemcpyDeviceToDevice, comm_stream));
+            }
 
             CHECK_NCCL(ncclGroupStart());
             CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[next_buf], (void*)d_A_recv[next_buf], Nb * Nb, ncclFloat, next_root_A, nccl_row_comm, comm_stream));
@@ -364,54 +484,19 @@ int main(int argc, char** argv) {
 
     CHECK_CUDA(cudaDeviceSynchronize());
 
-/*    
-    // Verification: does the distributed communication pattern work correctly
-    // Note: the SUMMA computation is not verified in this experiment
-    std::vector<float> h_C(Nb * Nb);
-    CHECK_CUDA(cudaMemcpy(h_C.data(), d_C_local, tile_bytes, cudaMemcpyDeviceToHost));
-
-    float expected = 0.0f;
-    for (int k = 0; k < K_blocks; k++) {
-        int owner_col = k % row_comm_size; // which col-position owns A's k-th block
-        int owner_row = k % col_comm_size; // which row-position owns B's k-th block
-        float val_A = (rank_row + 1) * 100.0f + (owner_col + 1) * 10.0f +k;
-        float val_B = (owner_row + 1) * 100.0f + (rank_col + 1) * 10.0f + k;
-        expected += Nb * val_A * val_B;
-    }
-
-    float max_abs_err = 0.0f;
-    for (float v : h_C) {
-        max_abs_err = std::max(max_abs_err, std::fabs(v - expected));
-    }
-    float rel_err = max_abs_err / (std::fabs(expected) + 1e-8f);
-    // Use 1e-3f threshold to catch logic bug not a false-flagging fp32 imprecision rounding noise
-    int local_pass = (rel_err < 1e-3f) ? 1 : 0;
-
-    printf("[Rank %d (row=%d,col=%d)] expected=%.2f max_abs_err=%.6f rel_err=%.2e verified=%d\n",
-       world_rank, rank_row, rank_col, expected, max_abs_err, rel_err, local_pass);
-
-    int all_pass;
-    MPI_Allreduce(&local_pass, &all_pass, 1, MPI_INT, MPI_LAND, MPI_COMM_WORLD);
-
-    if (world_rank == 0) {
-        std::cout << (all_pass ? "SUMMA correctness verified across ALL ranks: PASS"
-                            : "SUMMA correctness FAILED on at least one rank") << std::endl;
-    }
-*/
-
     // Gather and cuBLAS Ground Truth Verification on Rank 0
-    std::vector<float> h_C_local(local_M * local_N);
-    CHECK_CUDA(cudaMemcpy(h_C_local.data(), d_C_local, local_M * local_N * sizeof(float), cudaMemcpyDeviceToHost));
+    std::vector<float> h_C_local(dim_C.alloc_rows * dim_C.alloc_cols);
+    CHECK_CUDA(cudaMemcpy(h_C_local.data(), d_C_local, dim_C.alloc_rows * dim_C.alloc_cols * sizeof(float), cudaMemcpyDeviceToHost));
 
     if (world_rank != 0) {
-        for (int lc = 0; lc < local_N; lc++) {
-            for (int lr = 0; lr < local_M; lr++) {
-                // Row-Major local indexing
-                float val = h_C_local[lr * local_N + lc];
-                Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
-                // Row-Major global offset
-                FloatPayload p = {g.g_row * Global_N + g.g_col, val};
-                MPI_Send(&p, sizeof(FloatPayload), MPI_BYTE, 0, 1, cart_comm);
+        for (int lr = 0; lr < dim_C.alloc_rows; lr++) {
+            for (int lc = 0; lc < dim_C.alloc_cols; lc++) {
+                Global2DCoord g = local_to_global_2d_arbitrary(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
+                if (g.g_row < Global_M && g.g_col < Global_N) {
+                    float val = h_C_local[lr * dim_C.alloc_cols + lc];
+                    FloatPayload p = {g.g_row * Global_N + g.g_col, val};
+                    MPI_Send(&p, sizeof(FloatPayload), MPI_BYTE, 0, 1, cart_comm);
+                }
             }
         }
     }
@@ -419,16 +504,20 @@ int main(int argc, char** argv) {
         std::vector<float> final_C_dist(Global_M * Global_N, 0.0f);
 
         // Self-map Rank 0 using row-major global offset
-        for (int lc = 0; lc < local_N; lc++) {
-            for (int lr = 0; lr < local_M; lr++) {
-                float val = h_C_local[lr * local_N + lc];
-                Global2DCoord g = local_to_global_2d(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
-                final_C_dist[g.g_row * Global_N + g.g_col] = val;
+        for (int lr = 0; lr < dim_C.alloc_rows; lr++) {
+            for (int lc = 0; lc < dim_C.alloc_cols; lc++) {
+                Global2DCoord g = local_to_global_2d_arbitrary(lr, lc, rank_row, rank_col, Nb, P_r, P_c);
+                if (g.g_row < Global_M && g.g_col < Global_N) {
+                    final_C_dist[g.g_row * Global_N + g.g_col] = h_C_local[lr * dim_C.alloc_cols + lc];
+                }
             }
         }
 
         // Receive payloads from Workers
-        int incoming_elements = (Global_M * Global_N) - (local_M * local_N);
+        int total_valid_elements = Global_M * Global_N;
+        int rank0_valid_elements = dim_C.local_rows * dim_C.local_cols;
+        int incoming_elements = total_valid_elements - rank0_valid_elements;
+
         for (int i = 0; i < incoming_elements; i++) {
             FloatPayload p;
             MPI_Recv(&p, sizeof(FloatPayload), MPI_BYTE, MPI_ANY_SOURCE, 1, cart_comm, MPI_STATUS_IGNORE);
@@ -442,13 +531,13 @@ int main(int argc, char** argv) {
         CHECK_CUDA(cudaMalloc(&d_C_ref, Global_M * Global_N * sizeof(float)));
         CHECK_CUDA(cudaMemset(d_C_ref, 0, Global_M * Global_N * sizeof(float)));
 
-        int blocks_A = (Global_M * Global_K + threadsPerBlock - 1) / threadsPerBlock;
-        int blocks_B = (Global_K * Global_N + threadsPerBlock - 1) / threadsPerBlock;
+        int blocks_A_ref = (Global_M * Global_K + threadsPerBlock - 1) / threadsPerBlock;
+        int blocks_B_ref = (Global_K * Global_N + threadsPerBlock - 1) / threadsPerBlock;
         //int blocks_C = (Global_M * Global_N + threadsPerBlock - 1) / threadsPerBlock;
 
-        // CORRECTED: Use clean baseline initialization kernels
-        init_baseline_matrix_kernel<<<blocks_A, threadsPerBlock>>>(d_A_ref, Global_M, Global_K, true);
-        init_baseline_matrix_kernel<<<blocks_B, threadsPerBlock>>>(d_B_ref, Global_K, Global_N, false);
+        // Use clean baseline initialization kernels
+        init_baseline_matrix_kernel<<<blocks_A_ref, threadsPerBlock>>>(d_A_ref, Global_M, Global_K, true);
+        init_baseline_matrix_kernel<<<blocks_B_ref, threadsPerBlock>>>(d_B_ref, Global_K, Global_N, false);
 
         // Baseline cuBLAS Row-Major GEMM call (B_ref first, A_ref second)
         // Dimensions: N = Global_N, M = Global_M, K = Global_K
@@ -518,4 +607,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
