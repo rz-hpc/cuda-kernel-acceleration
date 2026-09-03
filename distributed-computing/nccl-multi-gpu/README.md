@@ -1,3 +1,4 @@
+
 # Distributed SUMMA GEMM — NCCL Multi-GPU
 
 A from-scratch distributed GEMM (SUMMA — Scalable Universal Matrix Multiplication
@@ -130,6 +131,8 @@ volume choice.
 
 ## Results
 
+### Experiment 1: Verify the Distributed Communication and Compute Pipeline
+
 **Environment**: RunPod Secure Cloud, 2x NVIDIA RTX 2000 Ada Generation,
 `-np 2`, `Nb=1024` (1024×1024 tiles), `K_blocks=4`.
 
@@ -176,9 +179,9 @@ GPU1    SYS      X      32-63           1
 
 ---
 
-## Analysis: why no overlap, and the NUMA connection
+### Analysis: why no overlap, and the NUMA connection
 
-### The root cause
+#### The root cause
 
 `SYS` is the worst case on `nvidia-smi`'s topology legend — it means the
 only path between GPU0 and GPU1 traverses PCIe *and* the host's
@@ -240,7 +243,7 @@ interesting question this finding sets up.
 
 ---
 
-## Known scope limits (not yet done)
+### Known scope limits (not yet done)
 
 - `d_A_local`/`d_B_local` currently hold synthetic per-rank values, not
   data sourced from a real matrix via `global_to_local`/`local_to_global`
@@ -253,3 +256,71 @@ interesting question this finding sets up.
 - Overlap has not been observed on any topology yet — worth retesting on a
   pod with `PIX`/`NV#` interconnect if one becomes available, to confirm
   the architecture actually delivers overlap when the hardware allows it.
+
+---
+
+### Experiment 2: Arbitrary Matrix SUMMA GEMM (Multi-GPU Profiling)
+
+**Objective:** Validate distributed SUMMA GEMM correctness using arbitrary, non-square input matrix dimensions and evaluate CUDA stream double-buffering efficacy for communication/compute overlap.
+
+### 1. Environment & Topology
+The experiment was executed on a 2-GPU instance. Diagnostic output from `nvidia-smi topo -m` revealed a host-routed `SYS` interconnect topology rather than a direct peer-to-peer (P2P) fabric:
+
+```text
+       GPU0    GPU1    NIC0    NIC1    CPU Affinity      NUMA Affinity
+GPU0     X     SYS     SYS     SYS     0-23,48-71        0
+GPU1    SYS     X      NODE    NODE    24-47,72-95       1
+```
+
+*   **SYS Interconnect:** GPU-to-GPU communication routes through the CPU and PCIe root complex.
+*   **NUMA Separation:** The GPUs reside on different NUMA nodes, further increasing latency for inter-device transfers.
+
+### 2. Execution Parameters
+*   **Global Dimensions:** $M = 3500$, $N = 2048$, $K = 5120$
+*   **Block Size (Nb):** $1024$
+*   **Grid Topology:** $P \times Q = 2 \times 1$ (or $1 \times 2$, auto-factored via `MPI_Dims_create`)
+*   **Loop Iterations:** $\lceil K / Nb \rceil = 5120 / 1024 = 5$ iterations per rank.
+
+### 3. Correctness & Baseline Verification
+To verify the distributed algorithm's handling of arbitrary dimensions and block-cyclic edge cases, Rank 0 computes a monolithic cuBLAS baseline matrix and compares it against the gathered distributed result:
+
+* **Status:** `DISTRIBUTED VERIFICATION: PASS` 
+* **Baseline vs. Distributed C[0]:** $4.47261 \times 10^{10}$ (Exact element match at index 0)
+*  **Max Absolute Error:** 172,032 (across $3500 \times 2048$ matrix layout) 
+* **Max Relative Error:** $2.72608 \times 10^{-6}$
+*   **Verdict:** PASS. The errors are within the expected floating-point (fp32) epsilon for rounding noise accumulated across 5 independent block-wise additions.
+
+### 4. Profiling Results (Nsight Systems)
+Execution traces confirm that the algorithm structure is correct. The Nsight Systems (`nsys`) API and GPU kernel summaries explicitly show 5 distinct loop iterations for both computation and communication:
+
+
+### Rank 0 Execution Profile
+| Time Share (%) | Total Time (ns) | Instances | Kernel / Operation Name |
+| :--- | :--- | :--- | :--- |
+| **55.4%** | 2,947,161 | 5 | `ncclDevKernel_Broadcast_RING_LL` |
+| **41.0%** | 2,182,331 | 5 | `ampere_sgemm_128x64_nn` |
+| **2.6%** | 135,839 | 1 | `init_matrix_A_kernel` |
+| **1.0%** | 55,552 | 1 | `init_matrix_B_kernel` |
+
+### Rank 1 Execution Profile
+| Time Share (%) | Total Time (ns) | Instances | Kernel / Operation Name |
+| :--- | :--- | :--- | :--- |
+| **39.2%** | 3,038,184 | 1 | `cutlass::Kernel2<..._sgemm_256x128_8x4>` |
+| **28.3%** | 2,189,317 | 5 | `ampere_sgemm_128x64_nn` |
+| **27.1%** | 2,098,405 | 5 | `ncclDevKernel_Broadcast_RING_LL` |
+| **2.6%** | 198,368 | 2 | `init_baseline_matrix_kernel` |
+| **1.7%** | 135,425 | 1 | `init_matrix_A_kernel` |
+| **1.1%** | 81,888 | 1 | `init_matrix_B_kernel` |
+
+---
+
+
+### 5. Bottleneck Analysis & Overlap Efficacy
+While the CUDA stream double-buffering architecture is synchronization-correct, the hardware topology prevented measurable overlap. 
+
+True communication/compute overlap requires the compute duration of a tile to mask the communication latency of the next step. In this environment:
+1. **Topology Bottleneck:** Because inter-GPU traffic traverses the `SYS` PCIe interconnect instead of a high-bandwidth NVLink or `PIX` fabric, NCCL bandwidth is severely constrained.
+2. **Kernel Duration Balance:** Profiling data indicates that aggregate time spent in low-latency ring broadcasts (`ncclDevKernel_Broadcast_RING_LL`) constitutes a major share of execution time relative to the partial SGEMM computations (`ampere_sgemm_128x64_nn`).
+3. **Stream Starvation:** The compute stream rapidly drains its available buffer, hits the stream synchronization event, and is forced to idle while waiting for the communication stream to finish transferring data across the bus.
+
+**Conclusion:** The overlap mechanism functions correctly in software, but performance is strictly network-bound. Achieving concurrent execution profiles requires deploying to a node with a dedicated P2P interconnect where communication throughput matches or exceeds math throughput.
