@@ -194,8 +194,11 @@ __global__ void init_matrix_A_kernel(float* ptr, int alloc_cols, int G_M, int G_
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     int total_threads = gridDim.x * blockDim.x;
 
+    int total_blocks_m = (G_M + Nb - 1) / Nb;
+    int alloc_rows = (total_blocks_m / P_r + (rank_row < (total_blocks_m % P_r) ? 1 : 0)) * Nb;
+
     // Strided grid loop over local memory
-    for (int i = idx; i < alloc_cols * G_M; i += total_threads) {
+    for (int i = idx; i < alloc_cols * alloc_rows; i += total_threads) {
         int l_row = i / alloc_cols;
         int l_col = i % alloc_cols;
 
@@ -212,7 +215,10 @@ __global__ void init_matrix_B_kernel(float* ptr, int alloc_cols, int G_K, int G_
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     int total_threads = gridDim.x * blockDim.x;
 
-    for (int i = idx; i < alloc_cols * G_K; i += total_threads) {
+    int total_blocks_k = (G_K + Nb - 1) / Nb;
+    int alloc_rows = (total_blocks_k / P_r + (rank_row < (total_blocks_k % P_r) ? 1 : 0)) * Nb;
+
+    for (int i = idx; i < alloc_cols * alloc_rows; i += total_threads) {
         int l_row = i / alloc_cols;
         int l_col = i % alloc_cols;
 
@@ -352,7 +358,9 @@ int main(int argc, char** argv) {
     size_t bytes_A_panel = dim_A.alloc_rows * Nb * sizeof(float);
     // Panel B size: panel height (Nb) x local cols
     size_t bytes_B_panel = Nb * dim_B.alloc_cols * sizeof(float);
-    
+    size_t elems_A_panel = dim_A.alloc_rows * Nb;
+    size_t elems_B_panel = Nb * dim_B.alloc_cols;
+
     float *d_A_recv[2], *d_B_recv[2];
     for (int i = 0; i < 2; i++) {
         CHECK_CUDA(cudaMalloc(&d_A_recv[i], bytes_A_panel));
@@ -408,14 +416,14 @@ int main(int argc, char** argv) {
     CHECK_NCCL(ncclGroupStart());
     CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[0], // pointer to data being sent (read, only this rank)
                               (void*)d_A_recv[0], // pointer to where data is saved (write, on all ranks)
-                              Nb * Nb, // number of elements
+                              elems_A_panel, // number of elements
                               ncclFloat, // type of data
                               root_A, // the rank ID inside this specific communicator that holds source data
                               nccl_row_comm, // the specific ncclComm_t universe (row or col comm)
                               comm_stream)); // cuda stream executing the transfer
     CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[0],
                               (void*)d_B_recv[0],
-                              Nb * Nb,
+                              elems_B_panel,
                               ncclFloat,
                               root_B,
                               nccl_col_comm, 
@@ -439,7 +447,7 @@ int main(int argc, char** argv) {
                          dim_C.alloc_cols, dim_C.alloc_rows, current_kb,
                          &alpha,
                          d_B_recv[current_buf], dim_B.alloc_cols, // lda = dim_B.alloc_cols (must be >= dim_C.alloc_cols)
-                         d_A_recv[current_buf], current_kb,       // ldb = current_kb        (must be >= current_kb)
+                         d_A_recv[current_buf], Nb,       // ldb = Nb
                          &beta,
                          d_C_local, dim_C.alloc_cols));           // ldc = dim_C.alloc_cols (must be >= dim_C.alloc_cols)
         CHECK_CUDA(cudaEventRecord(compute_done[current_buf], compute_stream));
@@ -472,8 +480,8 @@ int main(int argc, char** argv) {
             }
 
             CHECK_NCCL(ncclGroupStart());
-            CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[next_buf], (void*)d_A_recv[next_buf], Nb * Nb, ncclFloat, next_root_A, nccl_row_comm, comm_stream));
-            CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[next_buf], (void*)d_B_recv[next_buf], Nb * Nb, ncclFloat, next_root_B, nccl_col_comm, comm_stream));
+            CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[next_buf], (void*)d_A_recv[next_buf], elems_A_panel, ncclFloat, next_root_A, nccl_row_comm, comm_stream));
+            CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[next_buf], (void*)d_B_recv[next_buf], elems_B_panel, ncclFloat, next_root_B, nccl_col_comm, comm_stream));
             CHECK_NCCL(ncclGroupEnd());
 
             CHECK_CUDA(cudaEventRecord(comm_done[next_buf], comm_stream));
