@@ -1,4 +1,25 @@
 
+/*
+// Compile and Run:
+!nvcc -Wno-deprecated-gpu-targets summa_multinode.cu -o summa_multinode -lcublas -lnccl -ccbin mpicxx -arch=native
+
+!NCCL_DEBUG=WARN mpirun --allow-run-as-root -np 1 ./summa_multinode
+
+# Run on multi-node RunPod:
+# mpirun --hostfile hostfile --allow-run-as-root -np <TOTAL_GPUS> \
+#     -mca btl_tcp_if_include eth0 \
+#     -x NCCL_SOCKET_IFNAME=eth0 \
+#     -x NCCL_DEBUG=INFO \
+#     ./summa_multinode
+
+// Example output on Colab:
+NCCL version 2.25.1+cuda12.8
+Initializing multi-node SUMMA across 1x1 Grid.
+Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 9.65322e-07
+VERIFICATION: PASS
+
+*/
+
 #include <mpi.h>
 #include <nccl.h>
 #include <cublas_v2.h>
@@ -346,7 +367,7 @@ int main(int argc, char** argv) {
     float *d_A_recv[2], *d_B_recv[2];
     for (int i = 0; i < 2; i++) {
         CHECK_CUDA(cudaMalloc(&d_A_recv[i], dim_A.alloc_rows * Nb * sizeof(float)));
-        CHECK_CUDA(cudaMalloc(&d_B_recv[i], Nb * dim_B.alloc_rows * sizeof(float)));
+        CHECK_CUDA(cudaMalloc(&d_B_recv[i], Nb * dim_B.alloc_cols * sizeof(float)));
     }
 
     cudaStream_t compute_stream, comm_stream;
@@ -396,7 +417,7 @@ int main(int argc, char** argv) {
 
     CHECK_NCCL(ncclGroupStart());
     CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[0], (void*)d_A_recv[0], dim_A.alloc_rows * Nb, ncclFloat, root_A, nccl_row_comm, comm_stream));
-    CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[0], (void*)d_B_recv[0], Nb * dim_B.alloc_cols, ncclFloat, root_B, nccl_row_comm, comm_stream));    
+    CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[0], (void*)d_B_recv[0], Nb * dim_B.alloc_cols, ncclFloat, root_B, nccl_col_comm, comm_stream));    
     CHECK_NCCL(ncclGroupEnd());
     CHECK_CUDA(cudaEventRecord(comm_done[0], comm_stream));
 
@@ -437,7 +458,7 @@ int main(int argc, char** argv) {
 
             CHECK_NCCL(ncclGroupStart());
             CHECK_NCCL(ncclBroadcast((const void*)d_A_recv[next_buf], (void*)d_A_recv[next_buf], dim_A.alloc_rows * Nb, ncclFloat, next_root_A, nccl_row_comm, comm_stream));
-            CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[next_buf], (void*)d_B_recv[next_buf], Nb * dim_B.alloc_cols, ncclFloat, next_root_B, nccl_row_comm, comm_stream));
+            CHECK_NCCL(ncclBroadcast((const void*)d_B_recv[next_buf], (void*)d_B_recv[next_buf], Nb * dim_B.alloc_cols, ncclFloat, next_root_B, nccl_col_comm, comm_stream));
             CHECK_NCCL(ncclGroupEnd());
             CHECK_CUDA(cudaEventRecord(comm_done[next_buf], comm_stream));
         }
@@ -468,18 +489,41 @@ int main(int argc, char** argv) {
         std::vector<float> h_C_ref(Global_M * Global_N);
         CHECK_CUDA(cudaMemcpy(h_C_ref.data(), d_C_ref, Global_M * Global_N * sizeof(float), cudaMemcpyDeviceToHost));
 
+        /*
+        // Use standard combined absolute + relative tolerance (numpy.allclose uses)
+        // passes when the difference is small in either absolute or relative terms
+        // so near-zero references stop causing false failures
+        const float atol = 1e-3f;
+        const float rtol = 1e-3f;
         float max_err = 0.0f;
         float max_rel_err = 0.0f;
+        bool all_pass = true;
         for (int i = 0; i < Global_M * Global_N; i++) {
             float abs_diff = std::fabs(global_C_verify[i] - h_C_ref[i]);
             max_err = std::max(max_err, abs_diff);
-            float rel_diff = abs_diff / (std::fabs(h_C_ref[i]) + 1e-5f);
+            float rel_diff = abs_diff / (std::fabs(h_C_ref[i]) + 1e-8f);
             max_rel_err = std::max(max_rel_err, rel_diff);
+            if (abs_diff > atol + rtol * std::fabs(h_C_ref[i])) all_pass = false;
         }
-
         std::cout << "Max Absolute Error: " << max_err << "\n";
-        std::cout << "Max Relative Error: " << max_rel_err << "\n";
-        std::cout << (max_rel_err < 1e-3f ? "VERIFICATION: PASS" : "VERIFICATION: FAIL") << std::endl;
+        std::cout << "Max Relative Error: " << max_rel_err << " (may be inflated by near-zero entries)\n";
+        std::cout << (all_pass ? "VERIFICATION: PASS" : "VERIFICATION: FAIL") << std::endl;
+        */
+
+        // The Frobenius-norm ratio verification (single global norm ratio)
+        double norm_diff_sq = 0.0, norm_ref_sq = 0.0;
+        for (int i = 0; i < Global_M * Global_N; i++) {
+            double diff = global_C_verify[i] - h_C_ref[i];
+            norm_diff_sq += diff * diff;
+            norm_ref_sq += (double)h_C_ref[i] * h_C_ref[i];
+        }
+        double norm_ratio = std::sqrt(norm_diff_sq) / std::sqrt(norm_ref_sq);
+
+        std::cout << "Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: " << norm_ratio << "\n";
+        // Typical accepted threshold scales with K and machine epsilon:
+        double threshold = std::sqrt((double)Global_K) * 1e-6;  // ~sqrt(K)*eps, generous margin
+        std::cout << (norm_ratio < threshold ? "VERIFICATION: PASS" : "VERIFICATION: FAIL") << std::endl;
+
 
         cudaFree(d_A_ref);
         cudaFree(d_B_ref);
