@@ -54,8 +54,6 @@ Official examples https://github.com/NVIDIA/CUDALibrarySamples/blob/main/cuBLASM
 #include <nccl.h>
 #include <cublas_v2.h>
 #include <cublasmp.h>
-//#include <nvshmem.h>
-//#include <nvshmemx.h>
 #include <cuda_runtime.h>
 #include <iostream>
 #include <vector>
@@ -413,8 +411,6 @@ int main(int argc, char** argv) {
     ));
 
     //// Allocate Workspaces (NVSHMEM for distributed device workspace)
-    //void* d_work = nvshmem_malloc(workspaceInBytesOnDevice);
-    //std::vector<int8_t> h_work(workspaceInBytesOnHost);
 
     void* d_work = nullptr;
     CHECK_CUDA(cudaMalloc(&d_work, workspaceInBytesOnDevice));
