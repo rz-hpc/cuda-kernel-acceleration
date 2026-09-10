@@ -1,32 +1,52 @@
 
 /*
 Run and Compile:
-# (run one time) 1. Download standalone micromamba and create local environment with pinned NVSHMEM >= 3.7.0
+# (Run once) 0. Create local environment with cuBLASMp and NCCL (no NVSHMEM needed!)
 !curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba && \
  ./bin/micromamba create -y -p ./cublasmp_env -c nvidia -c conda-forge \
- libcublasmp-dev libcublasmp "libnvshmem-dev>=3.7.0" "libnvshmem3>=3.7.0"
+ libcublasmp-dev libcublasmp nccl cuda-cudart
 
-# 2. Compile with RDC enabled and explicit architecture targeting (sm_80 for A100, sm_90 for H100)
-!nvcc -Wno-deprecated-gpu-targets -rdc=true summa_cublasmp.cu -o summa_cublasmp \
+# 1. Compile
+!./cublasmp_env/bin/nvcc -Wno-deprecated-gpu-targets -arch=sm_75 summa_cublasmp.cu -o summa_cublasmp \
  -I./cublasmp_env/include \
  -I./cublasmp_env/include/cublasMp \
- -I./cublasmp_env/include/nvshmem \
  -L./cublasmp_env/lib \
- -lcublas -lnccl -lcublasMp -lnvshmem -lcudart -lcudadevrt \
- -ccbin mpicxx -arch=sm_80
+ -lcublas -lnccl -lcublasmp -lcudart \
+ -ccbin mpicxx
 
-# 3. Run with the local lib directory exported to the MPI workers
-!mpirun --allow-run-as-root -np 1 \
+# 2. Run
+!mpirun --allow-run-as-root --oversubscribe -np 1 \
  -x LD_LIBRARY_PATH=$(pwd)/cublasmp_env/lib:$LD_LIBRARY_PATH \
  -x NCCL_DEBUG=WARN \
+ -x NCCL_MULTI_RANK_GPU_ENABLE=1 \
+ -x CUBLASMP_LOG_LEVEL=3 \
  ./summa_cublasmp
 
-// Note:
-// Incompatible with Google Colab (Tesla T4 / sm_75). 
-// cuBLASMp and NVSHMEM device-side proxies require internal state symbols 
-// (e.g., nvshmemi_device_state_d) and per-architecture bitcode that are 
-// restricted to Ampere (sm_80) or Hopper (sm_90) architectures. 
-// Conda-forge device linkages fail to resolve correctly on Turing hardware.
+ # Example output on Google Colab T4:
+ # the exact 0 is too clean, real validation needs more than -np 1:
+Initializing cuBLASMp multi-node GEMM across 1x1 Grid.
+NCCL version 2.30.7+cuda13.3
+[2026-09-10 18:38:24][cublasMp][3313][Trace][cublasMpMatmul] Using local Matmul
+Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 0
+VERIFICATION: PASS
+
+# Google Colab T4 with -np 4:
+Initializing cuBLASMp multi-node GEMM across 2x2 Grid.
+NCCL version 2.30.7+cuda13.3
+[2026-09-10 18:47:40][cublasMp][5920][Trace][cublasMpMatmul] Using generic Matmul
+[2026-09-10 18:47:40][cublasMp][5920][Trace][cublasMpMatmul] Matmul NN
+[2026-09-10 18:47:40][cublasMp][5921][Trace][cublasMpMatmul] Using generic Matmul
+[2026-09-10 18:47:40][cublasMp][5922][Trace][cublasMpMatmul] Using generic Matmul
+[2026-09-10 18:47:40][cublasMp][5921][Trace][cublasMpMatmul] Matmul NN
+[2026-09-10 18:47:40][cublasMp][5923][Trace][cublasMpMatmul] Using generic Matmul
+[2026-09-10 18:47:40][cublasMp][5923][Trace][cublasMpMatmul] Matmul NN
+[2026-09-10 18:47:40][cublasMp][5922][Trace][cublasMpMatmul] Matmul NN
+Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 9.54703e-07
+VERIFICATION: PASS
+
+Note:
+Official doc https://docs.nvidia.com/cuda/cublasmp/index.html
+Official examples https://github.com/NVIDIA/CUDALibrarySamples/blob/main/cuBLASMp/matmul_ag.cu
 */
 
 
@@ -34,8 +54,8 @@ Run and Compile:
 #include <nccl.h>
 #include <cublas_v2.h>
 #include <cublasmp.h>
-#include <nvshmem.h>
-#include <nvshmemx.h>
+//#include <nvshmem.h>
+//#include <nvshmemx.h>
 #include <cuda_runtime.h>
 #include <iostream>
 #include <vector>
@@ -319,9 +339,9 @@ int main(int argc, char** argv) {
     distribute_matrix(global_B.data(), h_B_local.data(), Global_K, Global_N, Nb, P_r, P_c, rank_row, rank_col, dim_B, cart_comm, world_rank, world_size);
 
     float *d_C_local, *d_A_local, *d_B_local;
-    CHECK_CUDA(cudaMalloc(&d_C_local, dim_C.alloc_rows * dim_C.alloc_cols * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_A_local, dim_A.alloc_rows * dim_A.alloc_cols * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_B_local, dim_B.alloc_rows * dim_B.alloc_cols * sizeof(float)));
+    CHECK_CUDA(cudaMalloc((void**)&d_C_local, dim_C.alloc_rows * dim_C.alloc_cols * sizeof(float)));
+    CHECK_CUDA(cudaMalloc((void**)&d_A_local, dim_A.alloc_rows * dim_A.alloc_cols * sizeof(float)));
+    CHECK_CUDA(cudaMalloc((void**)&d_B_local, dim_B.alloc_rows * dim_B.alloc_cols * sizeof(float)));
 
     CHECK_CUDA(cudaMemcpy(d_A_local, h_A_local.data(), dim_A.alloc_rows * dim_A.alloc_cols * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_B_local, h_B_local.data(), dim_B.alloc_rows * dim_B.alloc_cols * sizeof(float), cudaMemcpyHostToDevice));
@@ -360,7 +380,7 @@ int main(int argc, char** argv) {
     CHECK_CUBLASMP(cublasMpMatrixDescriptorCreate(Global_K, Global_M, Nb, Nb, 0, 0, dim_A.alloc_cols, CUDA_R_32F, grid, &descA));
     CHECK_CUBLASMP(cublasMpMatrixDescriptorCreate(Global_N, Global_K, Nb, Nb, 0, 0, dim_B.alloc_cols, CUDA_R_32F, grid, &descB));
     CHECK_CUBLASMP(cublasMpMatrixDescriptorCreate(Global_N, Global_M, Nb, Nb, 0, 0, dim_C.alloc_cols, CUDA_R_32F, grid, &descC));
-    
+   
     // C = alpha * A x B + beta * C
     float alpha = 1.0f, beta = 1.0f;
 
@@ -369,45 +389,48 @@ int main(int argc, char** argv) {
     
     // Create and configure the matmul Descriptor
     cublasOperation_t transA = CUBLAS_OP_N, transB = CUBLAS_OP_N;
-    cublasMpMatmulAlgoType_t algoType = CUBLASMP_MATMUL_ALGO_TYPE_SPLIT_P2P;
 
     cublasMpMatmulDescriptor_t matmulDesc;
     CHECK_CUBLASMP(cublasMpMatmulDescriptorCreate(&matmulDesc, CUBLAS_COMPUTE_32F));
 
     CHECK_CUBLASMP(cublasMpMatmulDescriptorSetAttribute(matmulDesc, CUBLASMP_MATMUL_DESCRIPTOR_ATTRIBUTE_TRANSA, &transA, sizeof(transA)));
     CHECK_CUBLASMP(cublasMpMatmulDescriptorSetAttribute(matmulDesc, CUBLASMP_MATMUL_DESCRIPTOR_ATTRIBUTE_TRANSB, &transB, sizeof(transB)));
-    CHECK_CUBLASMP(cublasMpMatmulDescriptorSetAttribute(matmulDesc, CUBLASMP_MATMUL_DESCRIPTOR_ATTRIBUTE_ALGO_TYPE, &algoType, sizeof(algoType)));
-    
+
     // Query workspace requirements
     size_t workspaceInBytesOnDevice = 0, workspaceInBytesOnHost = 0;
     CHECK_CUBLASMP(cublasMpMatmul_bufferSize(
         mp_handle, 
         matmulDesc, 
-        Global_M, Global_N, Global_K,
+        Global_N, Global_M, Global_K,
         &alpha, 
-        d_A_local, 1, 1, descA, 
         d_B_local, 1, 1, descB, 
+        d_A_local, 1, 1, descA, 
         &beta, 
-        nullptr, 1, 1, descC,
+        d_C_local, 1, 1, descC,
         d_C_local, 1, 1, descC,
         &workspaceInBytesOnDevice, 
         &workspaceInBytesOnHost
     ));
 
-    // Allocate Workspaces (NVSHMEM for distributed device workspace)
-    void* d_work = nvshmem_malloc(workspaceInBytesOnDevice);
+    //// Allocate Workspaces (NVSHMEM for distributed device workspace)
+    //void* d_work = nvshmem_malloc(workspaceInBytesOnDevice);
+    //std::vector<int8_t> h_work(workspaceInBytesOnHost);
+
+    void* d_work = nullptr;
+    CHECK_CUDA(cudaMalloc(&d_work, workspaceInBytesOnDevice));
+
     std::vector<int8_t> h_work(workspaceInBytesOnHost);
 
     // Execute Distributed GEMM
     CHECK_CUBLASMP(cublasMpMatmul(
         mp_handle, 
         matmulDesc, 
-        Global_M, Global_N, Global_K,
+        Global_N, Global_M, Global_K,
         &alpha, 
-        d_A_local, 1, 1, descA, 
         d_B_local, 1, 1, descB, 
-        &beta, 
-        nullptr, 1, 1, descC,
+        d_A_local, 1, 1, descA, 
+        &beta,
+        d_C_local, 1, 1, descC,
         d_C_local, 1, 1, descC,
         d_work, 
         workspaceInBytesOnDevice, 
@@ -418,7 +441,7 @@ int main(int argc, char** argv) {
     CHECK_CUDA(cudaStreamSynchronize(compute_stream));
 
     // 6. Cleanup Library Resources
-    nvshmem_free(d_work);
+    cudaFree(d_work);
     CHECK_CUBLASMP(cublasMpMatmulDescriptorDestroy(matmulDesc));
     CHECK_CUBLASMP(cublasMpMatrixDescriptorDestroy(descA));
     CHECK_CUBLASMP(cublasMpMatrixDescriptorDestroy(descB));
