@@ -18,6 +18,13 @@ Initializing multi-node SUMMA across 1x1 Grid.
 Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 9.65322e-07
 VERIFICATION: PASS
 
+// Timing -np 1:
+Custom SUMMA Execution Time: 36.5726 ms (2.00697 TFLOPS)
+
+// on Google Colab, can't run with --oversubscribe -np 4, error:
+06e811e0e6df:8700:8700 [0] init.cc:720 NCCL WARN Duplicate GPU detected : rank 0 and rank 1 both on CUDA device 40
+free(): double free detected in tcache 2
+
 */
 
 #include <mpi.h>
@@ -421,6 +428,11 @@ int main(int argc, char** argv) {
     CHECK_NCCL(ncclGroupEnd());
     CHECK_CUDA(cudaEventRecord(comm_done[0], comm_stream));
 
+    // --- START TIMING ---
+    MPI_Barrier(cart_comm);
+    CHECK_CUDA(cudaDeviceSynchronize());
+    double start_time = MPI_Wtime();
+
     for (int k = 0; k < K_blocks; k++) {
         int next_buf = (current_buf + 1) % 2;
         int current_kb = std::min(Nb, Global_K - k * Nb);
@@ -466,6 +478,15 @@ int main(int argc, char** argv) {
     }
 
     CHECK_CUDA(cudaDeviceSynchronize());
+
+    // --- END TIMING ---
+    double end_time = MPI_Wtime();
+    if (world_rank == 0) {
+        double elapsed_ms = (end_time - start_time) * 1000.0;
+        double tflops = (2.0 * (double)Global_M * (double)Global_N * (double)Global_K) / (elapsed_ms * 1e9);
+        std::cout << "Custom SUMMA Execution Time: " << elapsed_ms << " ms (" << tflops << " TFLOPS)\n";
+    }
+
     CHECK_CUDA(cudaMemcpy(h_C_local.data(), d_C_local, dim_C.alloc_rows * dim_C.alloc_cols * sizeof(float), cudaMemcpyDeviceToHost));
 
     // Gather distributed blocks back into global C matrix on Rank 0

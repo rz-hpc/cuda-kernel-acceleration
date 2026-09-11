@@ -44,6 +44,12 @@ NCCL version 2.30.7+cuda13.3
 Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 9.54703e-07
 VERIFICATION: PASS
 
+# Timing with -np 1:
+Execution Time: 33.9472 ms (2.16219 TFLOPS)
+
+# Timing with -np 4:
+Execution Time: 2942.2 ms (0.0249475 TFLOPS)
+
 Note:
 Official doc https://docs.nvidia.com/cuda/cublasmp/index.html
 Official examples https://github.com/NVIDIA/CUDALibrarySamples/blob/main/cuBLASMp/matmul_ag.cu
@@ -417,6 +423,11 @@ int main(int argc, char** argv) {
 
     std::vector<int8_t> h_work(workspaceInBytesOnHost);
 
+    // Synchronize before starting the timer to clear out any pending operations
+    MPI_Barrier(cart_comm);
+    CHECK_CUDA(cudaDeviceSynchronize());
+    double start_time = MPI_Wtime();
+
     // Execute Distributed GEMM
     CHECK_CUBLASMP(cublasMpMatmul(
         mp_handle, 
@@ -435,6 +446,15 @@ int main(int argc, char** argv) {
     ));
 
     CHECK_CUDA(cudaStreamSynchronize(compute_stream));
+
+    double end_time = MPI_Wtime();
+
+    if (world_rank == 0) {
+        double elapsed_ms = (end_time - start_time) * 1000.0;
+        // 2*M*N*K total floating-point operations for standard GEMM
+        double tflops = (2.0 * (double)Global_M * (double)Global_N * (double)Global_K) / (elapsed_ms * 1e9);
+        std::cout << "Execution Time: " << elapsed_ms << " ms (" << tflops << " TFLOPS)\n";
+    }
 
     // 6. Cleanup Library Resources
     cudaFree(d_work);
