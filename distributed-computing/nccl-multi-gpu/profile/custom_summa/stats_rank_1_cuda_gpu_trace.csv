@@ -1,0 +1,70 @@
+Start (ns),Duration (ns),CorrId,GrdX,GrdY,GrdZ,BlkX,BlkY,BlkZ,Reg/Trd,StcSMem (MB),DymSMem (MB),Bytes (MB),Throughput (MB/s),SrcMemKd,DstMemKd,Device,Ctx,GreenCtx,Strm,Name
+3249926603,640,1534,,,,,,,,,,0.001,1900.000,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3250136044,384,1545,,,,,,,,,,0.000,104.167,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3250148076,224,1548,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3250153004,256,1551,,,,,,,,,,0.000,31.250,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3250319853,352,1562,,,,,,,,,,0.000,22.727,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3250483502,384,1575,,,,,,,,,,0.001,3166.666,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3250700911,384,1586,,,,,,,,,,0.000,104.167,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3250707183,224,1589,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3250711855,224,1592,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3250889232,352,1603,,,,,,,,,,0.000,22.727,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3251249938,832,1616,,,,,,,,,,0.024,28423.075,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3251534388,384,1627,,,,,,,,,,0.000,20.833,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memset]
+3251540916,224,1630,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3252030679,256,1645,,,,,,,,,,0.000,31.250,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3252034359,224,1648,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3252042391,992,1651,,,,,,,,,,0.024,23838.697,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,17,[CUDA memcpy Host-to-Device]
+3260716808,480,1816,,,,,,,,,,0.001,2533.333,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3261012778,416,1827,,,,,,,,,,0.000,96.154,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3261020938,256,1830,,,,,,,,,,0.000,31.250,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3261025738,224,1833,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3261290060,384,1844,,,,,,,,,,0.000,20.833,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3261605710,416,1857,,,,,,,,,,0.001,2923.077,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3261920335,576,1868,,,,,,,,,,0.000,69.444,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3261927247,224,1871,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3261931375,224,1874,,,,,,,,,,0.000,35.714,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3262117008,352,1885,,,,,,,,,,0.000,22.727,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3262780852,928,1898,,,,,,,,,,0.024,25482.754,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3263105366,352,1909,,,,,,,,,,0.000,22.727,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memset]
+3263112758,256,1912,,,,,,,,,,0.000,31.250,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3264939873,448,1927,,,,,,,,,,0.000,17.857,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3264944129,416,1930,,,,,,,,,,0.000,19.231,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+3264951809,1056,1933,,,,,,,,,,0.024,22393.923,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,19,[CUDA memcpy Host-to-Device]
+9228686853,1220167,1940,,,,,,,,,,16.777,13740.540,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,7,[CUDA memcpy Host-to-Device]
+9229980908,734373,1941,,,,,,,,,,12.583,17125.343,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,7,[CUDA memcpy Host-to-Device]
+9230751569,4128,1942,,,,,,,,,,8.389,2032123.511,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,7,[CUDA memset]
+9248744217,3041,3773,,,,,,,,,,4.194,1379250.733,Device,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,[CUDA memcpy Device-to-Device]
+9355345477,448,3842,,,,,,,,,,0.000,339.286,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,18,[CUDA memcpy Host-to-Device]
+9360914437,288,3849,,,,,,,,,,0.000,527.778,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,18,[CUDA memcpy Host-to-Device]
+9366095459,288,3856,,,,,,,,,,0.000,527.778,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,18,[CUDA memcpy Host-to-Device]
+9369384982,320,3863,,,,,,,,,,0.000,475.000,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,18,[CUDA memcpy Host-to-Device]
+9379169711,288,3942,,,,,,,,,,0.000,527.778,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,20,[CUDA memcpy Host-to-Device]
+9385729813,288,3949,,,,,,,,,,0.000,527.778,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,20,[CUDA memcpy Host-to-Device]
+9389171113,320,3956,,,,,,,,,,0.000,475.000,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,20,[CUDA memcpy Host-to-Device]
+9396665813,320,3963,,,,,,,,,,0.000,475.000,Pageable,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,20,[CUDA memcpy Host-to-Device]
+9407746421,302114,3973,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9408050679,248258,3982,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9504711241,320,4080,,,,,,,,,,0.000,800.000,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,[CUDA memset]
+9504728873,162881,4081,64,1,5,256,1,1,210,0.000,0.049,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+9504854154,31136,4088,,,,,,,,,,8.389,269416.923,Device,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,[CUDA memcpy Device-to-Device]
+9504887850,433826,4101,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9505326636,51233,4110,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9505381005,6880,4133,,,,,,,,,,4.194,609633.698,Device,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,[CUDA memcpy Device-to-Device]
+9505382957,320,4125,,,,,,,,,,0.000,800.000,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,[CUDA memset]
+9505386349,156897,4126,64,1,5,256,1,1,210,0.000,0.049,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+9505506349,491107,4146,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9506000336,217825,4155,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9506222449,16225,4178,,,,,,,,,,8.389,517015.077,Device,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,[CUDA memcpy Device-to-Device]
+9506223025,320,4170,,,,,,,,,,0.000,800.000,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,[CUDA memset]
+9506237682,181857,4171,64,1,5,256,1,1,210,0.000,0.049,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+9506357362,439427,4191,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9506799157,251233,4200,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9507054710,6816,4223,,,,,,,,,,4.194,615358.923,Device,Device,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,[CUDA memcpy Device-to-Device]
+9507055350,1600,4215,,,,,,,,,,0.000,160.000,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,[CUDA memset]
+9507059926,157057,4216,64,1,5,256,1,1,210,0.000,0.049,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+9507179799,610020,4236,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9507791419,224385,4245,2,1,1,544,1,1,96,0.022,0.062,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,22,ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+9508019964,288,4260,,,,,,,,,,0.000,888.889,Device,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,[CUDA memset]
+9508021372,156481,4261,64,1,5,256,1,1,210,0.000,0.049,,,,,NVIDIA RTX PRO 4500 Blackwell (1),1,,21,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+9508200285,889701,4268,,,,,,,,,,8.389,9420.407,Device,Pageable,NVIDIA RTX PRO 4500 Blackwell (1),1,,7,[CUDA memcpy Device-to-Host]

@@ -1,0 +1,7 @@
+NCCL version 2.30.7+cuda13.3
+NCCL version 2.30.7+cuda13.3
+NCCL version 2.30.7+cuda13.3
+Initializing multi-node SUMMA across 2x2 Grid.
+Custom SUMMA Execution Time: 86.2164 ms (0.85135 TFLOPS)
+Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 6.86539e-07
+VERIFICATION: PASS

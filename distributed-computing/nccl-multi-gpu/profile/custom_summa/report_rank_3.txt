@@ -1,0 +1,147 @@
+
+NOTICE: Existing SQLite export found: profiles/custom_summa/summa_rank_3.sqlite
+        It is assumed file was previously exported from: profiles/custom_summa/summa_rank_3.nsys-rep
+        Consider using --force-export=true if needed.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/nvtx_sum.py]... 
+
+ ** NVTX Range Summary (nvtx_sum):
+
+ Time (%)  Total Time (ns)  Instances   Avg (ns)     Med (ns)    Min (ns)  Max (ns)   StdDev (ns)   Style           Range        
+ --------  ---------------  ---------  -----------  -----------  --------  ---------  -----------  -------  ---------------------
+     52.4        399101594          2  199550797.0  199550797.0  12068256  387033338  265140352.2  PushPop  NCCL:ncclCommInitRank
+     38.0        289164030          2  144582015.0  144582015.0  42051591  247112439  144999916.2  PushPop  NCCL:ncclCommDestroy 
+      9.6         73337667          5   14667533.4      32429.0     28459   73190829   32715518.7  PushPop  NCCL:ncclGroupEnd    
+      0.0            33890         10       3389.0       2225.0      1040      10620       3214.3  PushPop  NCCL:ncclBroadcast   
+      0.0            19910          5       3982.0       1050.0       560      16060       6760.4  PushPop  NCCL:ncclGroupStart  
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/osrt_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain OS Runtime trace data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_api_sum.py]... 
+
+ ** CUDA API Summary (cuda_api_sum):
+
+ Time (%)  Total Time (ns)  Num Calls   Avg (ns)    Med (ns)   Min (ns)  Max (ns)  StdDev (ns)                     Name                   
+ --------  ---------------  ---------  ----------  ----------  --------  --------  -----------  ------------------------------------------
+     36.1         47460308          4  11865077.0  13724091.0   3522538  16489588    5713942.7  cuLibraryLoadData                         
+     13.1         17218753          8   2152344.1   1954503.0    863575   4228444    1172434.2  cuMemExportToShareableHandle              
+      8.1         10634255         32    332320.5    165364.0     69669   2745343     522515.9  cuMemSetAccess                            
+      6.5          8587488          8   1073436.0    876259.5    182359   2288606     757678.8  cuMemImportFromShareableHandle            
+      6.5          8555257          6   1425876.2      3969.5      1540   8081951    3265950.7  cudaDeviceSynchronize                     
+      5.4          7108336         10    710833.6      4340.0      3410   7063386    2232060.2  cuLaunchKernelEx                          
+      3.7          4900803         24    204200.1     55985.0     24220   1481461     360206.6  cuMemCreate                               
+      3.4          4497301         32    140540.7    123859.0     71509    428597      69964.3  cuMemUnmap                                
+      2.6          3403418         10    340341.8      6520.0      2150   1734939     705049.7  cudaHostAlloc                             
+      2.1          2793823         10    279382.3     21630.0     10130   1364911     551963.0  cudaFreeHost                              
+      2.0          2568803          3    856267.7   1003113.0    441717   1123973     364061.8  cudaMemcpy                                
+      1.9          2543677         64     39745.0     30250.0       180    147419      42388.1  cuMemRelease                              
+      1.9          2471316         13    190101.2     98879.0      1310   1156813     306458.7  cudaFree                                  
+      1.5          1905888         32     59559.0     46635.0      2010    340698      72789.2  cuMemMap                                  
+      1.2          1552520          5    310504.0       440.0       350   1550740     693313.0  cuKernelGetFunction                       
+      1.1          1509291         10    150929.1    133549.0      3450    402928     102107.6  cudaMalloc                                
+      1.1          1429971         41     34877.3       720.0       450    714736     150960.0  cudaStreamWaitEvent                       
+      0.2           277929          5     55585.8      6720.0      3480    247609     107477.6  cudaStreamCreateWithFlags                 
+      0.2           243199       1257       193.5       150.0        70      3520        142.4  cuGetProcAddress_v2                       
+      0.2           235717         26      9066.0      6155.0      2540     45580       8909.6  cudaMemcpyAsync                           
+      0.1           166500         32      5203.1      3045.0      1280     21630       5916.2  cuMemAddressReserve                       
+      0.1           162018         21      7715.1      5230.0      3300     23329       5879.7  cudaMemsetAsync                           
+      0.1           140720         37      3803.2      2840.0      1790     11330       2425.6  cudaEventRecord                           
+      0.1           131539          2     65769.5     65769.5     24380    107159      58533.6  cudaMemPoolCreate_v11020                  
+      0.1           121500         32      3796.9      3400.0      2420      8260       1491.6  cuMemAddressFree                          
+      0.1           110810          2     55405.0     55405.0     50520     60290       6908.4  cudaMemPoolDestroy_v11020                 
+      0.1           106209          2     53104.5     53104.5      3330    102879      70391.8  cudaStreamCreate                          
+      0.1            87879          7     12554.1     15360.0      3950     18939       5738.0  cudaStreamDestroy                         
+      0.1            85139        152       560.1       375.0       150      5110        681.2  cudaThreadExchangeStreamCaptureMode_v10010
+      0.1            68519         32      2141.2      1345.0       709      9430       2101.4  cuMemRetainAllocationHandle               
+      0.0            60410         10      6041.0      4125.0      2160     18210       5557.6  cudaStreamSynchronize                     
+      0.0            37640          5      7528.0      4210.0      3740     20540       7291.1  cuLaunchKernel                            
+      0.0            30880          1     30880.0     30880.0     30880     30880          0.0  cudaMemset                                
+      0.0            30740          2     15370.0     15370.0      9460     21280       8358.0  cudaMemcpy2DAsync                         
+      0.0            20600         31       664.5       370.0       200      2300        589.0  cudaEventDestroy                          
+      0.0            19940          5      3988.0      5500.0       710      6490       2796.2  cuLibraryGetKernel                        
+      0.0            14660         27       543.0       370.0       250      2000        412.7  cudaEventCreateWithFlags                  
+      0.0            11639         32       363.7       230.0       100      1310        314.1  cuMemGetAllocationGranularity             
+      0.0            11130          1     11130.0     11130.0     11130     11130          0.0  cudaEventQuery                            
+      0.0             9340          5      1868.0      1910.0      1400      2390        435.1  cuInit                                    
+      0.0             9190         34       270.3       225.0       180       710        119.5  cudaGetDriverEntryPoint_v11030            
+      0.0             6690         10       669.0       435.0       190      2590        758.7  cudaStreamGetCaptureInfo_v2_v11030        
+      0.0             4190         25       167.6        80.0        60      1730        329.3  cuStreamGetCaptureInfo_v2                 
+      0.0             3640          4       910.0       455.0       330      2400        995.8  cudaEventCreate                           
+      0.0             3330         10       333.0       245.0       120       870        260.9  cudaGetFuncBySymbol_v11000                
+      0.0             2410          2      1205.0      1205.0      1000      1410        289.9  cudaMemPoolSetAttribute_v11020            
+      0.0             1870          4       467.5       165.0       130      1410        628.6  cuModuleGetLoadingMode                    
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+
+ ** CUDA GPU Kernel Summary (cuda_gpu_kern_sum):
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                                       Name                                     
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ------------------------------------------------------------------------------
+     92.2          9346509         10  934650.9  430546.0    178016   5121530    1506999.0  ncclDevKernel_Broadcast_RING_LL(ncclDevKernelArgsStorage<(unsigned long)4096>)
+      7.8           791877          5  158375.4  154657.0    154113    168353       6104.1  void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(T1::Params)
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_gpu_mem_time_sum.py]... 
+
+ ** CUDA GPU MemOps Summary (by Time) (cuda_gpu_mem_time_sum):
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)            Operation           
+ --------  ---------------  -----  --------  --------  --------  --------  -----------  ------------------------------
+     62.4          1462408     26   56246.5     288.0       224   1061382     218938.1  [CUDA memcpy Host-to-Device]  
+     34.2           800516      1  800516.0  800516.0    800516    800516          0.0  [CUDA memcpy Device-to-Host]  
+      2.9            67104      4   16776.0   15168.0      6464     30304      10011.8  [CUDA memcpy Device-to-Device]
+      0.6            13600     22     618.2     384.0       288      4256        828.0  [CUDA memset]                 
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_gpu_mem_size_sum.py]... 
+
+ ** CUDA GPU MemOps Summary (by Size) (cuda_gpu_mem_size_sum):
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)            Operation           
+ ----------  -----  --------  --------  --------  --------  -----------  ------------------------------
+     25.214     26     0.970     0.000     0.000    16.777        3.619  [CUDA memcpy Host-to-Device]  
+     25.166      4     6.291     6.291     4.194     8.389        2.422  [CUDA memcpy Device-to-Device]
+      8.442     22     0.384     0.000     0.000     8.389        1.788  [CUDA memset]                 
+      8.389      1     8.389     8.389     8.389     8.389        0.000  [CUDA memcpy Device-to-Host]  
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/openmp_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain OpenMP event data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/opengl_khr_range_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain KHR Extension (KHR_DEBUG) data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/opengl_khr_gpu_range_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain GPU KHR Extension (KHR_DEBUG) data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/vulkan_marker_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain Vulkan Debug Extension (Vulkan Debug Util) data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/vulkan_gpu_marker_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain GPU Vulkan Debug Extension (GPU Vulkan Debug markers) data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/dx11_pix_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain DX11 CPU debug markers.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/dx12_gpu_marker_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain DX12 GPU debug markers.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/dx12_pix_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain DX12 CPU debug markers.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/wddm_queue_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain WDDM context data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/um_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/um_total_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/um_cpu_page_faults_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/openacc_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain OpenACC event data.
+
+Processing [profiles/custom_summa/summa_rank_3.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/syscall_sum.py]... 
+SKIPPED: profiles/custom_summa/summa_rank_3.sqlite does not contain syscall data.
+

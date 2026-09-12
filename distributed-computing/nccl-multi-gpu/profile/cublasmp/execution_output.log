@@ -1,0 +1,5 @@
+Initializing cuBLASMp multi-node GEMM across 2x2 Grid.
+NCCL version 2.30.7+cuda13.3
+Execution Time: 317.853 ms (0.230925 TFLOPS)
+Frobenius norm ratio ||C_dist - C_ref|| / ||C_ref||: 6.85965e-07
+VERIFICATION: PASS
