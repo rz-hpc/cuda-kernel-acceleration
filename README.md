@@ -1,222 +1,174 @@
-# High-Performance CUDA Kernel Optimization Portfolio
+# High-Performance CUDA Kernel Optimization & Distributed Systems Portfolio
 
-A performance-optimized portfolio of CUDA kernels, numerical linear algebra solvers, and
-parallel computing primitives — engineered to explore GPU micro-architectural constraints
-through profiling-guided iteration on an NVIDIA Tesla T4 (Turing, sm_75).
+A performance-optimized portfolio of CUDA kernels, numerical linear algebra solvers, parallel computing primitives, and distributed multi-GPU systems. This repository is engineered to explore GPU micro-architectural constraints and interconnect topologies through profiling-guided iteration.
 
 ---
 
 ## Background & Motivation
 
-Across 8 years engineering iterative numerical solvers (CG, LU, domain decomposition) at
-Siemens EDA and 4 years optimizing high-throughput concurrent systems at Microsoft —
-including lock-free producer-consumer pipelines for multi-billion row datasets and
-NUMA-aware memory layout tuning — I developed a deep intuition for hardware-aware
-algorithm design.
+Across 8 years engineering iterative numerical solvers (CG, LU, domain decomposition) at Siemens EDA and 4 years optimizing high-throughput concurrent systems at Microsoft — including NUMA-aware memory layout tuning — I developed a deep intuition for hardware-aware algorithm design.
 
-This self-directed CUDA project extends that foundation to GPU-native implementations,
-profiled end-to-end with Nsight Compute. Each module targets a specific GPU
-micro-architectural constraint: memory coalescing, shared memory bank conflicts, warp
-divergence, occupancy ceilings, or L2 cache thrashing. The goal is not to replicate
-tutorials — it is to develop the same instincts on GPU hardware that 12 years of CPU
-systems work built on the CPU side.
+This self-directed CUDA project extends that foundation to GPU-native implementations and multi-node distributed setups, profiled end-to-end with NVIDIA Nsight Compute (`ncu`) and Nsight Systems (`nsys`). Each module targets a specific hardware constraint: memory coalescing, shared memory bank conflicts, warp divergence, L2 cache thrashing, or PCIe/MPI interconnect contention.
 
-**Target role focus:** Math library engineering (cuBLAS / cuSPARSE / cuSOLVER equivalent
-workflows), HPC kernel optimization, and GPU-native numerical methods.
+**Target focus:** Math library engineering (cuBLAS / cuSPARSE / cuSOLVER / cuBLASMp equivalent workflows), HPC kernel optimization, and GPU-native numerical methods focused on distributed systems.
+
+---
+
+## Hardware & Profiling Environments
+
+This repository isolates different performance bounds by utilizing distinct hardware environments tailored to specific profiling goals:
+
+1. **Single-GPU Micro-Architectural Profiling (NVIDIA Tesla T4, sm_75):** Used for all dense/sparse kernel optimizations, focusing on L1/L2 cache behavior, shared memory bank conflicts, and warp execution efficiency. Executed on Google Colab T4 instances (4 MB L2, 40 MB L1/SRAM).
+2. **Multi-GPU Distributed Profiling (4× NVIDIA RTX PRO 4500, sm_89):** Dedicated exclusively to the distributed SUMMA vs. `cuBLASMp` benchmarking. This environment isolated host-routed PCIe (`NODE`/`PHB`) interconnect bottlenecks during MPI and NCCL stream overlap studies.
 
 ---
 
 ## Key Concepts Demonstrated
 
-`shared memory tiling` · `bank conflict analysis & padding` · `warp-level primitives`
-(`__shfl_down_sync`) · `Nsight Compute profiling (ncu)` · `occupancy optimization` ·
-`memory coalescing` · `L1/L2 cache hierarchy` · `batched LU factorization` ·
-`blocked Cholesky (LL^T)` · `Tall-Skinny QR (TSQR, Householder)` ·
-`Krylov iterative solvers (CG)` · `FlashAttention block tiling` · `BLAS-level GEMM` ·
-`CSR SpMV` · `Schur complement rank-1 update` · `Turing architecture (sm_75)` · `Google Colab T4 runtime`
-
----
-
-## Performance Highlights (NVIDIA Tesla T4, Compute Capability 7.5)
-
-All numbers sourced directly from Nsight Compute (`ncu`) benchmark reports in each subfolder.
-
-| Kernel / Module | Baseline | Optimized | Speedup | Key Technique |
-|---|---|---|---|---|
-| Matrix Transpose | 0.2286 ms (naive) | 0.0737 ms (tiled + padded) | **~3.1×** | Shared mem staging + bank-conflict padding (32×33) |
-| 2D Poisson Solver (SpMV vs Tiling) | CSR scalar (~8.1% L2 hit) | 32×32 spatial tiling | **~4×** | Eliminated L2 thrash via SMEM staging |
-| Register-Tiled GEMM | — (baseline) | 1,528,051 cycles (−6.5%) | — | Stride offset fix, bank conflict resolution |
-| Prefix Scan | Shared memory tree | Warp shuffle (`__shfl_down_sync`) | — | Zero `__syncthreads()`, register-only exchange |
-
-> **Environment note:** All experiments run on Google Colab T4 runtime (4 MB L2, 40 MB
-> L1/SRAM). Some multi-GPU or high-memory experiments are constrained by this environment.
+`distributed SUMMA GEMM` · `MPI + NCCL communicators` · `CUDA stream double-buffering` · `shared memory tiling` · `bank conflict analysis & padding` · `warp-level primitives (__shfl_down_sync)` · `Nsight Compute (ncu) & Nsight Systems (nsys)` · `occupancy optimization` · `memory coalescing` · `L1/L2 cache hierarchy` · `batched LU factorization` · `blocked Cholesky` · `Tall-Skinny QR (TSQR, Householder)` · `Krylov iterative solvers (CG)` · `FlashAttention block tiling` · `BLAS-level GEMM` · `CSR SpMV` · `Schur complement rank-1 update`.
 
 ---
 
 ## Repository Structure
 
-```
+```text
 cuda-kernel-acceleration/
+├── distributed-computing/    # Multi-GPU MPI + NCCL SUMMA GEMM vs. cuBLASMp
 ├── blas-primitives/          # GEMM (naive → tiled → register), Matrix Transpose
 ├── parallel-primitives/      # Prefix Sum: Blelloch, Brent-Kung, warp shuffle
 ├── sparse-linear-algebra/    # CSR SpMV, structured stencil variants
-├── numerical-solvers/        # Batched LU (partial pivoting), Cholesky (blocked),
-│                             # Tall-Skinny QR (TSQR), backward substitution
+├── numerical-solvers/        # Batched LU (partial pivoting), Cholesky (blocked), TSQR
 ├── krylov-methods/           # 2D Conjugate Gradient for Poisson equations
 ├── dl-acceleration/          # Online Softmax, FlashAttention block tiling
 ├── asynchronous-streams/     # CUDA stream overlap experiments
 └── benchmarks/               # Nsight Compute ncu reports and profiling summaries
+
 ```
 
 ---
 
-## Micro-Architectural Profiling Scorecard
+## Featured Distributed Module: Multi-GPU SUMMA GEMM vs. cuBLASMp
 
-### 1. Register-Tiled GEMM with Shared Memory Padding
+Located in `distributed-computing/nccl-multi-gpu/`, this flagship module isolates interconnect latency from compute throughput by evaluating a custom Scalable Universal Matrix Multiplication Algorithm (SUMMA) against NVIDIA `cuBLASMp` on a 4-GPU workstation topology.
 
-**Target:** Resolve shared memory bank serialization and minimize memory pipeline latency stalls.
+### Architectural Highlights
 
-**Nsight Compute Results:**
-- Elapsed Duration: **1,528,051 cycles** (~6.5% reduction from stride offset fix alone)
-- L1/TEX Cache Throughput: **98.91%**
-- DRAM Throughput: **2.40%** (compute-bound, not memory-bound — expected for tiled GEMM)
-- Compute (SM) Throughput: **40.10%**
+* **Process Grid Topology:** Dynamic P × Q MPI process grid with 2D block-cyclic local-to-global index mapping across physical GPUs.
+* **Double-Buffered Overlap Engine:** Dual CUDA streams (`stream_compute` vs. `stream_comm`) utilize CUDA event synchronization to hide non-blocking `ncclBcast` transfers behind partial SGEMM tile computations.
 
-**Bottleneck Analysis:**
-- The profiler isolated a **2.0–2.1× bank conflict** rate across shared store operations,
-  affecting ~52.99% of all shared store wavefronts. Root cause: column-step indexing
-  patterns (`tile_A[ty * 4 + i][k_inst]`) mapping threads to the same physical banks.
-- With a 4×4 block configuration, theoretical occupancy was anchored at **50%**
-  (16 active threads/warp), leaving half the warp execution lanes unutilized.
-- FMA pipeline occupied 24.5% of active cycles — healthy FP throughput with no
-  execution stalls on integer or transcendental pipelines.
+### Comparative Profiling (`-np 4`, RTX PRO 4500)
 
-**CPU Parallel:** On CPU (Intel MKL), GEMM latency hides behind deep out-of-order
-execution and large L3 caches. On T4, the 4 MB L2 ceiling and lack of speculative
-prefetch make explicit tiling and padding non-negotiable — not a micro-optimization
-but a correctness constraint for throughput.
+| Rank | Implementation | Compute Time (ms) | MPI/Sync Overhead (ms) | Total Transfer (MB) | Execution Bottleneck |
+| --- | --- | --- | --- | --- | --- |
+| **0** | **cuBLASMp** | **7.31** | **1,604.74** | 263.45 | PCIe Host Bridge Bandwidth |
+| **0** | **Custom SUMMA** | **26.66** | **774.66** | 263.35 | PCIe Host Bridge Bandwidth |
+| **1** | **cuBLASMp** | **3.75** | **7,043.84** | 75.71 | Worker Spin-Wait Skew |
+| **1** | **Custom SUMMA** | **4.08** | **6,392.87** | 75.60 | Worker Spin-Wait Skew |
+
+**Key Insights:** Vendor-tuned `cuBLASMp` micro-kernels achieve a 2.6×–3.6× compute speedup over the custom tile GEMM on localized execution. However, on a topology relying entirely on host-routed PCIe bridges without direct NVLink fabrics, broadcast latency exceeds compute time by orders of magnitude. The double-buffered compute streams stall on network synchronization, forcing both custom SUMMA and `cuBLASMp` to hit the identical physical bandwidth floor imposed by the hardware.
 
 ---
 
-### 2. Tiled Matrix Transpose
+## Single-GPU Micro-Architectural Case Studies (NVIDIA Tesla T4)
 
-**Target:** Eliminate uncoalesced global memory writes by introducing a shared memory
-staging pivot table.
+All numbers sourced directly from Nsight Compute (`ncu`) benchmark reports.
 
-| Configuration | Time | Speedup | Mechanism |
-|---|---|---|---|
-| Naive (baseline) | 0.2286 ms | 1.0× | Strided global writes, $N$-element column stride |
-| Shared Memory Tiled (32×32) | 0.1207 ms | ~1.9× | Coalesced reads/writes via `__syncthreads()` barrier |
-| Tiled + Bank Padded (32×33) | **0.0737 ms** | **~3.1×** | Bank conflict elimination via row-stride padding |
+### 1. SGEMM: Naive vs. Tiled vs. Register-Tiled
 
-**CPU Parallel:** CPU transpose benefits from hardware prefetchers and large per-core
-caches tolerating strided access. GPU warp execution is strictly sequential within a
-wavefront on non-coalesced addresses — strided column writes serialize to 32 independent
-memory transactions, which is why the 3.1× gap between naive and padded is so large.
+* **Target:** Evaluate shared memory tiling and instruction-level parallelism on deliberately unaligned matrix dimensions (M=1001, K=503, N=1001) using a 63×63 grid.
 
----
 
-### 3. Sparse CSR vs. 2D Spatial Tiling (2D Poisson Field Solver)
+* **Naive (16×16 blocks):** 3.5 ms latency.
 
-**Target:** Minimize L2 cache thrashing and quantify the indirect memory access penalty
-on structured grids.
 
-**The Structural Problem:** A 512×512 Poisson grid via 5-point CSR stencil requires a
-~17 MB working set per iteration (11 MB sparse matrix trio + 6 MB workspace vectors).
-The T4's 4 MB L2 is continuously evicted, forcing repeated high-latency DRAM traffic.
+* **Shared Memory Tiled (16×16 blocks):** 3.7 ms. **Analysis:** Tiling resulted in a ~6% performance regression because the L2 cache was already achieving a 99% hit rate; adding shared memory synchronization overhead penalized a bandwidth problem that did not exist at this problem size.
 
-**CSR Baseline (Nsight Compute):**
-- Global Memory Bandwidth: **132 GB/s**
-- L2 Cache Hit Rate: **8.1%** — effectively uncached
-- L1/TEX Cache Hit Rate: **49.96%** — catches immediate spatial neighbors, not inter-iteration reuse
 
-**Architectural Fix — 2D Spatial Tiling:**
-- Replaced CSR indirect indexing (`values[i] * p[col_indices[i]]`) with 32×32 spatial
-  blocks mapped to thread blocks in shared memory.
-- Data loaded once from DRAM, reused across all 256 threads in the block.
-- **Result: ~4× throughput speedup** over scalar CSR baseline.
+* **Register-Tiled (8×4 blocks, 4×2 output patch per thread):** 1.76 ms. **Analysis:** Achieved a ~2× speedup over the baseline. Despite shared memory bank conflicts remaining at ~50% of shared-store wavefronts, performance doubled because the total instruction count was reduced from 75M to 35M, amortizing memory operations across more work per thread. Unaligned dimensions forced vectorized float4 write-backs to successfully utilize scalar fallback paths at boundary guards.
 
-**CPU Parallel:** This is the GPU equivalent of the CPU lesson that MKL SpMV on structured
-grids is often outperformed by stencil-aware cache-blocking. The principle transfers
-directly — the difference is that the penalty for ignoring it on GPU is proportionally
-larger due to the narrower cache hierarchy.
 
----
 
-## Micro-Architectural Case Studies
+### 2. Blocked Cholesky Factorization: Trailing Matrix Update
 
-### Bank Conflict Elimination via Structural Padding
+* **Target:** Resolve memory-bound bottlenecks in trailing submatrix updates for a 2048×2048 matrix using 32×32 thread blocks and 64 outer iterations.
 
-During matrix transpose and GEMM kernels, warp threads writing column-wise to SRAM
-frequently mapped to identical hardware banks, causing 2-way serialization.
 
-**Solution:** Alter array stride dimensions (`[TILE_WIDTH][TILE_WIDTH + 1]` or `+ 2`
-for vectorized FP configurations). This shifts index addresses so sequential row elements
-distribute evenly across separate physical banks — from serialized to parallel LSU requests.
+* **Optimization:** Staged the pivot row and column directly into shared memory.
 
-### Warp-Level Register Primitives for Prefix Scans
 
-Standard shared memory prefix scans require two `__syncthreads()` barriers per level —
-one after reduction, one after fan-out. This is avoidable inside a single warp.
+* **Results:** Execution time dropped from 5.8 ms to ~150 μs, representing a ~38× speedup. Instructions Per Cycle (IPC) scaled from 0.07 to ~0.9 (~13× improvement).
 
-**Solution:** `__shfl_down_sync` exchanges values directly in the register file, dropping
-shared memory bank checks, array index pointer arithmetic, and explicit sync points
-entirely. Particularly effective for reductions that fit within a 32-thread warp.
 
-### Synchronization Boundaries in Batched LU Solvers
+* **Bottleneck Shift:** Execution stalls successfully transitioned from a 97% global-memory dependency to a 68% shared-memory MIO queue bottleneck—proving the workload shifted from memory-bound to compute-bound.
 
-Dense batched direct solvers require strict thread barrier management to preserve data
-integrity during parallel partial pivoting.
 
-**Solution:** Three explicit execution phases separated by `__syncthreads()` barriers:
-(1) cooperative max-element search below the diagonal, (2) shared tile row-swap,
-(3) global permutation tracker update — all prior to computing rank-1 Schur complement
-tail updates. Race-free pivoting at block level without global memory round-trips.
+
+### 3. Communication-Avoiding TSQR: Panel vs. Merge Kernels
+
+* **Target:** Optimize Householder reflections for a tall-skinny matrix (M=512, N=4) distributed across 4 leaf panels of 128 rows each, utilizing a 3-level reduction tree.
+
+
+* **Panel Kernel:** Implementing row-partitioned warp-shuffle reductions decreased latency from 67 μs to 30 μs (~2.2× speedup), while active threads per warp improved from 9 to 17.
+
+
+* **Merge Kernel:** Execution time remained flat (17.06 μs to 17.38 μs) despite active threads per warp improving from 9 to 12. **Analysis:** The merge system size (8×4) is too small to yield performance benefits from 32-way warp cooperation, isolating the minimum threshold required for warp-shuffle efficacy.
+
+
+
+### 4. Sparse CSR vs. 2D Spatial Tiling (2D Poisson Field Solver)
+
+* **Target:** Minimize L2 cache thrashing and quantify the indirect memory access penalty on structured grids.
+* **CSR Baseline:** 132 GB/s global memory bandwidth, but an 8.1% L2 cache hit rate (effectively uncached due to the T4's 4 MB L2 ceiling).
+* **Architectural Fix:** Replaced CSR indirect indexing with 32×32 spatial blocks mapped to thread blocks in shared memory, yielding a **~4× throughput speedup** over the scalar CSR baseline by reusing data directly from SRAM.
 
 ---
 
-## Compilation
+## Compilation & Profiling Toolchain
 
-All modules are CUDA C++ (`.cu`), compiled with standard optimization flags:
+### Single-GPU Profiling (Tesla T4)
+
+Used for micro-architectural metric extraction.
 
 ```bash
-# Example: numerical solver
+# Example: numerical solver compilation
 cd numerical-solvers
 nvcc -O3 -arch=sm_75 LUFactorization.cu -o lu_solver
-./lu_solver
 
 # Profile with Nsight Compute
 ncu --set full ./lu_solver
+
+```
+
+### Multi-GPU Distributed Profiling (RTX PRO 4500)
+
+Used for MPI process tracing, NCCL bandwidth limits, and stream concurrency evaluation.
+
+```bash
+# Compile Distributed SUMMA Kernel
+cd distributed-computing/nccl-multi-gpu
+nvcc -O3 -arch=native summa_gemm.cu -o summa_gemm -lcublas -lnccl -ccbin mpicxx
+
+# Capture trace across all MPI processes with Nsight Systems
+mpirun --allow-run-as-root -np 4 nsys profile \
+  --trace=cuda,nvtx,mpi \
+  -o trace_rank%q{OMPI_COMM_WORLD_RANK} \
+  ./summa_gemm
+
 ```
 
 ---
 
 ## Roadmap
 
-Work in progress — all experiments scoped to Google Colab T4 runtime constraints,
-with architecture-only studies noted where hardware access isn't available.
+Work in progress — Balancing applied optimizations on accessible hardware with theoretical architectural studies for next-generation systems.
 
-- [ ] **cuDSS refactorization demo** *(next up)* — repeated solves on matrices sharing
-      a sparsity pattern (analyze-once / factorize-once / solve-many workflow). Targets
-      the core use case for sparse direct solvers in iterative design loops (e.g. circuit
-      simulation, FEM parameter sweeps) where the nonzero structure is fixed but values change.
-- [ ] cuSPARSE API comparison benchmarks for SpMV formats (CSR vs BSR vs ELL)
-- [ ] FP16/BF16 GEMM variants — explore tensor core access pathways on T4 (sm_75)
-- [ ] Multi-stream overlap across solver iterations (asynchronous-streams module)
-- [ ] Hopper architecture (sm_90) review: TMA, warpgroup MMA — architectural study
-      even if not runnable on Colab T4
-- [ ] Structured sparsity experiments for transformer inference acceleration
+### Distributed Systems & Communication Overlap
 
----
+* [ ] **Multi-Node & RDMA Architectural Study:** Theoretical extension of the current single-node SUMMA engine to multi-node MPI clusters, focusing on InfiniBand interconnect modeling and NCCL SHARP in-network reductions without immediate access to physical clusters.
+* [ ] **Stream Priority & Pipeline Scheduling:** Refine asynchronous compute/comm overlap by leveraging CUDA stream priorities to prevent compute kernels from stalling critical-path NCCL broadcasts.
 
-## Environment
+### Micro-Architecture & Kernel Optimization
 
-| Component | Details |
-|---|---|
-| GPU | NVIDIA Tesla T4 (Turing, sm_75) |
-| Runtime | Google Colab T4 instance |
-| L2 Cache | 4 MB |
-| CUDA Version | 12.x |
-| Profiler | Nsight Compute (`ncu`) |
-| Language | CUDA C++ (`.cu`) |
-| Compiler | `nvcc -O3 -arch=sm_75` |
+* [ ] **cuDSS Refactorization Demo:** Implement repeated solves on matrices sharing a sparsity pattern (analyze-once / factorize-once / solve-many workflow for FEM and circuit simulators).
+* [ ] **Mixed-Precision Tensor Core (WMMA) GEMM:** Optimize FP16/BF16 dense matrix multiplications via hardware tensor core instructions on accessible architectures (Turing sm_75).
+* [ ] **Hopper (sm_90) Feature Exploration:** Theoretical review and literature study of Tensor Memory Accelerator (TMA) asynchronous block transfers and warpgroup-level MMA execution models.
