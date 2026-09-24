@@ -1,0 +1,4 @@
+kernel,gpu__time_duration.sum,gpu__time_duration.avg,sm__throughput.avg.pct_of_peak_sustained_elapsed,gpu__compute_memory_throughput.avg.pct_of_peak_sustained_elapsed,dram__throughput.avg.pct_of_peak_sustained_elapsed,sm__warps_active.avg.pct_of_peak_sustained_active,launch__occupancy_limit_blocks,launch__occupancy_limit_registers,launch__occupancy_limit_shared_mem,launch__occupancy_limit_warps,launch__registers_per_thread,sm__sass_thread_inst_executed_op_ffma_pred_on.sum,dram__bytes.sum,l1tex__t_bytes_pipe_lsu_mem_global_op_ld.sum,l1tex__t_bytes_pipe_lsu_mem_global_op_st.sum
+"void unnamed>::csr_partition_kernel<int, int>",10.5,,,,,,16.0,16.0,16.0,4.0,16.0,0.0,70.08,,
+"void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>",3.42,,,,,,16.0,16.0,16.0,4.0,16.0,0.0,4.03,,
+"void csrmv_v3_kernel<std::integral_constant<bool, 0>, int, int, float, float, float, float, void>",84.35,,,,,,16.0,9.0,15.0,8.0,49.0,0.0,11.62,,
